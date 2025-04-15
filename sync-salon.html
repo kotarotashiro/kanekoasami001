@@ -1,0 +1,2965 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>シンクロサロン - PremaNadi</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .threads-icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      vertical-align: middle;
+      fill: currentColor;
+    }
+    .social-icons .threads-icon {
+      width: 20px;
+      height: 20px;
+    }
+    
+    /* シンクロサロン専用スタイル */
+    .sync-hero {
+      position: relative;
+      padding: 10rem 0 6rem;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    
+    .sync-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.3);
+      z-index: 1;
+    }
+    
+    .sync-hero .container {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .sync-hero .hero-content {
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.9);
+    }
+    
+    /* クイックナビゲーション */
+    .quick-nav {
+      display: flex;
+      justify-content: center;
+      margin: 2.5rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .quick-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      padding: 1.2rem 0.8rem;
+      border-radius: var(--card-border-radius);
+      background-color: white;
+      color: var(--text-color);
+      text-decoration: none;
+      width: 110px;
+      box-shadow: var(--box-shadow);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    .quick-nav-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(248, 165, 179, 0.25);
+      color: var(--primary-color);
+    }
+    
+    .quick-nav-item i {
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
+      color: var(--primary-color);
+      transition: transform 0.3s ease;
+    }
+    
+    .quick-nav-item:hover i {
+      transform: scale(1.1);
+    }
+    
+    .quick-nav-item span {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+    
+    @media (max-width: 768px) {
+      .quick-nav {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 1rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      
+      .quick-nav::-webkit-scrollbar {
+        display: none;
+      }
+      
+      .quick-nav-item {
+        flex-shrink: 0;
+        width: 90px;
+        margin: 0 0.3rem;
+      }
+    }
+    
+    /* アコーディオンスタイル */
+    .accordion-container {
+      margin-top: 3.5rem;
+    }
+    
+    .accordion-item {
+      margin-bottom: 1.5rem;
+      border-radius: var(--card-border-radius);
+      background-color: white;
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    .accordion-item:hover {
+      box-shadow: 0 10px 30px rgba(248, 165, 179, 0.2);
+    }
+    
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.8rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-color: white;
+      border-left: 4px solid transparent;
+    }
+    
+    .accordion-header:hover {
+      background-color: var(--primary-light);
+    }
+    
+    .accordion-item.active .accordion-header {
+      border-left: 4px solid var(--primary-color);
+    }
+    
+    .accordion-header h3 {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      font-size: 1.3rem;
+    }
+    
+    .accordion-header h3 i {
+      color: var(--primary-color);
+      margin-right: 1rem;
+      font-size: 1.4rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .accordion-item:hover .accordion-header h3 i {
+      transform: scale(1.1);
+    }
+    
+    .accordion-icon {
+      color: var(--primary-color);
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .accordion-item.active .accordion-icon {
+      transform: rotate(180deg);
+    }
+    
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+      background-color: #fff;
+      padding: 0 1.8rem;
+    }
+    
+    .accordion-item.active .accordion-content {
+      max-height: 2000px;
+      padding: 0 1.8rem 1.8rem;
+    }
+    
+    .sync-overview {
+      background-color: var(--background-color);
+      position: relative;
+      overflow: hidden;
+      padding: 7rem 0;
+      background-image: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    }
+    
+    .sync-overview::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--primary-light) 0%, rgba(255, 255, 255, 0) 70%);
+      opacity: 0.4;
+      top: -250px;
+      right: -150px;
+      z-index: 0;
+      animation: pulse 15s infinite alternate ease-in-out;
+    }
+
+    .sync-overview::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--primary-light) 0%, rgba(255, 255, 255, 0) 70%);
+      opacity: 0.3;
+      bottom: -200px;
+      left: -150px;
+      z-index: 0;
+      animation: pulse 12s infinite alternate-reverse ease-in-out;
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.3;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 0.4;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0.3;
+      }
+    }
+
+    .overview-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .overview-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      max-width: 150px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    }
+
+    .divider-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 5px 15px rgba(248, 165, 179, 0.2);
+      margin: 0 1rem;
+      color: var(--primary-color);
+      font-size: 1.2rem;
+    }
+    
+    .overview-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 4rem;
+    }
+
+    .overview-quote {
+      position: relative;
+      padding: 1.5rem 1.5rem 1.5rem 3rem;
+      margin-bottom: 2rem;
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: var(--card-border-radius);
+      box-shadow: 0 8px 30px rgba(248, 165, 179, 0.15);
+      backdrop-filter: blur(5px);
+    }
+
+    .quote-icon {
+      position: absolute;
+      left: 1rem;
+      top: 1.5rem;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      opacity: 0.6;
+    }
+
+    .overview-cta {
+      margin-top: 2.5rem;
+    }
+
+    .btn-glow {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .btn-glow::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+      transform: rotate(30deg);
+      z-index: -1;
+      transition: all 0.8s;
+      opacity: 0;
+    }
+
+    .btn-glow:hover::after {
+      opacity: 1;
+      left: 100%;
+      transition: all 0.8s;
+    }
+
+    .image-frame {
+      position: relative;
+      border-radius: var(--card-border-radius);
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(248, 165, 179, 0.25);
+      transform: perspective(1000px) rotateY(-5deg);
+      transition: all 0.5s ease;
+    }
+
+    .image-frame:hover {
+      transform: perspective(1000px) rotateY(0deg);
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.7s ease;
+    }
+
+    .image-frame:hover img {
+      transform: scale(1.05);
+    }
+
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom right, rgba(248, 165, 179, 0.2), rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
+    
+    .overview-features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background-color: white;
+      border-radius: var(--card-border-radius);
+      padding: 2.5rem 1.5rem;
+      box-shadow: 0 10px 30px rgba(248, 165, 179, 0.15);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      overflow: hidden;
+      border-top: 3px solid transparent;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: linear-gradient(to bottom, var(--primary-light), transparent);
+      opacity: 0.2;
+      transition: height 0.5s ease;
+      z-index: 0;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(248, 165, 179, 0.25);
+      border-top: 3px solid var(--primary-color);
+    }
+
+    .feature-card:hover::before {
+      height: 100%;
+    }
+
+    .feature-icon {
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      border-radius: 50%;
+      color: white;
+      font-size: 1.6rem;
+      box-shadow: 0 8px 20px rgba(248, 165, 179, 0.4);
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover .feature-icon {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 12px 25px rgba(248, 165, 179, 0.5);
+    }
+
+    .feature-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-text h3 {
+      margin-bottom: 0.8rem;
+      font-size: 1.3rem;
+      color: var(--text-color);
+    }
+
+    .feature-text p {
+      color: var(--text-light);
+      margin-bottom: 0;
+    }
+
+    .floating-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .shape {
+      position: absolute;
+      background-color: var(--primary-light);
+      opacity: 0.1;
+      border-radius: 50%;
+    }
+
+    .shape-1 {
+      width: 60px;
+      height: 60px;
+      top: 15%;
+      left: 10%;
+      animation: float 20s infinite alternate ease-in-out;
+    }
+
+    .shape-2 {
+      width: 40px;
+      height: 40px;
+      top: 20%;
+      right: 15%;
+      animation: float 15s infinite alternate-reverse ease-in-out;
+    }
+
+    .shape-3 {
+      width: 80px;
+      height: 80px;
+      bottom: 25%;
+      left: 15%;
+      animation: float 18s infinite alternate ease-in-out;
+    }
+
+    .shape-4 {
+      width: 50px;
+      height: 50px;
+      bottom: 15%;
+      right: 10%;
+      animation: float 22s infinite alternate-reverse ease-in-out;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      50% {
+        transform: translate(15px, 15px) rotate(5deg);
+      }
+      100% {
+        transform: translate(-15px, -15px) rotate(-5deg);
+      }
+    }
+
+    @media (max-width: 992px) {
+      .overview-content,
+      .activity-content,
+      .join-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      
+      .overview-image,
+      .activity-image,
+      .join-image {
+        order: -1;
+      }
+
+      .overview-features {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+      
+      .membership-item {
+        padding: 2rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .sync-hero,
+      .sync-overview,
+      .sync-section,
+      .sync-activities,
+      .sync-testimonials,
+      .sync-join {
+        padding: 4rem 0;
+      }
+      
+      .membership-types,
+      .overview-features {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .testimonials-slider {
+        grid-template-columns: 1fr;
+      }
+      
+      .join-buttons {
+        flex-direction: column;
+      }
+      
+      .process-steps li {
+        padding-left: 70px;
+      }
+      
+      .step-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+
+      .overview-header h2 {
+        font-size: 2rem;
+      }
+
+      .image-frame {
+        transform: none;
+      }
+    }
+    
+    /* 新しいセクションスタイル */
+    .sync-section {
+      background-color: var(--background-color);
+      position: relative;
+      overflow: hidden;
+      padding: 6rem 0;
+    }
+    
+    .sync-section:nth-child(even) {
+      background-color: var(--background-light);
+    }
+    
+    .section-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .section-content.reverse {
+      grid-template-columns: 1fr 1fr;
+      direction: rtl;
+    }
+    
+    .section-content.reverse .section-text {
+      direction: ltr;
+    }
+    
+    .section-text {
+      position: relative;
+    }
+    
+    .section-icon {
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      border-radius: 50%;
+      color: white;
+      font-size: 1.8rem;
+      box-shadow: 0 8px 20px rgba(248, 165, 179, 0.4);
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .section-text:hover .section-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .section-image img {
+      border-radius: var(--card-border-radius);
+      box-shadow: var(--box-shadow);
+      transition: transform 0.5s ease;
+    }
+    
+    .section-image:hover img {
+      transform: scale(1.02);
+    }
+    
+    @media (max-width: 992px) {
+      .section-content,
+      .section-content.reverse {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        direction: ltr;
+      }
+      
+      .section-image {
+        order: -1;
+      }
+    }
+    
+    /* 実績と経験セクションのスタイル */
+    .experience-image-container {
+      position: relative;
+      border-radius: var(--card-border-radius);
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(248, 165, 179, 0.25);
+    }
+    
+    .achievements-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .achievement-item {
+      background: white;
+      border-radius: var(--card-border-radius);
+      padding: 1.2rem;
+      box-shadow: 0 10px 25px rgba(248, 165, 179, 0.1);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .achievement-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(248, 165, 179, 0.2);
+    }
+    
+    .achievement-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.3rem;
+    }
+    
+    .achievement-content h4 {
+      font-size: 1.6rem;
+      margin: 0 0 0.5rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .achievement-content p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+    
+    @media (max-width: 768px) {
+      .achievements-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+    
+    /* 驚きの実績セクションスタイル */
+    .results-stats {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+      gap: 1rem;
+    }
+    
+    .stat-counter {
+      flex: 1;
+      min-width: 120px;
+      background: white;
+      border-radius: var(--card-border-radius);
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(248, 165, 179, 0.15);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stat-counter::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary-color), var(--primary-light));
+    }
+    
+    .stat-counter:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(248, 165, 179, 0.25);
+    }
+    
+    .counter {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+    
+    .counter-icon {
+      color: var(--primary-color);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-counter p {
+      margin: 0;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+    
+    .results-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .result-card {
+      background: white;
+      border-radius: var(--card-border-radius);
+      padding: 1.8rem;
+      box-shadow: 0 10px 25px rgba(248, 165, 179, 0.15);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .result-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 70px;
+      height: 70px;
+      background: radial-gradient(circle, var(--primary-light) 0%, rgba(255,255,255,0) 70%);
+      opacity: 0.3;
+      border-radius: 0 0 var(--card-border-radius) 0;
+      transition: all 0.3s ease;
+    }
+    
+    .result-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(248, 165, 179, 0.25);
+    }
+    
+    .result-card:hover::after {
+      width: 100px;
+      height: 100px;
+      opacity: 0.5;
+    }
+    
+    .result-icon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      border-radius: 50%;
+      color: white;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 5px 15px rgba(248, 165, 179, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .result-card:hover .result-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .result-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 1.2rem;
+      color: var(--text-color);
+    }
+    
+    .result-card > p {
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: var(--text-light);
+    }
+    
+    .result-quote {
+      background: rgba(248, 165, 179, 0.08);
+      border-left: 3px solid var(--primary-color);
+      padding: 0.8rem;
+      border-radius: 0 var(--card-border-radius) var(--card-border-radius) 0;
+      position: relative;
+    }
+    
+    .result-quote i {
+      color: var(--primary-color);
+      opacity: 0.5;
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+    
+    .result-quote p {
+      display: inline;
+      font-style: italic;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    
+    @media (max-width: 992px) {
+      .section-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .results-stats {
+        justify-content: center;
+      }
+      
+      .stat-counter {
+        min-width: 140px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .results-cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .results-stats {
+        flex-wrap: wrap;
+      }
+      
+      .stat-counter {
+        min-width: 45%;
+      }
+    }
+    
+    /* 充実のコンテンツセクションスタイル */
+    .text-center {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+    }
+    
+    .contents-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .content-card {
+      background-color: white;
+      border-radius: var(--card-border-radius);
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(248, 165, 179, 0.15);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      overflow: hidden;
+      border-top: 3px solid transparent;
+    }
+    
+    .content-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: linear-gradient(to bottom, var(--primary-light), transparent);
+      opacity: 0.2;
+      transition: height 0.5s ease;
+      z-index: 0;
+    }
+    
+    .content-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(248, 165, 179, 0.25);
+      border-top: 3px solid var(--primary-color);
+    }
+    
+    .content-card:hover::before {
+      height: 100%;
+    }
+    
+    .content-icon {
+      position: relative;
+      z-index: 1;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      border-radius: 50%;
+      color: white;
+      font-size: 1.4rem;
+      box-shadow: 0 8px 20px rgba(248, 165, 179, 0.4);
+      margin-bottom: 1.2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .content-card:hover .content-icon {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 12px 25px rgba(248, 165, 179, 0.5);
+    }
+    
+    .content-card h4 {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      color: var(--text-color);
+    }
+    
+    .content-card p {
+      position: relative;
+      z-index: 1;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+    
+    .content-badge {
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      margin-top: auto;
+    }
+    
+    .content-cta {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    
+    @media (max-width: 992px) {
+      .contents-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .contents-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* シンプル化した学べることセクションのスタイル */
+    .learning-bg {
+      background: linear-gradient(135deg, rgba(255, 248, 250, 0.9) 0%, rgba(255, 255, 255, 0.8) 100%);
+      position: relative;
+    }
+    
+    .learning-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('写真素材/nyx3913_The_space_appeared_infinite._There_were_no_boundaries_n_e352c857-84a6-4e82-9d29-900112893cff.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.08;
+      z-index: 0;
+    }
+    
+    .section-description {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      color: var(--text-color);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    
+    .learning-simple {
+      margin: 2rem 0 3rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .learning-main-categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    
+    .learning-main-category {
+      background: white;
+      border-radius: var(--card-border-radius);
+      padding: 0;
+      box-shadow: 0 8px 25px rgba(248, 165, 179, 0.12);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .learning-main-category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(248, 165, 179, 0.2);
+    }
+    
+    .category-header {
+      padding: 1.5rem;
+      background: linear-gradient(135deg, rgba(248, 165, 179, 0.2) 0%, rgba(255, 255, 255, 0.5) 100%);
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(248, 165, 179, 0.15);
+    }
+    
+    .main-category-icon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      border-radius: 50%;
+      color: white;
+      font-size: 1.2rem;
+      margin-right: 1.2rem;
+      box-shadow: 0 5px 15px rgba(248, 165, 179, 0.3);
+      flex-shrink: 0;
+    }
+    
+    .learning-main-category h3 {
+      font-size: 1.4rem;
+      margin: 0;
+      color: var(--text-color);
+    }
+    
+    .learning-list {
+      list-style: none;
+      padding: 1.5rem;
+      margin: 0;
+    }
+    
+    .learning-list li {
+      margin-bottom: 0.8rem;
+      padding: 0.5rem 0;
+      font-size: 1.1rem;
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      border-bottom: 1px dashed rgba(248, 165, 179, 0.2);
+    }
+    
+    .learning-list li:last-child {
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+    
+    .learning-list li i {
+      color: var(--primary-color);
+      margin-right: 0.8rem;
+      font-size: 1.1rem;
+      width: 22px;
+      height: 22px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    
+    .learning-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem auto 2rem;
+      padding: 1rem;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: var(--card-border-radius);
+      max-width: 600px;
+      box-shadow: 0 5px 15px rgba(248, 165, 179, 0.12);
+    }
+    
+    .learning-note i {
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin-right: 1rem;
+    }
+    
+    .learning-note p {
+      margin: 0;
+      font-size: 1.1rem;
+      color: var(--text-color);
+    }
+    
+    .learning-cta {
+      text-align: center;
+      margin-top: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    @media (max-width: 992px) {
+      .learning-main-categories {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .mobile-only {
+        display: block;
+      }
+    }
+    
+    @media (min-width: 993px) {
+      .mobile-only {
+        display: none;
+      }
+    }
+
+    .category-lifestyle .category-header {
+      background: linear-gradient(135deg, rgba(255, 182, 193, 0.2) 0%, rgba(255, 255, 255, 0.5) 100%);
+    }
+    
+    .category-lifestyle .main-category-icon {
+      background: linear-gradient(135deg, #ff8c9e, #ff6b80);
+    }
+    
+    .category-lifestyle .learning-list li i {
+      color: #ff6b80;
+    }
+    
+    .category-relationships .category-header {
+      background: linear-gradient(135deg, rgba(173, 216, 230, 0.2) 0%, rgba(255, 255, 255, 0.5) 100%);
+    }
+    
+    .category-relationships .main-category-icon {
+      background: linear-gradient(135deg, #7fb3d5, #5499c7);
+    }
+    
+    .category-relationships .learning-list li i {
+      color: #5499c7;
+    }
+    
+    .category-spiritual .category-header {
+      background: linear-gradient(135deg, rgba(216, 191, 216, 0.2) 0%, rgba(255, 255, 255, 0.5) 100%);
+    }
+    
+    .category-spiritual .main-category-icon {
+      background: linear-gradient(135deg, #c39bd3, #9b59b6);
+    }
+    
+    .category-spiritual .learning-list li i {
+      color: #9b59b6;
+    }
+    
+    .category-career .category-header {
+      background: linear-gradient(135deg, rgba(152, 251, 152, 0.2) 0%, rgba(255, 255, 255, 0.5) 100%);
+    }
+    
+    .category-career .main-category-icon {
+      background: linear-gradient(135deg, #82e0aa, #58d68d);
+    }
+    
+    .category-career .learning-list li i {
+      color: #58d68d;
+    }
+
+    /* 人物アイコンのスタイル */
+    .testimonial-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 1rem;
+      border: 3px solid var(--primary-color);
+      background-color: #f8f9fa;
+    }
+
+    .testimonial-image .fa-user-circle {
+      font-size: 3.5rem;
+      color: var(--primary-color);
+    }
+    
+    /* スクロールを停止 */
+    .testimonials-slider {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      width: 100%;
+      animation: none !important;
+    }
+    
+    /* testimonial-cardのスタイル調整 */
+    .testimonial-card {
+      flex-shrink: initial;
+      width: auto;
+    }
+    
+    @media (max-width: 768px) {
+      .testimonials-slider {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* 入会案内セクションのスタイル */
+    .sync-join {
+      background-color: var(--background-color);
+      position: relative;
+      padding: 7rem 0;
+      background-image: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    }
+    
+    .intro-text {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      color: var(--text-color);
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    
+    .membership-types {
+      margin: 3rem 0;
+    }
+
+    .faq-container {
+      margin: 2.5rem 0;
+      background-color: white;
+      border-radius: var(--card-border-radius);
+      padding: 2.5rem;
+      box-shadow: 0 15px 35px rgba(248, 165, 179, 0.15);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .faq-container h3 {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+      font-size: 1.6rem;
+      color: var(--text-color);
+      text-align: center;
+      justify-content: center;
+    }
+    
+    .faq-container h3 i {
+      color: var(--primary-color);
+      margin-right: 1rem;
+      font-size: 1.6rem;
+    }
+    
+    .faq-item {
+      background-color: white;
+      margin-bottom: 1rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      overflow: hidden;
+      border: 1px solid transparent;
+      transition: var(--transition);
+    }
+    
+    .faq-item:hover {
+      border-color: var(--primary-light);
+    }
+    
+    .faq-question {
+      padding: 1.5rem;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .faq-question h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      padding-right: 2rem;
+      justify-content: flex-start;
+      text-align: left;
+    }
+    
+    .faq-toggle {
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary-color);
+      font-size: 1.2rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="index.html"><img src="PremaNadi_logo.svg" alt="PremaNadi" class="logo-image"></a></div>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html#services">サービス</a></li>
+            <li><a href="about.html">金子あさみについて</a></li>
+            <li><a href="index.html#testimonials">お客様の声</a></li>
+            <li><a href="index.html#blog">ブログ</a></li>
+            <li><a href="index.html#contact" class="btn btn-primary">お問い合わせ</a></li>
+          </ul>
+        </nav>
+        <button class="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ヒーローセクション -->
+  <section class="hero sync-hero parallax-section" style="background: linear-gradient(135deg, rgba(253, 193, 205, 0.6), rgba(248, 165, 179, 0.4)), url('写真素材/nyx3913_The_space_appeared_infinite._There_were_no_boundaries_n_e352c857-84a6-4e82-9d29-900112893cff.png'); background-size: cover; background-position: center;">
+    <div class="container">
+      <div class="hero-content">
+        <h1>金子あさみと<span class="highlight">シンクロサロン</span></h1>
+        <p class="hero-description">魂と人生を輝かせ、ワクワクするエネルギーを高める<br class="pc-only">あなたの可能性を広げるコミュニティ</p>
+        
+        <div class="hero-buttons">
+          <a href="index.html#contact" class="btn btn-primary">今すぐ申し込む <i class="fas fa-arrow-right"></i></a>
+          <a href="#join" class="btn btn-outline">詳細を見る <i class="fas fa-info-circle"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="floral-decoration"></div>
+  </section>
+
+  <!-- サロン概要セクション -->
+  <section id="overview" class="sync-overview parallax-section">
+    <div class="container">
+      <div class="overview-header reveal-on-scroll">
+        <h2>シンクロサロンとは<span class="highlight">？</span></h2>
+        <div class="section-divider">
+          <span class="divider-icon"><i class="fas fa-infinity"></i></span>
+        </div>
+      </div>
+      <div class="overview-content">
+        <div class="overview-text reveal-on-scroll">
+          <div class="overview-cta">
+            <p class="overview-quote">
+              <span class="quote-icon"><i class="fas fa-quote-left"></i></span>
+              シンクロサロンは、あなたの魂と人生を輝かせるための特別なコミュニティです。マヤ暦の知恵を活用し、自分自身の才能と可能性を最大限に引き出すサポートをします。
+            </p>
+            <p>金子あさみが主宰する少人数制のオンラインサロンで、毎日をワクワクと過ごすためのエネルギーの高め方や、人間関係の改善、自分の使命に沿った生き方など、人生をより豊かにするための様々な知識や実践方法を学ぶことができます。</p>
+            <p>メンバー同士の交流も活発で、同じ志を持つ仲間との繋がりが生まれます。特別なライブ配信やワークショップ、マヤ暦鑑定などの特典も充実しています。</p>
+            <div class="cta-buttons">
+              <a href="index.html#contact" class="btn btn-primary btn-glow">今すぐ申し込む <i class="fas fa-arrow-right"></i></a>
+              <a href="#learning" class="btn btn-outline">学べる内容を見る <i class="fas fa-book"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="overview-image reveal-on-scroll">
+          <div class="image-frame">
+            <img src="写真素材/19884343-0AA3-41D8-83E1-ADC095A64D86.jpg" alt="シンクロサロン">
+            <div class="image-overlay"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 豊富な実績と経験セクション -->
+  <section id="experience" class="sync-section parallax-section">
+    <div class="container">
+      <h2 class="reveal-on-scroll">豊富な<span class="highlight">実績と経験</span></h2>
+      
+      <div class="section-content">
+        <div class="section-image reveal-on-scroll">
+          <div class="experience-image-container">
+            <img src="写真素材/1B165849-0AAD-43FD-9CFF-CE3483918907.jpg" alt="豊富な実績と経験">
+          </div>
+        </div>
+        <div class="section-text reveal-on-scroll">
+          <div class="section-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <h3>豊富な実績と経験</h3>
+          <p>金子あさみの経験と知識に基づいたノウハウを提供。白バイ警官からヨガ講師・マヤ暦鑑定士へと転身した経験から、人生の転機の乗り越え方をお伝えします。</p>
+          <p>長年の経験から培った独自の視点で、あなたの人生における転機や変化をポジティブなものへと導きます。</p>
+          
+          <div class="achievements-container">
+            <div class="achievement-item">
+              <div class="achievement-icon"><i class="fas fa-user-graduate"></i></div>
+              <div class="achievement-content">
+                <h4>500+</h4>
+                <p>マヤ暦鑑定実績</p>
+              </div>
+            </div>
+            <div class="achievement-item">
+              <div class="achievement-icon"><i class="fas fa-users"></i></div>
+              <div class="achievement-content">
+                <h4>300+</h4>
+                <p>ヨガクラス受講者</p>
+              </div>
+            </div>
+            <div class="achievement-item">
+              <div class="achievement-icon"><i class="fas fa-heart"></i></div>
+              <div class="achievement-content">
+                <h4>100+</h4>
+                <p>成功体験談</p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 充実のコンテンツセクション -->
+  <section id="contents" class="sync-section parallax-section">
+    <div class="container">
+      <h2 class="reveal-on-scroll">充実の<span class="highlight">コンテンツ</span></h2>
+      
+      <div class="section-text reveal-on-scroll text-center">
+        <div class="section-icon">
+          <i class="fas fa-gift"></i>
+        </div>
+        <h3>サロン会員だけの特別コンテンツ</h3>
+        <p>シンクロサロンでは、あなたの人生をより豊かにする様々な特典と学びの機会をご提供しています。<br>毎月新しいコンテンツも追加され、常に新鮮な学びと成長の機会があります。</p>
+      </div>
+
+      <div class="contents-cards reveal-on-scroll">
+        <div class="content-card">
+          <div class="content-icon">
+            <i class="fas fa-spa"></i>
+          </div>
+          <h4>オンラインヨガレッスン</h4>
+          <p>サロン会員は無料で参加できる特別クラス。心と体のバランスを整え、エネルギーを高めます。週に2回のライブレッスンとアーカイブ動画も視聴可能。</p>
+          <div class="content-badge">無料</div>
+        </div>
+        <div class="content-card">
+          <div class="content-icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <h4>マヤ暦鑑定</h4>
+          <p>あなたの才能や使命を明らかにするマヤ暦鑑定を特別価格でご利用いただけます。毎月のエネルギーレポートも定期配信。</p>
+          <div class="content-badge">特別価格</div>
+        </div>
+        <div class="content-card">
+          <div class="content-icon">
+            <i class="fas fa-video"></i>
+          </div>
+          <h4>限定ライブ配信</h4>
+          <p>サロン会員限定のライブ配信で、最新の知識やテクニックをリアルタイムで学べます。質問にもその場で回答します。</p>
+          <div class="content-badge">会員限定</div>
+        </div>
+        <div class="content-card">
+          <div class="content-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h4>交流コミュニティ</h4>
+          <p>同じ志を持つ仲間との交流の場。情報交換や励まし合いで成長を加速させます。定期的なオンライン座談会も開催。</p>
+          <div class="content-badge">仲間づくり</div>
+        </div>
+        <div class="content-card">
+          <div class="content-icon">
+            <i class="fas fa-map-marked-alt"></i>
+          </div>
+          <h4>特別企画</h4>
+          <p>パワースポット巡りなど、エネルギーを高める特別なイベントにご招待します。オフラインでのメンバー交流会もあります。</p>
+          <div class="content-badge">優先参加</div>
+        </div>
+        <div class="content-card">
+          <div class="content-icon">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <h4>マヤ暦スマホカレンダー</h4>
+          <p>毎日のエネルギーがわかるマヤ暦カレンダーをスマホで確認できます。自分の日々のエネルギーの流れを把握し、最適な行動ができます。</p>
+          <div class="content-badge">毎日更新</div>
+        </div>
+      </div>
+
+      <div class="advanced-contents reveal-on-scroll">
+        <h3 class="advanced-title">さらに充実のコンテンツ</h3>
+        
+        <div class="advanced-content-grid">
+          <div class="advanced-content-item">
+            <div class="advanced-icon">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="advanced-content">
+              <h4>月間エネルギーガイド</h4>
+              <p>その月のエネルギー傾向を詳しく解説し、効果的な過ごし方をアドバイス。計画や意思決定に役立ちます。</p>
+            </div>
+          </div>
+          
+          <div class="advanced-content-item">
+            <div class="advanced-icon">
+              <i class="fas fa-moon"></i>
+            </div>
+            <div class="advanced-content">
+              <h4>月のリズム活用法</h4>
+              <p>満月・新月のエネルギーを最大限に活用するための具体的なワークとアファメーション。願望実現に効果的です。</p>
+            </div>
+          </div>
+          
+          <div class="advanced-content-item">
+            <div class="advanced-icon">
+              <i class="fas fa-comment-dots"></i>
+            </div>
+            <div class="advanced-content">
+              <h4>個別質問サポート</h4>
+              <p>マヤ暦や宇宙の法則について、金子あさみに直接質問できる特別枠を用意。悩みに合わせたアドバイスが受けられます。</p>
+            </div>
+          </div>
+          
+          <div class="advanced-content-item">
+            <div class="advanced-icon">
+              <i class="fas fa-percentage"></i>
+            </div>
+            <div class="advanced-content">
+              <h4>会員特典割引</h4>
+              <p>金子あさみの個人セッションや有料ワークショップが特別価格で受講可能。キャンセル待ち優先枠もご用意しています。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="content-cta reveal-on-scroll">
+        <a href="index.html#contact" class="btn btn-primary btn-glow">今すぐ申し込む <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* 充実のコンテンツセクションスタイル */
+    .text-center {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+    }
+    
+    .contents-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .content-card {
+      background-color: white;
+      border-radius: var(--card-border-radius);
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(248, 165, 179, 0.15);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      overflow: hidden;
+      border-top: 3px solid transparent;
+    }
+    
+    .content-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: linear-gradient(to bottom, var(--primary-light), transparent);
+      opacity: 0.2;
+      transition: height 0.5s ease;
+      z-index: 0;
+    }
+    
+    .content-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(248, 165, 179, 0.25);
+      border-top: 3px solid var(--primary-color);
+    }
+    
+    .content-card:hover::before {
+      height: 100%;
+    }
+    
+    .content-icon {
+      position: relative;
+      z-index: 1;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      border-radius: 50%;
+      color: white;
+      font-size: 1.4rem;
+      box-shadow: 0 8px 20px rgba(248, 165, 179, 0.4);
+      margin-bottom: 1.2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .content-card:hover .content-icon {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 12px 25px rgba(248, 165, 179, 0.5);
+    }
+    
+    .content-card h4 {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      color: var(--text-color);
+    }
+    
+    .content-card p {
+      position: relative;
+      z-index: 1;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+    
+    .content-badge {
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      margin-top: auto;
+    }
+    
+    /* 追加コンテンツスタイル */
+    .advanced-contents,
+    .exclusive-benefits {
+      margin: 4rem 0;
+    }
+    
+    .advanced-title,
+    .exclusive-title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      color: var(--text-color);
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .advanced-title::after,
+    .exclusive-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    }
+    
+    .advanced-content-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    
+    .advanced-content-item {
+      display: flex;
+      background-color: white;
+      border-radius: var(--card-border-radius);
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(248, 165, 179, 0.12);
+      transition: all 0.3s ease;
+    }
+    
+    .advanced-content-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(248, 165, 179, 0.2);
+    }
+    
+    .advanced-icon {
+      width: 50px;
+      height: 50px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+      border-radius: 50%;
+      color: white;
+      font-size: 1.2rem;
+      margin-right: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .advanced-content-item:hover .advanced-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .advanced-content h4 {
+      margin: 0 0 0.5rem;
+      font-size: 1.2rem;
+      color: var(--text-color);
+    }
+    
+    .advanced-content p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--text-light);
+    }
+    
+    .exclusive-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .exclusive-item {
+      display: flex;
+      background-color: white;
+      border-radius: var(--card-border-radius);
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(248, 165, 179, 0.15);
+      transition: all 0.3s ease;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--primary-color);
+    }
+    
+    .exclusive-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 15px 35px rgba(248, 165, 179, 0.25);
+    }
+    
+    .exclusive-icon {
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ffd700, #ffa500);
+      border-radius: 50%;
+      color: white;
+      font-size: 1.4rem;
+      margin-right: 1.5rem;
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+    
+    .exclusive-item:hover .exclusive-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .exclusive-content h4 {
+      margin: 0 0 0.5rem;
+      font-size: 1.3rem;
+      color: var(--text-color);
+    }
+    
+    .exclusive-content p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    .content-cta {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    
+    @media (max-width: 992px) {
+      .contents-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .advanced-content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .contents-cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .exclusive-item {
+        flex-direction: column;
+      }
+      
+      .exclusive-icon {
+        margin: 0 auto 1rem;
+      }
+      
+      .exclusive-content {
+        text-align: center;
+      }
+    }
+  </style>
+
+  <!-- サロンの学べることセクション -->
+  <section id="learning" class="sync-section parallax-section learning-bg">
+    <div class="container">
+      <div class="overview-header reveal-on-scroll">
+        <h2>サロンで<span class="highlight">学べること</span></h2>
+        <div class="section-divider">
+          <span class="divider-icon"><i class="fas fa-graduation-cap"></i></span>
+        </div>
+        <p class="section-description">シンクロサロンで学べる主なテーマ</p>
+      </div>
+      
+      <div class="learning-simple reveal-on-scroll">
+        <div class="learning-main-categories">
+          <div class="learning-main-category category-lifestyle">
+            <div class="category-header">
+              <div class="main-category-icon">
+                <i class="fas fa-heart"></i>
+              </div>
+              <h3>ライフスタイル</h3>
+            </div>
+            <ul class="learning-list">
+              <li><i class="fas fa-star"></i> ワクワクエネルギーの高め方</li>
+              <li><i class="fas fa-book"></i> ミラクルダイアリーの活用法</li>
+              <li><i class="fas fa-cloud-sun"></i> 魂のレベルアップ</li>
+              <li><i class="fas fa-seedling"></i> 自己成長の習慣化</li>
+            </ul>
+          </div>
+          
+          <div class="learning-main-category category-relationships">
+            <div class="category-header">
+              <div class="main-category-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h3>人間関係</h3>
+            </div>
+            <ul class="learning-list">
+              <li><i class="fas fa-hand-holding-heart"></i> マヤ暦でわかる相性と特性</li>
+              <li><i class="fas fa-comments"></i> 夫婦関係の改善</li>
+              <li><i class="fas fa-child"></i> 親子関係をより良くする方法</li>
+              <li><i class="fas fa-people-arrows"></i> 人間関係のエネルギー管理</li>
+            </ul>
+          </div>
+          
+          <div class="learning-main-category category-spiritual">
+            <div class="category-header">
+              <div class="main-category-icon">
+                <i class="fas fa-spa"></i>
+              </div>
+              <h3>スピリチュアル</h3>
+            </div>
+            <ul class="learning-list">
+              <li><i class="fas fa-infinity"></i> 宇宙の法則</li>
+              <li><i class="fas fa-calendar-alt"></i> マヤ暦の基本と応用</li>
+              <li><i class="fas fa-sync-alt"></i> シンクロニシティの活用</li>
+              <li><i class="fas fa-lightbulb"></i> 直感力を高める方法</li>
+            </ul>
+          </div>
+          
+          <div class="learning-main-category category-career">
+            <div class="category-header">
+              <div class="main-category-icon">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <h3>キャリア</h3>
+            </div>
+            <ul class="learning-list">
+              <li><i class="fas fa-gem"></i> 自分の才能を活かした仕事</li>
+              <li><i class="fas fa-compass"></i> 使命に沿った仕事の始め方</li>
+              <li><i class="fas fa-rocket"></i> 起業のための基礎知識</li>
+              <li><i class="fas fa-balance-scale"></i> 仕事と生活のバランス</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="learning-note reveal-on-scroll">
+        <i class="fas fa-info-circle"></i>
+        <p>これ以外にも、あなたの知りたいことに合わせて<br class="mobile-only">個別の質問にお答えします</p>
+      </div>
+    </div>
+    
+    <style>
+      /* シンプル化した学べることセクションのスタイル */
+      .learning-bg {
+        background: linear-gradient(135deg, rgba(255, 248, 250, 0.9) 0%, rgba(255, 255, 255, 0.8) 100%);
+        position: relative;
+      }
+      
+      .learning-bg::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('写真素材/nyx3913_The_space_appeared_infinite._There_were_no_boundaries_n_e352c857-84a6-4e82-9d29-900112893cff.png');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.08;
+        z-index: 0;
+      }
+      
+      .section-description {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 2rem;
+        color: var(--text-color);
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+      
+      .learning-simple {
+        margin: 2rem 0 3rem;
+        position: relative;
+        z-index: 1;
+      }
+      
+      .learning-main-categories {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+      
+      .learning-main-category {
+        background: white;
+        border-radius: var(--card-border-radius);
+        padding: 0;
+        box-shadow: 0 8px 25px rgba(248, 165, 179, 0.12);
+        transition: all 0.3s ease;
+        overflow: hidden;
+      }
+      
+      .learning-main-category:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(248, 165, 179, 0.2);
+      }
+      
+      .category-header {
+        padding: 1.5rem;
+        background: linear-gradient(135deg, rgba(248, 165, 179, 0.2) 0%, rgba(255, 255, 255, 0.5) 100%);
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgba(248, 165, 179, 0.15);
+      }
+      
+      .main-category-icon {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        border-radius: 50%;
+        color: white;
+        font-size: 1.2rem;
+        margin-right: 1.2rem;
+        box-shadow: 0 5px 15px rgba(248, 165, 179, 0.3);
+        flex-shrink: 0;
+      }
+      
+      .learning-main-category h3 {
+        font-size: 1.4rem;
+        margin: 0;
+        color: var(--text-color);
+      }
+      
+      .learning-list {
+        list-style: none;
+        padding: 1.5rem;
+        margin: 0;
+      }
+      
+      .learning-list li {
+        margin-bottom: 0.8rem;
+        padding: 0.5rem 0;
+        font-size: 1.1rem;
+        color: var(--text-color);
+        display: flex;
+        align-items: center;
+        border-bottom: 1px dashed rgba(248, 165, 179, 0.2);
+      }
+      
+      .learning-list li:last-child {
+        margin-bottom: 0;
+        border-bottom: none;
+      }
+      
+      .learning-list li i {
+        color: var(--primary-color);
+        margin-right: 0.8rem;
+        font-size: 1.1rem;
+        width: 22px;
+        height: 22px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+      
+      .learning-note {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem auto 2rem;
+        padding: 1rem;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: var(--card-border-radius);
+        max-width: 600px;
+        box-shadow: 0 5px 15px rgba(248, 165, 179, 0.12);
+      }
+      
+      .learning-note i {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        margin-right: 1rem;
+      }
+      
+      .learning-note p {
+        margin: 0;
+        font-size: 1.1rem;
+        color: var(--text-color);
+      }
+      
+      @media (max-width: 992px) {
+        .learning-main-categories {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+        
+        .mobile-only {
+          display: block;
+        }
+      }
+      
+      @media (min-width: 993px) {
+        .mobile-only {
+          display: none;
+        }
+      }
+    </style>
+  </section>
+
+  <!-- メンバーの声セクション -->
+  <section id="testimonials" class="sync-testimonials parallax-section">
+    <div class="container">
+      <h2 class="reveal-on-scroll">メンバーの<span class="highlight">声</span></h2>
+      
+      <div class="testimonials-slider reveal-on-scroll">
+        <div class="testimonial-card">
+          <div class="testimonial-image">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <div class="testimonial-content">
+            <div class="testimonial-header">
+              <div class="testimonial-info">
+                <h3>Sさん</h3>
+                <p>35歳・フリーランス</p>
+              </div>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+            <p>サロンに入会して3ヶ月。念願の妊娠ができました！金子さんのアドバイスで心身ともに整えることができたおかげです。</p>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-image">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <div class="testimonial-content">
+            <div class="testimonial-header">
+              <div class="testimonial-info">
+                <h3>Kさん</h3>
+                <p>42歳・パート</p>
+              </div>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+            <p>長年悩んでいた夫婦関係が、マヤ暦の知識を得たことで劇的に改善しました。お互いの特性を理解し、尊重できるようになりました。</p>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-image">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <div class="testimonial-content">
+            <div class="testimonial-header">
+              <div class="testimonial-info">
+                <h3>Yさん</h3>
+                <p>38歳・起業家</p>
+              </div>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+            <p>自分の使命に気づき、思い切って起業。今では自分らしく働けています。このサロンがなければ、一歩を踏み出す勇気は湧かなかったと思います。</p>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-image">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <div class="testimonial-content">
+            <div class="testimonial-header">
+              <div class="testimonial-info">
+                <h3>Mさん</h3>
+                <p>29歳・会社員</p>
+              </div>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+            <p>ヨガと瞑想をとおして、仕事のストレスへの対処法を学びました。今では毎日が穏やかで、職場での人間関係も良くなりました。</p>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <div class="testimonial-image">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <div class="testimonial-content">
+            <div class="testimonial-header">
+              <div class="testimonial-info">
+                <h3>Tさん</h3>
+                <p>45歳・主婦</p>
+              </div>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+            <p>子育てに悩んでいた時期に参加しました。マヤ暦で子供の個性を理解できるようになり、育児がとても楽しくなりました。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 入会案内セクション -->
+  <section id="join" class="sync-join parallax-section">
+    <div class="container">
+      <div class="overview-header reveal-on-scroll">
+        <h2>シンクロサロンへの<span class="highlight">入会案内</span></h2>
+        <div class="section-divider">
+          <span class="divider-icon"><i class="fas fa-user-plus"></i></span>
+        </div>
+      </div>
+      
+      <p class="intro-text">シンクロサロンでは、自分らしく生きたい女性、人生をより豊かにしたい女性、夫婦関係や親子関係を改善したい女性、自分の使命を見つけたい女性、毎日をもっとワクワクして過ごしたい女性を歓迎しています。</p>
+      
+      <div class="join-single-column reveal-on-scroll">
+        <div class="membership-types">
+          <div class="membership-item">
+            <div class="membership-header">
+              <div class="membership-icon">
+                <i class="fas fa-crown"></i>
+              </div>
+              <h3>月額会員</h3>
+            </div>
+            <div class="membership-price-container">
+              <p class="membership-price">月額 <span>2,000</span>円<small>（税込）</small></p>
+              <p class="membership-note">※現在の料金は最安値です。品質向上のため、将来的に値上げの可能性があります。</p>
+            </div>
+            <ul class="membership-features">
+              <li><i class="fas fa-check-circle"></i> 特別鑑定・セッション</li>
+              <li><i class="fas fa-check-circle"></i> オンラインヨガ無料参加権</li>
+              <li><i class="fas fa-check-circle"></i> サロン生限定ライブ配信</li>
+              <li><i class="fas fa-check-circle"></i> マヤ暦スマホカレンダー</li>
+              <li><i class="fas fa-check-circle"></i> 特別企画への招待</li>
+              <li><i class="fas fa-check-circle"></i> 各種サービスの特別価格提供</li>
+              <li><i class="fas fa-check-circle"></i> シンクロに関わる質問し放題</li>
+            </ul>
+            <div class="membership-cta">
+              <a href="index.html#contact" class="btn btn-primary btn-join pulse-btn">今すぐ申し込む <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="join-process">
+          <h3><i class="fas fa-map-marked-alt"></i> 入会の流れ</h3>
+          <div class="process-steps-container">
+            <ol class="process-steps">
+              <li>
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <h4>申し込み</h4>
+                  <p>専用フォームから必要事項を送信</p>
+                </div>
+              </li>
+              <li>
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <h4>決済</h4>
+                  <p>クレジットカード決済（Square利用）</p>
+                </div>
+              </li>
+              <li>
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <h4>招待</h4>
+                  <p>鍵付きInstagramアカウントとLINEオープンチャットへ招待</p>
+                </div>
+              </li>
+              <li>
+                <div class="step-number">4</div>
+                <div class="step-content">
+                  <h4>サロン開始</h4>
+                  <p>すぐに各種コンテンツへアクセス可能になります</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="faq-container">
+          <h3><i class="fas fa-question-circle"></i> よくある質問</h3>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>いつでも退会できますか？</h3>
+              <div class="faq-toggle">
+                <i class="fas fa-plus"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>はい、登録後の解約はいつでも可能です。</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>サロンに参加するために特別な知識は必要ですか？</h3>
+              <div class="faq-toggle">
+                <i class="fas fa-plus"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>いいえ、初心者の方でも安心してご参加いただけます。</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3>どのくらいの頻度でコンテンツが更新されますか？</h3>
+              <div class="faq-toggle">
+                <i class="fas fa-plus"></i>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <p>週に2〜3回の頻度で新しい情報やライブ配信を行っています。</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+    <style>
+      /* 入会案内セクションのスタイル */
+      .sync-join {
+        background-color: var(--background-color);
+        position: relative;
+        padding: 7rem 0;
+        background-image: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      }
+      
+      .intro-text {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 3rem;
+        color: var(--text-color);
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+      
+      .join-single-column {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .membership-types {
+        margin: 3rem 0;
+      }
+      
+      .membership-item {
+        background-color: white;
+        border-radius: var(--card-border-radius);
+        padding: 2.5rem;
+        box-shadow: 0 15px 35px rgba(248, 165, 179, 0.2);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(248, 165, 179, 0.1);
+      }
+      
+      .membership-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(248, 165, 179, 0.3);
+      }
+      
+      .membership-item.popular {
+        border: 2px solid var(--primary-color);
+      }
+      
+      .popular-badge {
+        position: absolute;
+        top: -15px;
+        right: 2rem;
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        color: white;
+        font-weight: 600;
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        box-shadow: 0 5px 15px rgba(248, 165, 179, 0.3);
+        z-index: 1;
+      }
+      
+      .membership-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+      
+      .membership-icon {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        border-radius: 50%;
+        margin-right: 1.5rem;
+        color: white;
+        font-size: 1.5rem;
+        box-shadow: 0 10px 20px rgba(248, 165, 179, 0.3);
+      }
+      
+      .membership-item h3 {
+        margin: 0;
+        font-size: 1.8rem;
+        color: var(--text-color);
+      }
+      
+      .membership-features {
+        list-style: none;
+        padding: 0;
+        margin: 2rem 0;
+      }
+      
+      .membership-features li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.2rem;
+        font-size: 1.1rem;
+        color: var(--text-color);
+        background-color: rgba(248, 165, 179, 0.05);
+        padding: 0.8rem 1rem;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+      }
+      
+      .membership-features li:hover {
+        background-color: rgba(248, 165, 179, 0.1);
+        transform: translateX(10px);
+      }
+      
+      .membership-features li i {
+        color: var(--primary-color);
+        margin-right: 1rem;
+        font-size: 1.2rem;
+      }
+      
+      .membership-price-container {
+        background: linear-gradient(135deg, rgba(248, 165, 179, 0.1) 0%, rgba(255, 255, 255, 0.5) 100%);
+        padding: 1.5rem;
+        border-radius: var(--card-border-radius);
+        margin-bottom: 1rem;
+        border-left: 4px solid var(--primary-color);
+        text-align: center;
+      }
+      
+      .membership-price {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 0 0.5rem;
+        color: var(--text-color);
+      }
+      
+      .membership-price span {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+      }
+      
+      .membership-note {
+        font-size: 0.9rem;
+        margin: 0;
+        color: var(--text-light);
+      }
+      
+      .membership-cta {
+        text-align: center;
+        margin-top: 2rem;
+      }
+      
+      .btn-join {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+        font-size: 1.2rem;
+      }
+      
+      .pulse-btn {
+        animation: pulse-button 2s infinite;
+      }
+      
+      @keyframes pulse-button {
+        0% {
+          box-shadow: 0 0 0 0 rgba(248, 165, 179, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(248, 165, 179, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(248, 165, 179, 0);
+        }
+      }
+      
+      .join-process {
+        margin: 3.5rem 0;
+        background-color: white;
+        border-radius: var(--card-border-radius);
+        padding: 2.5rem;
+        box-shadow: 0 15px 35px rgba(248, 165, 179, 0.15);
+      }
+      
+      .join-process h3 {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+        font-size: 1.6rem;
+        color: var(--text-color);
+      }
+      
+      .join-process h3 i {
+        color: var(--primary-color);
+        margin-right: 1rem;
+        font-size: 1.6rem;
+      }
+      
+      .process-steps-container {
+        position: relative;
+      }
+      
+      .process-steps {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        counter-reset: step;
+      }
+      
+      .process-steps li {
+        position: relative;
+        padding-left: 90px;
+        margin-bottom: 2.5rem;
+        counter-increment: step;
+        transition: all 0.3s ease;
+      }
+      
+      .process-steps li:last-child {
+        margin-bottom: 0;
+      }
+      
+      .step-number {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+        box-shadow: 0 10px 20px rgba(248, 165, 179, 0.3);
+      }
+      
+      .step-content {
+        position: relative;
+      }
+      
+      .step-content h4 {
+        margin: 0 0 0.5rem;
+        font-size: 1.3rem;
+        color: var(--text-color);
+      }
+      
+      .step-content p {
+        margin: 0;
+        color: var(--text-light);
+      }
+      
+      .faq-container {
+        margin: 2.5rem 0;
+        background-color: white;
+        border-radius: var(--card-border-radius);
+        padding: 2.5rem;
+        box-shadow: 0 15px 35px rgba(248, 165, 179, 0.15);
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .faq-container h3 {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+        font-size: 1.6rem;
+        color: var(--text-color);
+        text-align: center;
+        justify-content: center;
+      }
+      
+      .faq-container h3 i {
+        color: var(--primary-color);
+        margin-right: 1rem;
+        font-size: 1.6rem;
+      }
+      
+      .faq-item {
+        background-color: white;
+        margin-bottom: 1rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        overflow: hidden;
+        border: 1px solid transparent;
+        transition: var(--transition);
+      }
+      
+      .faq-item:hover {
+        border-color: var(--primary-light);
+      }
+      
+      .faq-question {
+        padding: 1.5rem;
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .faq-question h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        padding-right: 2rem;
+        justify-content: flex-start;
+        text-align: left;
+      }
+      
+      .faq-toggle {
+        position: absolute;
+        right: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--primary-color);
+        font-size: 1.2rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        padding: 0 1.5rem;
+      }
+      
+      @media (max-width: 768px) {
+        .process-steps li {
+          padding-left: 75px;
+        }
+        
+        .step-number {
+          width: 50px;
+          height: 50px;
+          font-size: 1.3rem;
+        }
+        
+        .membership-item {
+          padding: 1.5rem;
+        }
+        
+        .join-process,
+        .faq-container {
+          padding: 1.5rem;
+        }
+        
+        .special-offer {
+          flex-direction: column;
+          text-align: center;
+        }
+        
+        .offer-icon {
+          margin: 0 auto 1rem;
+        }
+      }
+    </style>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2>あなたの人生を輝かせる一歩を、今踏み出しませんか？</h2>
+      <p>シンクロサロンで、自分自身の才能と可能性を最大限に引き出し、シンクロニシティに満ちた毎日を手に入れましょう。</p>
+      
+      <div class="cta-buttons">
+        <a href="index.html#contact" class="btn btn-light">今すぐ申し込む <i class="fas fa-arrow-right"></i></a>
+        <a href="index.html#services" class="btn btn-outline-light">他のサービスを見る <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3><a href="index.html">PremaNadi</a></h3>
+          <p>金子あさみサービス</p>
+          <p class="footer-tagline">魂と人生を輝かせ、ワクワクさせるエネルギーを高める</p>
+        </div>
+        
+        <div class="footer-links">
+          <h4>サービス</h4>
+          <ul>
+            <li><a href="index.html#services">マヤ暦鑑定</a></li>
+            <li><a href="index.html#services">各種講座</a></li>
+            <li><a href="index.html#featured">未来創造プロジェクト</a></li>
+            <li><a href="sync-salon.html">シンクロサロン</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>お問い合わせ</h4>
+          <ul>
+            <li><a href="https://lin.ee/kTtgn9q">公式LINE</a></li>
+            <li><a href="index.html#contact">メールフォーム</a></li>
+            <li><a href="index.html#faq">よくある質問</a></li>
+            <li><a href="#privacy" class="privacy-policy-link">プライバシーポリシー</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-social">
+          <h4>フォロー</h4>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/asami.kaneko4488/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.threads.net/@asami.kaneko4488?xmt=AQGzV7RUmAeXAduSKWbM93ofT-J3xzu4gLaIOrm-oE3kiy8">
+              <svg class="threads-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 878 1000">
+                <path d="M446.7,1000h-0.3c-149.2-1-263.9-50.2-341-146.2C36.9,768.3,1.5,649.4,0.3,500.4v-0.7c1.2-149.1,36.6-267.9,105.2-353.4
+                  C182.5,50.2,297.3,1,446.4,0h0.3h0.3c114.4,0.8,210.1,30.2,284.4,87.4c69.9,53.8,119.1,130.4,146.2,227.8l-85,23.7
+                  c-46-165-162.4-249.3-346-250.6c-121.2,0.9-212.9,39-272.5,113.2C118.4,271,89.6,371.4,88.5,500c1.1,128.6,29.9,229,85.7,298.5
+                  c59.6,74.3,151.3,112.4,272.5,113.2c109.3-0.8,181.6-26.3,241.7-85.2c68.6-67.2,67.4-149.7,45.4-199.9
+                  c-12.9-29.6-36.4-54.2-68.1-72.9c-8,56.3-25.9,101.9-53.5,136.3c-36.9,45.9-89.2,71-155.4,74.6c-50.1,2.7-98.4-9.1-135.8-33.4
+                  c-44.3-28.7-70.2-72.5-73-123.5c-2.7-49.6,17-95.2,55.4-128.4c36.7-31.7,88.3-50.3,149.3-53.8c44.9-2.5,87-0.5,125.8,5.9
+                  c-5.2-30.9-15.6-55.5-31.2-73.2c-21.4-24.4-54.5-36.8-98.3-37.1c-0.4,0-0.8,0-1.2,0c-35.2,0-83,9.7-113.4,55L261.2,327
+                  c40.8-60.6,107-94,186.6-94c0.6,0,1.2,0,1.8,0c133.1,0.8,212.4,82.3,220.3,224.5c4.5,1.9,9,3.9,13.4,5.9
+                  c62.1,29.2,107.5,73.4,131.4,127.9c33.2,75.9,36.3,199.6-64.5,298.3C673.1,965,579.6,999.1,447,1000L446.7,1000L446.7,1000z
+                  M488.5,512.9c-10.1,0-20.3,0.3-30.8,0.9c-76.5,4.3-124.2,39.4-121.5,89.3c2.8,52.3,60.5,76.6,116,73.6
+                  c51-2.7,117.4-22.6,128.6-154.6C552.6,516,521.7,512.9,488.5,512.9z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> PremaNadi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- トップに戻るボタン -->
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- スクリプト -->
+  <script src="script.js"></script>
+  <script src="privacy.js"></script>
+  <script>
+    // アコーディオン機能
+    document.addEventListener("DOMContentLoaded", function() {
+      const accordionItems = document.querySelectorAll('.accordion-item');
+      
+      // 最初のアコーディオン項目を開く
+      if (accordionItems.length > 0) {
+        accordionItems[0].classList.add('active');
+      }
+      
+      accordionItems.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        
+        header.addEventListener('click', () => {
+          // 同じアイテムをクリックした場合はトグル
+          const isActive = item.classList.contains('active');
+          
+          // すべてのアイテムを閉じる
+          accordionItems.forEach(i => i.classList.remove('active'));
+          
+          // クリックされたアイテムが閉じていた場合は開く
+          if (!isActive) {
+            item.classList.add('active');
+            
+            // スムーズにスクロール
+            setTimeout(() => {
+              const offset = 100;
+              const itemPosition = item.getBoundingClientRect().top;
+              const offsetPosition = itemPosition + window.pageYOffset - offset;
+              
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+              });
+            }, 300);
+          }
+        });
+      });
+      
+      // スクロール時のアニメーション
+      const revealElements = document.querySelectorAll('.reveal-on-scroll');
+      
+      const revealOnScroll = function() {
+        for (let i = 0; i < revealElements.length; i++) {
+          const windowHeight = window.innerHeight;
+          const elementTop = revealElements[i].getBoundingClientRect().top;
+          const elementVisible = 150;
+          
+          if (elementTop < windowHeight - elementVisible) {
+            revealElements[i].classList.add("revealed");
+          }
+        }
+      };
+      
+      window.addEventListener("scroll", revealOnScroll);
+      revealOnScroll(); // 最初のロード時にも実行
+      
+      // フローティングシェイプのアニメーション
+      const shapes = document.querySelectorAll('.floating-shapes .shape');
+      
+      shapes.forEach(shape => {
+        // ランダムな初期位置とアニメーション遅延を設定
+        const randomDelay = Math.random() * 5;
+        const randomDuration = 15 + Math.random() * 10;
+        
+        shape.style.animationDelay = `${randomDelay}s`;
+        shape.style.animationDuration = `${randomDuration}s`;
+      });
+      
+      // 明るさエフェクトアニメーション
+      const featureCards = document.querySelectorAll('.feature-card');
+      
+      featureCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          const icon = card.querySelector('.feature-icon');
+          if (icon) {
+            icon.style.transform = 'scale(1.2) rotate(5deg)';
+            setTimeout(() => {
+              icon.style.transform = 'scale(1.1) rotate(0deg)';
+            }, 300);
+          }
+        });
+      });
+      
+      // ヘッダーの背景グラデーションアニメーション
+      const overviewHeader = document.querySelector('.overview-header h2');
+      if (overviewHeader) {
+        let gradientPosition = 0;
+        
+        setInterval(() => {
+          gradientPosition = (gradientPosition + 1) % 200;
+          overviewHeader.style.backgroundImage = `linear-gradient(135deg, var(--primary-color) ${gradientPosition}%, var(--primary-dark) ${gradientPosition + 60}%)`;
+        }, 50);
+      }
+      
+      // イメージフレームの3Dエフェクト
+      const imageFrame = document.querySelector('.image-frame');
+      if (imageFrame) {
+        imageFrame.addEventListener('mousemove', (e) => {
+          const rect = imageFrame.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          const rotateY = ((x - centerX) / centerX) * 5;
+          const rotateX = ((centerY - y) / centerY) * 5;
+          
+          imageFrame.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+        
+        imageFrame.addEventListener('mouseleave', () => {
+          imageFrame.style.transform = 'perspective(1000px) rotateY(-5deg)';
+        });
+      }
+    });
+    
+    // スムーズスクロール
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // クイックナビのホバーエフェクト
+    document.querySelectorAll('.quick-nav-item').forEach(item => {
+      item.addEventListener('mouseenter', function() {
+        const icon = this.querySelector('i');
+        icon.style.transform = 'scale(1.2) rotate(5deg)';
+        setTimeout(() => {
+          icon.style.transform = 'scale(1.1)';
+        }, 200);
+      });
+    });
+  </script>
+</body>
+</html>

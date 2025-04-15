@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ブログ - PremaNadi</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .threads-icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      vertical-align: middle;
+      fill: currentColor;
+    }
+    .social-icons .threads-icon {
+      width: 20px;
+      height: 20px;
+    }
+    
+    /* ブログページ専用スタイル */
+    .featured-post {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      background: white;
+      border-radius: var(--card-border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+    
+    .featured-post-image {
+      position: relative;
+      height: 0;
+      padding-bottom: 66.67%; /* 3:2のアスペクト比 */
+      overflow: hidden;
+    }
+    
+    .featured-post-image img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .post-category {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--primary-color);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .featured-post-content {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .post-meta {
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+    
+    .post-date, .post-author {
+      margin-right: 1rem;
+    }
+    
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .blog-post-card {
+      background: white;
+      border-radius: var(--card-border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .blog-post-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(248, 165, 179, 0.2);
+    }
+    
+    .post-image {
+      position: relative;
+      height: 0;
+      padding-bottom: 66.67%; /* 3:2のアスペクト比 */
+      overflow: hidden;
+    }
+    
+    .post-image img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .post-content {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .post-content h3 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      line-height: 1.4;
+    }
+    
+    .post-content p {
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+      flex: 1;
+    }
+    
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 3rem;
+      gap: 0.5rem;
+    }
+    
+    .pagination a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    
+    .pagination a.active, .pagination a:hover {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+    
+    /* 人気記事スタイル */
+    .popular-posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .popular-post {
+      background: white;
+      border-radius: var(--card-border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      height: 100%;
+    }
+    
+    .popular-post:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(248, 165, 179, 0.2);
+    }
+    
+    .popular-post-image {
+      position: relative;
+      height: 0;
+      padding-bottom: 66.67%; /* 3:2のアスペクト比 */
+      overflow: hidden;
+    }
+    
+    .popular-post-image img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .post-number {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    
+    .popular-post-content {
+      padding: 1.2rem;
+    }
+    
+    .popular-post-content h3 {
+      font-size: 1rem;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+    
+    /* カテゴリー別記事スタイル */
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .category-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      background: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .category-tab i {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+    
+    .category-tab.active, .category-tab:hover {
+      background: var(--primary-color);
+      transform: translateY(-5px);
+    }
+    
+    .category-tab.active i, .category-tab:hover i,
+    .category-tab.active span, .category-tab:hover span {
+      color: white;
+    }
+    
+    .category-pane {
+      display: none;
+    }
+    
+    .category-pane.active {
+      display: block;
+    }
+    
+    .category-posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .category-post-card {
+      background: white;
+      border-radius: var(--card-border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+    }
+    
+    .category-post-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(248, 165, 179, 0.2);
+    }
+    
+    .view-all-link {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    
+    .view-all-link a {
+      display: inline-flex;
+      align-items: center;
+      color: var(--primary-color);
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    
+    .view-all-link a i {
+      margin-left: 0.5rem;
+      transition: var(--transition);
+    }
+    
+    .view-all-link a:hover {
+      color: var(--primary-dark);
+    }
+    
+    .view-all-link a:hover i {
+      transform: translateX(3px);
+    }
+    
+    /* ニュースレターセクション */
+    .newsletter {
+      background: linear-gradient(135deg, #fce7eb, #fff5f7);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .newsletter:before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      right: -50px;
+      bottom: -50px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23f8a5b3" opacity="0.15"/></svg>');
+      z-index: -1;
+      transform: rotate(10deg);
+    }
+    
+    .newsletter-content {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 2.5rem;
+      border-radius: var(--card-border-radius);
+      box-shadow: var(--box-shadow);
+    }
+    
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    
+    .newsletter-form .form-group {
+      margin-bottom: 1rem;
+    }
+    
+    .newsletter-form input {
+      width: 100%;
+      padding: 0.8rem 1.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 30px;
+      background: white;
+    }
+    
+    .newsletter-form button {
+      align-self: center;
+    }
+    
+    .privacy-note {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+    
+    /* CTAセクション */
+    .cta {
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 5rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: -100px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .cta::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* レスポンシブ調整 */
+    @media (max-width: 992px) {
+      .featured-post {
+        grid-template-columns: 1fr;
+      }
+      
+      .category-posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .posts-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .popular-posts-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .category-posts-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .pagination a {
+        width: 35px;
+        height: 35px;
+      }
+      
+      .newsletter-form {
+        padding: 0 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="index.html"><img src="PremaNadi_logo.svg" alt="PremaNadi" class="logo-image"></a></div>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html#services">サービス</a></li>
+            <li><a href="about.html">金子あさみについて</a></li>
+            <li><a href="index.html#testimonials">お客様の声</a></li>
+            <li><a href="blog.html" class="active">ブログ</a></li>
+            <li><a href="index.html#contact" class="btn btn-primary">お問い合わせ</a></li>
+          </ul>
+        </nav>
+        <button class="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ヒーローセクション -->
+  <section class="hero blog-hero parallax-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1>PremaNadi<br><span class="highlight">ブログ</span></h1>
+        <p class="hero-description">マヤ暦、シンクロニシティ、人生の変革に関する<br class="pc-only">金子あさみのブログ記事をご紹介</p>
+      </div>
+    </div>
+    <div class="floral-decoration"></div>
+  </section>
+
+  <!-- 最新記事セクション -->
+  <section class="latest-posts parallax-section">
+    <div class="container">
+      <h2 class="reveal-on-scroll">最新の<span class="highlight">記事</span></h2>
+      
+      <div class="featured-post reveal-on-scroll">
+        <div class="featured-post-image">
+          <img src="写真素材/57B2BE4F-6B7A-465D-AA9D-B12164E9FBDC.jpg" alt="マヤ暦で読み解く2024年の運勢">
+          <div class="post-category">マヤ暦</div>
+        </div>
+        <div class="featured-post-content">
+          <div class="post-meta">
+            <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年4月1日</span>
+            <span class="post-author"><i class="far fa-user"></i> 金子あさみ</span>
+          </div>
+          <h3>マヤ暦で読み解く2024年の運勢とエネルギーの流れ</h3>
+          <p>2024年は黄色い太陽の年。マヤ暦では「完成」と「収穫」のエネルギーが強まる一年です。この記事では、KINごとの運勢とチャンスの掴み方、注意点を詳しく解説します。自分のKINを知って、2024年を最高の年にしましょう。</p>
+          <a href="#" class="btn btn-outline">続きを読む <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      
+      <div class="posts-grid">
+        <div class="blog-post-card reveal-on-scroll" data-category="sync">
+          <div class="post-image">
+            <img src="写真素材/253358D0-7195-498C-A4AD-F3B8D3E0F871.jpg" alt="シンクロニシティの正体">
+            <div class="post-category">シンクロニシティ</div>
+          </div>
+          <div class="post-content">
+            <div class="post-meta">
+              <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年3月25日</span>
+            </div>
+            <h3>シンクロニシティの正体とは？不思議な偶然を引き寄せる5つの方法</h3>
+            <p>日常の中で起こる「偶然の一致」には深い意味があります。この記事では、シンクロニシティの科学的背景と霊的意味、そして意図的にシンクロニシティを引き寄せる方法を紹介します。</p>
+            <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="blog-post-card reveal-on-scroll" data-category="self">
+          <div class="post-image">
+            <img src="写真素材/A965F9CF-B3A1-47F2-8E64-75604B699C6D.jpg" alt="理想の未来を引き寄せる">
+            <div class="post-category">自己実現</div>
+          </div>
+          <div class="post-content">
+            <div class="post-meta">
+              <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年3月18日</span>
+            </div>
+            <h3>理想の未来を引き寄せる！効果的なビジョンボードの作り方</h3>
+            <p>ビジョンボードは単なる願望を貼るだけの工作ではありません。潜在意識に働きかけ、本当に望む未来を引き寄せる強力なツールです。効果的なビジョンボードの作り方と活用法をご紹介します。</p>
+            <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="blog-post-card reveal-on-scroll" data-category="maya">
+          <div class="post-image">
+            <img src="写真素材/B218ECAB-0D63-4D35-8F6E-8C2B24F8FE03.jpg" alt="マヤ暦の基本">
+            <div class="post-category">マヤ暦</div>
+          </div>
+          <div class="post-content">
+            <div class="post-meta">
+              <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年3月10日</span>
+            </div>
+            <h3>マヤ暦の基本：あなたのKINから読み解く才能と使命</h3>
+            <p>マヤ暦は単なる占いではなく、あなたの本質的な才能と使命を知るための羅針盤です。この記事では、マヤ暦の基本的な考え方と、自分のKINの調べ方、各KINの特徴を詳しく解説します。</p>
+            <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="blog-post-card reveal-on-scroll" data-category="business">
+          <div class="post-image">
+            <img src="写真素材/DE1FF9C9-7607-49C4-B43F-6ACB939628E3.jpg" alt="才能を活かした起業">
+            <div class="post-category">起業</div>
+          </div>
+          <div class="post-content">
+            <div class="post-meta">
+              <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年3月5日</span>
+            </div>
+            <h3>才能を活かした起業：まずは何から始めるべきか</h3>
+            <p>「自分の才能を活かして起業したい」という思いはあっても、何から始めればいいのか悩む方は多いです。この記事では、才能ベースの起業準備から最初の一歩までを解説します。</p>
+            <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="blog-post-card reveal-on-scroll" data-category="self">
+          <div class="post-image">
+            <img src="写真素材/FEEF5EEF-1F6C-4884-9F46-7444584866CD.jpg" alt="自己肯定感を高める">
+            <div class="post-category">自己実現</div>
+          </div>
+          <div class="post-content">
+            <div class="post-meta">
+              <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年2月28日</span>
+            </div>
+            <h3>自己肯定感を高める7つのワークと日常習慣</h3>
+            <p>自己肯定感は人生の質を大きく左右します。この記事では、低い自己肯定感の原因と、科学的に効果が証明されている自己肯定感向上のためのワークと習慣をご紹介します。</p>
+            <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="blog-post-card reveal-on-scroll" data-category="sync">
+          <div class="post-image">
+            <img src="写真素材/55973D0C-F555-46CB-99F3-1638963C57DC.jpg" alt="シンクロサロンとは">
+            <div class="post-category">シンクロニシティ</div>
+          </div>
+          <div class="post-content">
+            <div class="post-meta">
+              <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年2月20日</span>
+            </div>
+            <h3>シンクロサロンとは？共鳴する仲間との成長コミュニティの魅力</h3>
+            <p>シンクロサロンでの不思議な体験と成長の物語。参加者の声と共に、魂の仲間と出会い、共に成長することの素晴らしさをお伝えします。</p>
+            <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="pagination reveal-on-scroll">
+        <a href="#" class="active">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#" class="next-page"><i class="fas fa-chevron-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 人気記事セクション -->
+  <section class="popular-posts parallax-section">
+    <div class="container">
+      <h2 class="reveal-on-scroll">人気の<span class="highlight">記事</span></h2>
+      
+      <div class="popular-posts-grid reveal-on-scroll">
+        <div class="popular-post">
+          <div class="popular-post-image">
+            <img src="写真素材/ABF94FF0-507C-4579-BCA2-109B30F3B2FB.jpg" alt="マヤ暦とは">
+            <div class="post-number">1</div>
+          </div>
+          <div class="popular-post-content">
+            <h3>マヤ暦とは？初心者でもわかる基本の「キ」</h3>
+            <div class="post-meta">
+              <span class="post-category">マヤ暦</span>
+              <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年1月15日</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="popular-post">
+          <div class="popular-post-image">
+            <img src="写真素材/32323190-4C91-4907-8F34-9B5B609B53EB.jpg" alt="才能の見つけ方">
+            <div class="post-number">2</div>
+          </div>
+          <div class="popular-post-content">
+            <h3>本当の才能の見つけ方：自分が気づいていない強みを発掘する方法</h3>
+            <div class="post-meta">
+              <span class="post-category">自己実現</span>
+              <span class="post-date"><i class="far fa-calendar-alt"></i> 2023年12月10日</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="popular-post">
+          <div class="popular-post-image">
+            <img src="写真素材/E74CFFC4-0967-45A8-A836-F21E24CD1F96.jpg" alt="引き寄せの法則">
+            <div class="post-number">3</div>
+          </div>
+          <div class="popular-post-content">
+            <h3>引き寄せの法則を科学的に解説：量子物理学からみる実現のメカニズム</h3>
+            <div class="post-meta">
+              <span class="post-category">シンクロニシティ</span>
+              <span class="post-date"><i class="far fa-calendar-alt"></i> 2023年11月5日</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="popular-post">
+          <div class="popular-post-image">
+            <img src="写真素材/35EB6A0F-43CB-4FCE-8420-2FB87F16A30D.jpg" alt="朝の習慣">
+            <div class="post-number">4</div>
+          </div>
+          <div class="popular-post-content">
+            <h3>成功者が実践する「魂を整える」朝の習慣7選</h3>
+            <div class="post-meta">
+              <span class="post-category">自己実現</span>
+              <span class="post-date"><i class="far fa-calendar-alt"></i> 2023年10月22日</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="popular-post">
+          <div class="popular-post-image">
+            <img src="写真素材/F03961A9-56ED-489E-A5F1-094423BE873B.jpg" alt="女性起業家">
+            <div class="post-number">5</div>
+          </div>
+          <div class="popular-post-content">
+            <h3>女性起業家のための理想のクライアントを引き寄せる方法</h3>
+            <div class="post-meta">
+              <span class="post-category">起業</span>
+              <span class="post-date"><i class="far fa-calendar-alt"></i> 2023年9月18日</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- カテゴリー別セクション -->
+  <section class="category-posts parallax-section">
+    <div class="container">
+      <h2 class="reveal-on-scroll">カテゴリー別<span class="highlight">記事</span></h2>
+      
+      <div class="category-tabs reveal-on-scroll">
+        <div class="category-tab active" data-tab="maya-tab">
+          <i class="fas fa-calendar-alt"></i>
+          <span>マヤ暦</span>
+        </div>
+        <div class="category-tab" data-tab="sync-tab">
+          <i class="fas fa-magic"></i>
+          <span>シンクロニシティ</span>
+        </div>
+        <div class="category-tab" data-tab="self-tab">
+          <i class="fas fa-heart"></i>
+          <span>自己実現</span>
+        </div>
+        <div class="category-tab" data-tab="business-tab">
+          <i class="fas fa-briefcase"></i>
+          <span>起業</span>
+        </div>
+      </div>
+      
+      <div class="category-content">
+        <div class="category-pane active" id="maya-tab">
+          <div class="category-posts-grid reveal-on-scroll">
+            <div class="category-post-card">
+              <div class="post-image">
+                <img src="写真素材/57B2BE4F-6B7A-465D-AA9D-B12164E9FBDC.jpg" alt="マヤ暦で読み解く2024年の運勢">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年4月1日</span>
+                </div>
+                <h3>マヤ暦で読み解く2024年の運勢とエネルギーの流れ</h3>
+                <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+            
+            <div class="category-post-card">
+              <div class="post-image">
+                <img src="写真素材/B218ECAB-0D63-4D35-8F6E-8C2B24F8FE03.jpg" alt="マヤ暦の基本">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年3月10日</span>
+                </div>
+                <h3>マヤ暦の基本：あなたのKINから読み解く才能と使命</h3>
+                <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+            
+            <div class="category-post-card">
+              <div class="post-image">
+                <img src="写真素材/ABF94FF0-507C-4579-BCA2-109B30F3B2FB.jpg" alt="マヤ暦とは">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年1月15日</span>
+                </div>
+                <h3>マヤ暦とは？初心者でもわかる基本の「キ」</h3>
+                <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="view-all-link reveal-on-scroll">
+            <a href="#">マヤ暦の記事をもっと見る <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="category-pane" id="sync-tab">
+          <div class="category-posts-grid reveal-on-scroll">
+            <div class="category-post-card">
+              <div class="post-image">
+                <img src="写真素材/253358D0-7195-498C-A4AD-F3B8D3E0F871.jpg" alt="シンクロニシティの正体">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年3月25日</span>
+                </div>
+                <h3>シンクロニシティの正体とは？不思議な偶然を引き寄せる5つの方法</h3>
+                <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+            
+            <div class="category-post-card">
+              <div class="post-image">
+                <img src="写真素材/55973D0C-F555-46CB-99F3-1638963C57DC.jpg" alt="シンクロサロンとは">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年2月20日</span>
+                </div>
+                <h3>シンクロサロンとは？共鳴する仲間との成長コミュニティの魅力</h3>
+                <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+            
+            <div class="category-post-card">
+              <div class="post-image">
+                <img src="写真素材/E74CFFC4-0967-45A8-A836-F21E24CD1F96.jpg" alt="引き寄せの法則">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date"><i class="far fa-calendar-alt"></i> 2023年11月5日</span>
+                </div>
+                <h3>引き寄せの法則を科学的に解説：量子物理学からみる実現のメカニズム</h3>
+                <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="view-all-link reveal-on-scroll">
+            <a href="#">シンクロニシティの記事をもっと見る <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="category-pane" id="self-tab">
+          <div class="category-posts-grid reveal-on-scroll">
+            <div class="category-post-card">
+              <div class="post-image">
+                <img src="写真素材/A965F9CF-B3A1-47F2-8E64-75604B699C6D.jpg" alt="理想の未来を引き寄せる">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年3月18日</span>
+                </div>
+                <h3>理想の未来を引き寄せる！効果的なビジョンボードの作り方</h3>
+                <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+            
+            <div class="category-post-card">
+              <div class="post-image">
+                <img src="写真素材/FEEF5EEF-1F6C-4884-9F46-7444584866CD.jpg" alt="自己肯定感を高める">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年2月28日</span>
+                </div>
+                <h3>自己肯定感を高める7つのワークと日常習慣</h3>
+                <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+            
+            <div class="category-post-card">
+              <div class="post-image">
+                <img src="写真素材/32323190-4C91-4907-8F34-9B5B609B53EB.jpg" alt="才能の見つけ方">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date"><i class="far fa-calendar-alt"></i> 2023年12月10日</span>
+                </div>
+                <h3>本当の才能の見つけ方：自分が気づいていない強みを発掘する方法</h3>
+                <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="view-all-link reveal-on-scroll">
+            <a href="#">自己実現の記事をもっと見る <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="category-pane" id="business-tab">
+          <div class="category-posts-grid reveal-on-scroll">
+            <div class="category-post-card">
+              <div class="post-image">
+                <img src="写真素材/DE1FF9C9-7607-49C4-B43F-6ACB939628E3.jpg" alt="才能を活かした起業">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date"><i class="far fa-calendar-alt"></i> 2024年3月5日</span>
+                </div>
+                <h3>才能を活かした起業：まずは何から始めるべきか</h3>
+                <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+            
+            <div class="category-post-card">
+              <div class="post-image">
+                <img src="写真素材/F03961A9-56ED-489E-A5F1-094423BE873B.jpg" alt="女性起業家">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date"><i class="far fa-calendar-alt"></i> 2023年9月18日</span>
+                </div>
+                <h3>女性起業家のための理想のクライアントを引き寄せる方法</h3>
+                <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+            
+            <div class="category-post-card">
+              <div class="post-image">
+                <img src="写真素材/2146F1A2-76B7-487E-9910-C54465A8447C.jpg" alt="起業とマインドセット">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <span class="post-date"><i class="far fa-calendar-alt"></i> 2023年8月5日</span>
+                </div>
+                <h3>起業成功のカギはマインドセット：豊かさブロックを解除する方法</h3>
+                <a href="#" class="read-more">続きを読む <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="view-all-link reveal-on-scroll">
+            <a href="#">起業の記事をもっと見る <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ニュースレターセクション -->
+  <section class="newsletter parallax-section">
+    <div class="container">
+      <div class="newsletter-content reveal-on-scroll">
+        <h2>最新の<span class="highlight">情報</span>を受け取る</h2>
+        <p>マヤ暦の読み解き方、シンクロニシティの活用法、自己実現のヒントなど、<br class="pc-only">役立つ情報を定期的にお届けします。</p>
+        
+        <form class="newsletter-form">
+          <div class="form-group">
+            <input type="text" placeholder="お名前">
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="メールアドレス">
+          </div>
+          <button type="submit" class="btn btn-primary">登録する <i class="fas fa-paper-plane"></i></button>
+        </form>
+        
+        <p class="privacy-note">※登録することで<a href="#privacy" class="privacy-policy-link">プライバシーポリシー</a>に同意したことになります。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2>マヤ暦とシンクロニシティで人生を変えませんか？</h2>
+      <p>ブログだけでは伝えきれない深い知識とパーソナルなアドバイスをお求めの方は、各種サービスをご利用ください。</p>
+      
+      <div class="cta-buttons">
+        <a href="index.html#contact" class="btn btn-light">無料相談を予約する <i class="fas fa-message"></i></a>
+        <a href="index.html#services" class="btn btn-outline-light">サービス一覧を見る <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3><a href="index.html">PremaNadi</a></h3>
+          <p>金子あさみサービス</p>
+          <p class="footer-tagline">魂と人生を輝かせ、ワクワクさせるエネルギーを高める</p>
+        </div>
+        
+        <div class="footer-links">
+          <h4>サービス</h4>
+          <ul>
+            <li><a href="index.html#services">マヤ暦鑑定</a></li>
+            <li><a href="index.html#services">各種講座</a></li>
+            <li><a href="index.html#featured">未来創造プロジェクト</a></li>
+            <li><a href="sync-salon.html">シンクロサロン</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>お問い合わせ</h4>
+          <ul>
+            <li><a href="https://lin.ee/kTtgn9q">公式LINE</a></li>
+            <li><a href="index.html#contact">メールフォーム</a></li>
+            <li><a href="index.html#faq">よくある質問</a></li>
+            <li><a href="#privacy" class="privacy-policy-link">プライバシーポリシー</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-social">
+          <h4>フォロー</h4>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/asami.kaneko4488/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.threads.net/@asami.kaneko4488?xmt=AQGzV7RUmAeXAduSKWbM93ofT-J3xzu4gLaIOrm-oE3kiy8">
+              <svg class="threads-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 878 1000">
+                <path d="M446.7,1000h-0.3c-149.2-1-263.9-50.2-341-146.2C36.9,768.3,1.5,649.4,0.3,500.4v-0.7c1.2-149.1,36.6-267.9,105.2-353.4
+                  C182.5,50.2,297.3,1,446.4,0h0.3h0.3c114.4,0.8,210.1,30.2,284.4,87.4c69.9,53.8,119.1,130.4,146.2,227.8l-85,23.7
+                  c-46-165-162.4-249.3-346-250.6c-121.2,0.9-212.9,39-272.5,113.2C118.4,271,89.6,371.4,88.5,500c1.1,128.6,29.9,229,85.7,298.5
+                  c59.6,74.3,151.3,112.4,272.5,113.2c109.3-0.8,181.6-26.3,241.7-85.2c68.6-67.2,67.4-149.7,45.4-199.9
+                  c-12.9-29.6-36.4-54.2-68.1-72.9c-8,56.3-25.9,101.9-53.5,136.3c-36.9,45.9-89.2,71-155.4,74.6c-50.1,2.7-98.4-9.1-135.8-33.4
+                  c-44.3-28.7-70.2-72.5-73-123.5c-2.7-49.6,17-95.2,55.4-128.4c36.7-31.7,88.3-50.3,149.3-53.8c44.9-2.5,87-0.5,125.8,5.9
+                  c-5.2-30.9-15.6-55.5-31.2-73.2c-21.4-24.4-54.5-36.8-98.3-37.1c-0.4,0-0.8,0-1.2,0c-35.2,0-83,9.7-113.4,55L261.2,327
+                  c40.8-60.6,107-94,186.6-94c0.6,0,1.2,0,1.8,0c133.1,0.8,212.4,82.3,220.3,224.5c4.5,1.9,9,3.9,13.4,5.9
+                  c62.1,29.2,107.5,73.4,131.4,127.9c33.2,75.9,36.3,199.6-64.5,298.3C673.1,965,579.6,999.1,447,1000L446.7,1000L446.7,1000z
+                  M488.5,512.9c-10.1,0-20.3,0.3-30.8,0.9c-76.5,4.3-124.2,39.4-121.5,89.3c2.8,52.3,60.5,76.6,116,73.6
+                  c51-2.7,117.4-22.6,128.6-154.6C552.6,516,521.7,512.9,488.5,512.9z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> PremaNadi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="privacy.js"></script>
+</body>
+</html> 

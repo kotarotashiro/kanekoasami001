@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サービス一覧 - PremaNadi</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .threads-icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      vertical-align: middle;
+      fill: currentColor;
+    }
+    .social-icons .threads-icon {
+      width: 20px;
+      height: 20px;
+    }
+    
+    /* サービスページ専用スタイル */
+    .services-hero {
+      background: linear-gradient(135deg, var(--primary-light) 0%, #fff 100%);
+      padding: 9rem 0 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .service-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .category-card {
+      background: #fff;
+      border-radius: var(--card-border-radius);
+      padding: 1.2rem;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      transition: var(--transition);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    
+    .category-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(248, 165, 179, 0.2);
+    }
+    
+    .category-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--primary-color);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    
+    .category-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .category-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--primary-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    
+    .category-icon i {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+    }
+    
+    .category-card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .category-card p {
+      font-size: 0.85rem;
+      line-height: 1.4;
+      margin-bottom: 0.8rem;
+      color: var(--text-light);
+    }
+    
+    .category-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 0.5rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--primary-color);
+    }
+    
+    .category-link i {
+      transition: transform 0.3s ease;
+      margin-left: 0.3rem;
+      font-size: 0.8rem;
+    }
+    
+    .category-link:hover i {
+      transform: translateX(3px);
+    }
+    
+    .service-section {
+      padding: 5rem 0;
+      position: relative;
+    }
+    
+    .service-section:nth-child(odd) {
+      background-color: var(--background-light);
+    }
+    
+    .section-badge {
+      display: inline-block;
+      padding: 0.5rem 1.2rem;
+      background: var(--primary-light);
+      color: var(--primary-color);
+      border-radius: 2rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .service-card {
+      background: #fff;
+      border-radius: var(--card-border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border-color);
+      height: 100%;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(248, 165, 179, 0.2);
+    }
+    
+    .service-image {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .service-card:hover .service-image img {
+      transform: scale(1.05);
+    }
+    
+    .service-content {
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    
+    .service-content h3 {
+      margin-bottom: 0.8rem;
+      font-size: 1.3rem;
+      color: var(--text-color);
+    }
+    
+    .service-description {
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      flex: 1;
+    }
+    
+    .service-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .meta-item {
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+    
+    .meta-item i {
+      margin-right: 0.5rem;
+      color: var(--primary-color);
+      font-size: 0.95rem;
+    }
+    
+    .cta-section {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+      position: relative;
+    }
+    
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .cta-content h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cta-content p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    @media (max-width: 768px) {
+      .services-hero {
+        padding: 7rem 0 4rem;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .service-content h3 {
+        font-size: 1.2rem;
+      }
+      
+      .cta-content h2 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="index.html"><img src="PremaNadi_logo.svg" alt="PremaNadi" class="logo-image"></a></div>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="services.html" class="active">サービス</a></li>
+            <li><a href="about.html">金子あさみについて</a></li>
+            <li><a href="index.html#testimonials">お客様の声</a></li>
+            <li><a href="blog.html">ブログ</a></li>
+            <li><a href="index.html#contact" class="btn btn-primary">お問い合わせ</a></li>
+          </ul>
+        </nav>
+        <button class="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ヒーローセクション -->
+  <section class="services-hero parallax-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1>PremaNadi<br><span class="highlight">サービス一覧</span></h1>
+        <p class="hero-description">あなたの魂と人生を輝かせるための<br class="pc-only">様々なサービスをご用意しています</p>
+      </div>
+    </div>
+    <div class="floral-decoration"></div>
+  </section>
+
+  <!-- サービス概要セクション -->
+  <section class="services-overview parallax-section">
+    <div class="container">
+      <h2 class="reveal-on-scroll">あなたに最適な<span class="highlight">サービス</span>を見つける</h2>
+      <p class="section-description reveal-on-scroll">PremaNadiでは、マヤ暦鑑定から各種講座、コンサルティングまで、あなたの目的や段階に合わせた様々なサービスをご提供しています。あなたの才能や使命を見つけ、理想の人生を実現するためのサポートをいたします。</p>
+      
+      <div class="service-categories reveal-on-scroll">
+        <div class="category-card" data-category="kantei">
+          <div class="category-icon">
+            <i class="fas fa-search"></i>
+          </div>
+          <h3>鑑定</h3>
+          <p>マヤ暦や真密教を通じて、あなたの才能や使命、人間関係の傾向を読み解きます。</p>
+          <a href="#kantei" class="category-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="category-card" data-category="kouza">
+          <div class="category-icon">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <h3>講座</h3>
+          <p>様々なテーマの講座で、自己理解や成長に必要なスキルを身につけます。</p>
+          <a href="#kouza" class="category-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="category-card" data-category="program">
+          <div class="category-icon">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <h3>長期プログラム</h3>
+          <p>数ヶ月間のプログラムで、人生の本格的な変革や目標達成をサポートします。</p>
+          <a href="#program" class="category-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="category-card" data-category="subscription">
+          <div class="category-icon">
+            <i class="fas fa-shopping-bag"></i>
+          </div>
+          <h3>物販</h3>
+          <p>日常生活に取り入れられる、魂と人生を輝かせるためのアイテムです。</p>
+          <a href="#subscription" class="category-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 鑑定サービスセクション -->
+  <section id="kantei" class="service-section parallax-section">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-badge">鑑定</span>
+        <h2>あなたの<span class="highlight">才能と使命</span>を読み解く</h2>
+        <p class="section-description">マヤ暦や真密教など、古代の叡智を通じてあなたの本質的な才能や使命、適性を明らかにします。「自分に何が向いているのか」「どんな道に進むべきか」といった疑問に答えを見つけるお手伝いをします。</p>
+      </div>
+      
+      <div class="services-grid">
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/ABF94FF0-507C-4579-BCA2-109B30F3B2FB.jpg" alt="マヤ暦個人鑑定">
+          </div>
+          <div class="service-content">
+            <h3>自分のことを知る マヤ暦個人鑑定</h3>
+            <p class="service-description">あなたの生年月日から算出されるKIN（キン）に基づき、生まれ持った才能、使命、人生の目的などを読み解きます。自分の強みを理解し、人生の方向性を見出すための鑑定です。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>60分</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>15,000円（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>オンライン / 対面</span>
+              </div>
+            </div>
+            <a href="https://reserve.peraichi.com/r/5c0d06b5?_gl=1*hfykg*_gcl_au*MTQ1NzQwNjkzMy4xNzM1NzM5NDUw" class="btn btn-primary">予約する <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/B218ECAB-0D63-4D35-8F6E-8C2B24F8FE03.jpg" alt="マヤ暦であなたと周りの関係性を知る">
+          </div>
+          <div class="service-content">
+            <h3>マヤ暦であなたと周りの関係性を知る</h3>
+            <p class="service-description">個人鑑定の内容に加え、相性や関係改善のアドバイス、アクションプランを提供します。人間関係を改善したい方や、より深い自己理解を求める方におすすめです。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>120分</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>25,000円（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>オンライン / 対面</span>
+              </div>
+            </div>
+            <a href="https://reserve.peraichi.com/r/5c0d06b5?_gl=1*hfykg*_gcl_au*MTQ1NzQwNjkzMy4xNzM1NzM5NDUw" class="btn btn-primary">予約する <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/BF9FF406-E02C-47C0-8601-261283FC185D.jpg" alt="マヤ暦お仕事コンサル">
+          </div>
+          <div class="service-content">
+            <h3>マヤ暦お仕事コンサル</h3>
+            <p class="service-description">才能と適職、仕事の強み/弱み、働き方、キャリアプラン、収入UP戦略など、お仕事に特化した鑑定とコンサルティングを行います。才能を活かした仕事を見つけたい方におすすめです。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>120分</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>44,000円（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>オンライン / 対面</span>
+              </div>
+            </div>
+            <a href="career-consulting.html" class="btn btn-primary">詳細を見る <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/57B2BE4F-6B7A-465D-AA9D-B12164E9FBDC.jpg" alt="真密教鑑定">
+          </div>
+          <div class="service-content">
+            <h3>真密教鑑定</h3>
+            <p class="service-description">日本古来の叡智である真密教の教えを基に、前世の課題/才能、魂のレベル、人間関係の真実、未来への道筋などを読み解きます。スピリチュアルな視点から人生を見つめ直したい方におすすめです。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>60分</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>10,000円（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>オンライン / 対面</span>
+              </div>
+            </div>
+            <a href="https://reserve.peraichi.com/r/5c0d06b5?_gl=1*hfykg*_gcl_au*MTQ1NzQwNjkzMy4xNzM1NzM5NDUw" class="btn btn-primary">予約する <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/253358D0-7195-498C-A4AD-F3B8D3E0F871.jpg" alt="タロット鑑定">
+          </div>
+          <div class="service-content">
+            <h3>タロットセッション</h3>
+            <p class="service-description">タロットカードを通じて、現在の状況の本質、未来の可能性/選択肢、問題解決のヒント、行動アドバイスなどを提供します。現在の迷いや悩みに具体的な答えを求める方におすすめです。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>60分</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>10,000円（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>オンライン / 対面</span>
+              </div>
+            </div>
+            <a href="https://reserve.peraichi.com/r/5c0d06b5?_gl=1*hfykg*_gcl_au*MTQ1NzQwNjkzMy4xNzM1NzM5NDUw" class="btn btn-primary">予約する <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 講座サービスセクション -->
+  <section id="kouza" class="service-section parallax-section">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-badge">講座</span>
+        <h2>学びを通じた<span class="highlight">成長と変容</span></h2>
+        <p class="section-description">様々なテーマの講座を通じて、自己理解を深め、潜在能力を開花させるためのスキルを身につけます。少人数制で丁寧に指導し、実践的な内容で日常生活にすぐに活かせる知識を提供します。</p>
+      </div>
+      
+      <div class="services-grid">
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/1B165849-0AAD-43FD-9CFF-CE3483918907.jpg" alt="マヤ暦ミラクル子育て講座">
+          </div>
+          <div class="service-content">
+            <h3>マヤ暦ミラクル子育て講座</h3>
+            <p class="service-description">子供の才能/個性、関わり方のコツ、ストレス軽減、環境づくりなどを学びます。子育てに悩むママや子供の才能を伸ばしたいママに最適な講座です。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>5時間</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>12,000円（税込）/ 本つき 13,500円（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>オンライン</span>
+              </div>
+            </div>
+            <a href="https://reserve.peraichi.com/r/5c0d06b5?_gl=1*hfykg*_gcl_au*MTQ1NzQwNjkzMy4xNzM1NzM5NDUw" class="btn btn-primary">申し込む <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/D09FDB28-9115-4951-A2B5-E3508DE5F081.jpg" alt="マヤ・モンテッソーリ講座">
+          </div>
+          <div class="service-content">
+            <h3>マヤ・モンテッソーリ講座</h3>
+            <p class="service-description">モンテッソーリ教育とマヤ暦の応用編。モンテッソーリ理念、子供の個性/才能、発達段階別環境、実践活動などを学びます。モンテッソーリ教育に興味がある方、子供の才能を最大限に引き出したい方におすすめです。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>3時間×2日間</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>24,200円（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>オンライン</span>
+              </div>
+            </div>
+            <a href="https://reserve.peraichi.com/r/5c0d06b5?_gl=1*hfykg*_gcl_au*MTQ1NzQwNjkzMy4xNzM1NzM5NDUw" class="btn btn-primary">申し込む <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/A965F9CF-B3A1-47F2-8E64-75604B699C6D.jpg" alt="マヤ暦鑑定初級講座">
+          </div>
+          <div class="service-content">
+            <h3>マヤ暦鑑定初級講座</h3>
+            <p class="service-description">マヤ暦の基礎、KINの読み方、自分/他者の鑑定方法を学びます。マヤ暦を深く学びたい方、アドバイザーを目指す方におすすめです。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>4時間×4日</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>46,200円（税込）（テキスト代2,200円込み）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>オンライン</span>
+              </div>
+            </div>
+            <a href="https://reserve.peraichi.com/r/5c0d06b5?_gl=1*hfykg*_gcl_au*MTQ1NzQwNjkzMy4xNzM1NzM5NDUw" class="btn btn-primary">申し込む <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/yoga-instructor.html" alt="ヨガインストラクター養成講座">
+          </div>
+          <div class="service-content">
+            <h3>ヨガインストラクター養成講座</h3>
+            <p class="service-description">ヨガの基本から指導法まで、総合的に学べる養成講座です。ヨガの哲学、アーサナ（ポーズ）、呼吸法、解剖学、指導法、ティーチングなど、インストラクターとして必要な知識と技術を習得できます。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>2時間/回 × 3～4回/月</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>217,800円（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>対面</span>
+              </div>
+            </div>
+            <a href="yoga-instructor.html" class="btn btn-primary">詳細を見る <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/0761EC26-17F1-45A3-9030-A7F1E24D95F0.jpg" alt="メモリーオイル講座">
+          </div>
+          <div class="service-content">
+            <h3>メモリーオイル基礎講座</h3>
+            <p class="service-description">メモリーオイルの知識、基本、願望達成方法、ブレンドレッスン、スプレーセットを学びます。メモリーオイルに興味のある方、願望実現のツールを探している方におすすめです。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>3時間</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>30,800円（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>オンライン / 対面</span>
+              </div>
+            </div>
+            <a href="https://reserve.peraichi.com/r/5c0d06b5?_gl=1*hfykg*_gcl_au*MTQ1NzQwNjkzMy4xNzM1NzM5NDUw" class="btn btn-primary">申し込む <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/35EB6A0F-43CB-4FCE-8420-2FB87F16A30D.jpg" alt="ミラクルダイアリー講座">
+          </div>
+          <div class="service-content">
+            <h3>ミラクルダイアリー講座 基礎編</h3>
+            <p class="service-description">基本的な使い方、目標設定、記録、振り返りを学びます。ミラクルダイアリーを効果的に活用したい方におすすめです。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>3時間</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>8,800円（税込）/ サロン生 7,700円（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>オンライン</span>
+              </div>
+            </div>
+            <a href="https://reserve.peraichi.com/r/5c0d06b5?_gl=1*hfykg*_gcl_au*MTQ1NzQwNjkzMy4xNzM1NzM5NDUw" class="btn btn-primary">申し込む <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 長期プログラムセクション -->
+  <section id="program" class="service-section parallax-section">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-badge">長期プログラム</span>
+        <h2>人生を<span class="highlight">根本から変える</span></h2>
+        <p class="section-description">数ヶ月間にわたる長期プログラムで、自分の本質と向き合い、理想の未来を創造するための本格的な変革をサポートします。個別セッションとグループワークを組み合わせ、持続的な成長を実現します。</p>
+      </div>
+      
+      <div class="services-grid">
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/57B2BE4F-6B7A-465D-AA9D-B12164E9FBDC.jpg" alt="未来創造3カ月プロジェクト">
+          </div>
+          <div class="service-content">
+            <h3>未来創造3カ月プロジェクト</h3>
+            <p class="service-description">才能/使命の発見、人生設計、行動計画、サポートで、本気で人生を変えたい方、使命を見つけたい方のためのプログラムです。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>3ヶ月間</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>330,000円（税込）/ 早期申込 264,000円（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>オンライン</span>
+              </div>
+            </div>
+            <a href="future-project.html" class="btn btn-primary">詳細を見る <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/253358D0-7195-498C-A4AD-F3B8D3E0F871.jpg" alt="起業スクール">
+          </div>
+          <div class="service-content">
+            <h3>起業スクール</h3>
+            <p class="service-description">マヤ暦鑑定で深堀し、ビジネスモデル、マーケティング、集客、価格設定、ブランディング、SNSなどを学ぶ起業プログラム。起業を考えている方、ビジネスを拡大したい方におすすめです。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>1年間（14枚または24枚コース）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>14枚：277,200円 / 24枚：343,200円（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>オンライン</span>
+              </div>
+            </div>
+            <a href="entrepreneur-school.html" class="btn btn-primary">詳細を見る <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/BF9FF406-E02C-47C0-8601-261283FC185D.jpg" alt="マヤ暦アドバイザー向け起業スクール">
+          </div>
+          <div class="service-content">
+            <h3>マヤ暦アドバイザー向け起業スクール</h3>
+            <p class="service-description">1枚1時間のチケット制で金子あさみに気軽に相談。ビジネスで躓いた時や悩んだ時にすぐにアドバイスがもらえ、鑑定スキル向上から収益アップまでトータルサポートします。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>1年間（14枚または24枚コース）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>14枚：200,200円 / 24枚：264,000円（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>オンライン</span>
+              </div>
+            </div>
+            <a href="entrepreneur-school.html" class="btn btn-primary">詳細を見る <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/19884343-0AA3-41D8-83E1-ADC095A64D86.jpg" alt="シンクロサロン">
+          </div>
+          <div class="service-content">
+            <h3>金子あさみとシンクロサロン</h3>
+            <p class="service-description">魂と人生を輝かせ、ワクワクさせるエネルギーを高めるための会員制コミュニティです。ヨガ無料、ライブ配信、カレンダー、限定案内などの特典があります。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>月会費制</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>月額2,000円（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>オンライン</span>
+              </div>
+            </div>
+            <a href="sync-salon.html" class="btn btn-primary">詳細を見る <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 物販セクション -->
+  <section id="subscription" class="service-section parallax-section">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-badge">物販</span>
+        <h2>日常に<span class="highlight">取り入れる</span>魂の成長</h2>
+        <p class="section-description">日々の生活に取り入れることで、自己理解や成長をサポートするアイテムです。マヤ暦や瞑想、自己啓発に関連したグッズを通じて、日常的に意識を高めることができます。</p>
+      </div>
+      
+      <div class="services-grid">
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/2BBC34B1-D910-449E-ADAC-CCF796B070F3.jpg" alt="講座用テキスト">
+          </div>
+          <div class="service-content">
+            <h3>講座用テキスト</h3>
+            <p class="service-description">各種講座で使用するテキストです。モンテッソーリ講座用テキスト、マヤ暦鑑定初級講座テキストなどをご用意しています。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-box"></i>
+                <span>各種講座向け</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>モンテッソーリ：550円、マヤ暦初級：1,100円</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-truck"></i>
+                <span>講座受講時または公式LINEから注文</span>
+              </div>
+            </div>
+            <a href="https://lin.ee/kTtgn9q" class="btn btn-primary">問い合わせる <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/AD4432E5-2DEF-4EB4-87C1-4052234E6E6D.jpg" alt="メモリーオイル スプレータイプ">
+          </div>
+          <div class="service-content">
+            <h3>メモリーオイル スプレータイプ</h3>
+            <p class="service-description">空間や身体にスプレーして使用する願望実現、エネルギーチャージ、浄化に役立つメモリーオイルです。10mlのコンパクトサイズと30mlの大容量サイズがあります。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-box"></i>
+                <span>10ml / 30ml</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>10ml：3,800円（リピーター：3,300円）<br>30ml：9,500円（リピーター：8,500円）（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-truck"></i>
+                <span>公式LINEまたは専用フォームから注文</span>
+              </div>
+            </div>
+            <a href="https://lin.ee/kTtgn9q" class="btn btn-primary">購入する <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/35EB6A0F-43CB-4FCE-8420-2FB87F16A30D.jpg" alt="メモリーオイル 小瓶タイプ">
+          </div>
+          <div class="service-content">
+            <h3>メモリーオイル 小瓶タイプ</h3>
+            <p class="service-description">原液タイプのメモリーオイルです。お守りとして持ち歩いたり、肌に直接塗布したりして使用します。願望実現、エネルギーチャージ、浄化に効果的です。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-box"></i>
+                <span>原液タイプ</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>7,500円（リピーター：6,800円）（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-truck"></i>
+                <span>公式LINEまたは専用フォームから注文</span>
+              </div>
+            </div>
+            <a href="https://lin.ee/kTtgn9q" class="btn btn-primary">購入する <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="service-card reveal-on-scroll">
+          <div class="service-image">
+            <img src="写真素材/FEEF5EEF-1F6C-4884-9F46-7444584866CD.jpg" alt="ミラクルダイアリー">
+          </div>
+          <div class="service-content">
+            <h3>ミラクルダイアリー</h3>
+            <p class="service-description">年間カレンダー、月間スケジュール、週間計画、目標設定、振り返りなどが含まれる手帳です。サイズは手帳サイズ（B6判）、ノートサイズ（B5判）、Premium（A5判）の3種類があります。</p>
+            <div class="service-meta">
+              <div class="meta-item">
+                <i class="fas fa-box"></i>
+                <span>B6判 / B5判 / A5判</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-yen-sign"></i>
+                <span>B6判：2,750円（早割：2,450円、特別会員：2,200円）<br>B5判：3,300円（早割：2,970円、特別会員：2,640円）<br>A5判：3,630円（早割：3,267円、特別会員：2,904円）（税込）</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-truck"></i>
+                <span>送料300円、カバー追加は+70円（A5判はカバー込み）</span>
+              </div>
+            </div>
+            <a href="https://lin.ee/kTtgn9q" class="btn btn-primary">購入する <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2 style="color: white;">あなたに<span class="highlight" style="color: white;">最適な</span>サービスが<br>見つからない場合は</h2>
+      <p style="color: white;">個別相談にて、あなたの状況や目標に合わせたカスタマイズプランをご提案します。<br>まずはお気軽にご相談ください。</p>
+      <div class="cta-buttons">
+        <a href="index.html#contact" class="btn btn-light">無料相談を予約する <i class="fas fa-message"></i></a>
+        <a href="index.html" class="btn btn-outline-light">トップページに戻る <i class="fas fa-home"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3><a href="index.html">PremaNadi</a></h3>
+          <p>金子あさみサービス</p>
+          <p class="footer-tagline">魂と人生を輝かせ、ワクワクさせるエネルギーを高める</p>
+        </div>
+        
+        <div class="footer-links">
+          <h4>サービス</h4>
+          <ul>
+            <li><a href="index.html#services">マヤ暦鑑定</a></li>
+            <li><a href="index.html#services">各種講座</a></li>
+            <li><a href="index.html#featured">未来創造プロジェクト</a></li>
+            <li><a href="sync-salon.html">シンクロサロン</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>お問い合わせ</h4>
+          <ul>
+            <li><a href="https://lin.ee/kTtgn9q">公式LINE</a></li>
+            <li><a href="index.html#contact">メールフォーム</a></li>
+            <li><a href="index.html#faq">よくある質問</a></li>
+            <li><a href="#privacy" class="privacy-policy-link">プライバシーポリシー</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-social">
+          <h4>フォロー</h4>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/asami.kaneko4488/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.threads.net/@asami.kaneko4488?xmt=AQGzV7RUmAeXAduSKWbM93ofT-J3xzu4gLaIOrm-oE3kiy8">
+              <svg class="threads-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 878 1000">
+                <path d="M446.7,1000h-0.3c-149.2-1-263.9-50.2-341-146.2C36.9,768.3,1.5,649.4,0.3,500.4v-0.7c1.2-149.1,36.6-267.9,105.2-353.4
+                  C182.5,50.2,297.3,1,446.4,0h0.3h0.3c114.4,0.8,210.1,30.2,284.4,87.4c69.9,53.8,119.1,130.4,146.2,227.8l-85,23.7
+                  c-46-165-162.4-249.3-346-250.6c-121.2,0.9-212.9,39-272.5,113.2C118.4,271,89.6,371.4,88.5,500c1.1,128.6,29.9,229,85.7,298.5
+                  c59.6,74.3,151.3,112.4,272.5,113.2c109.3-0.8,181.6-26.3,241.7-85.2c68.6-67.2,67.4-149.7,45.4-199.9
+                  c-12.9-29.6-36.4-54.2-68.1-72.9c-8,56.3-25.9,101.9-53.5,136.3c-36.9,45.9-89.2,71-155.4,74.6c-50.1,2.7-98.4-9.1-135.8-33.4
+                  c-44.3-28.7-70.2-72.5-73-123.5c-2.7-49.6,17-95.2,55.4-128.4c36.7-31.7,88.3-50.3,149.3-53.8c44.9-2.5,87-0.5,125.8,5.9
+                  c-5.2-30.9-15.6-55.5-31.2-73.2c-21.4-24.4-54.5-36.8-98.3-37.1c-0.4,0-0.8,0-1.2,0c-35.2,0-83,9.7-113.4,55L261.2,327
+                  c40.8-60.6,107-94,186.6-94c0.6,0,1.2,0,1.8,0c133.1,0.8,212.4,82.3,220.3,224.5c4.5,1.9,9,3.9,13.4,5.9
+                  c62.1,29.2,107.5,73.4,131.4,127.9c33.2,75.9,36.3,199.6-64.5,298.3C673.1,965,579.6,999.1,447,1000L446.7,1000L446.7,1000z
+                  M488.5,512.9c-10.1,0-20.3,0.3-30.8,0.9c-76.5,4.3-124.2,39.4-121.5,89.3c2.8,52.3,60.5,76.6,116,73.6
+                  c51-2.7,117.4-22.6,128.6-154.6C552.6,516,521.7,512.9,488.5,512.9z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> PremaNadi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="privacy.js"></script>
+</body>
+</html> 

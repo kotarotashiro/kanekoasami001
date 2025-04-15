@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>未来創造3カ月プロジェクト - PremaNadi</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* スレッドアイコン */
+    .threads-icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      vertical-align: middle;
+      fill: currentColor;
+    }
+    .social-icons .threads-icon {
+      width: 20px;
+      height: 20px;
+    }
+    
+    /* プログラム専用スタイル */
+    .program-hero {
+      background-color: var(--background-light);
+      position: relative;
+      padding: 10rem 0 6rem;
+    }
+    
+    /* こんな方におすすめセクションのスタイル */
+    .target-audience {
+      background-color: var(--background-color);
+      position: relative;
+      padding: 5rem 0;
+    }
+    
+    .target-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .target-item {
+      background: white;
+      border-radius: var(--card-border-radius);
+      padding: 2rem;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+    
+    .target-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(248, 165, 179, 0.2);
+    }
+    
+    .target-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    
+    .target-content h3 {
+      font-size: 1.2rem;
+      color: var(--text-color);
+      margin-bottom: 0.5rem;
+    }
+    
+    .target-content p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+    
+    @media (max-width: 768px) {
+      .target-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .target-item {
+        padding: 1.5rem;
+      }
+      
+      .target-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+    }
+    
+    .program-overview {
+      background-color: var(--background-color);
+      position: relative;
+    }
+    
+    .program-content {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    
+    .program-features {
+      background-color: var(--background-light);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .feature-item {
+      background: white;
+      border-radius: var(--card-border-radius);
+      padding: 1.5rem;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .feature-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(248, 165, 179, 0.2);
+    }
+    
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: white;
+      font-size: 1.5rem;
+    }
+    
+    .feature-content {
+      flex: 1;
+    }
+    
+    .feature-content h5 {
+      font-size: 1.2rem;
+      color: var(--text-color);
+      margin-bottom: 1rem;
+    }
+    
+    .feature-content p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    
+    .feature-value {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--primary-dark);
+      padding: 0.3rem 1rem;
+      background-color: var(--primary-light);
+      border-radius: 1rem;
+      display: inline-block;
+    }
+    
+    .program-details {
+      background-color: var(--background-color);
+    }
+    
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 3rem auto 0;
+      padding: 2rem 0;
+    }
+    
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50px;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary-light), var(--primary-color));
+      border-radius: 2px;
+    }
+    
+    .timeline-item {
+      position: relative;
+      padding-left: 100px;
+      margin-bottom: 2.5rem;
+    }
+    
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .timeline-marker {
+      position: absolute;
+      left: 48px;
+      top: 0;
+      width: 8px;
+      height: 8px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 0 6px var(--primary-light);
+    }
+    
+    .timeline-content {
+      background-color: white;
+      border-radius: var(--card-border-radius);
+      padding: 1.5rem;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+    }
+    
+    .timeline-content:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(248, 165, 179, 0.2);
+    }
+    
+    .testimonials {
+      background-color: var(--background-light);
+    }
+    
+    .testimonial-slider {
+      display: flex;
+      gap: 2rem;
+      overflow-x: auto;
+      padding: 1rem 0.5rem 2rem;
+      margin: 2rem -0.5rem 0;
+      scroll-behavior: smooth;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    .testimonial-slider::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .testimonial-item {
+      flex: 0 0 auto;
+      width: calc(33.33% - 1.35rem);
+      min-width: 300px;
+    }
+    
+    .testimonial-content {
+      background-color: white;
+      border-radius: var(--card-border-radius);
+      padding: 2rem;
+      box-shadow: var(--box-shadow);
+      position: relative;
+      transition: var(--transition);
+    }
+    
+    .testimonial-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(248, 165, 179, 0.2);
+    }
+    
+    .testimonial-icon {
+      position: absolute;
+      top: -15px;
+      left: 2rem;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      border-radius: 50%;
+      color: white;
+      font-size: 0.8rem;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .testimonial-author img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 1rem;
+      border: 3px solid var(--primary-light);
+    }
+    
+    .pricing {
+      background-color: var(--background-color);
+      position: relative;
+      padding: 5rem 0;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(248, 187, 208, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(248, 187, 208, 0.07) 0%, transparent 50%);
+    }
+    
+    .pricing-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .pricing-card {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background-color: white;
+      border-radius: var(--card-border-radius);
+      box-shadow: 0 10px 30px rgba(248, 165, 179, 0.15);
+    }
+    
+    .pricing-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(248, 165, 179, 0.25);
+    }
+    
+    .pricing-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    
+    .pricing-card:hover::after {
+      transform: scaleX(1);
+    }
+    
+    .pricing-header {
+      padding: 3rem 2rem 1.5rem;
+      text-align: center;
+      background: linear-gradient(135deg, #fff 0%, var(--primary-light) 100%);
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .pricing-header::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+      opacity: 0.6;
+      z-index: 1;
+      transform: scale(0);
+      transition: transform 0.5s ease;
+    }
+    
+    .pricing-card:hover .pricing-header::before {
+      transform: scale(1);
+    }
+    
+    .pricing-header h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--text-color);
+      position: relative;
+      z-index: 2;
+    }
+    
+    .price {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin: 1.5rem 0 0.5rem;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+    }
+    
+    .currency {
+      font-size: 1.8rem;
+      align-self: flex-start;
+      margin-top: 0.5rem;
+    }
+    
+    .period {
+      font-size: 1rem;
+      color: var(--text-light);
+      font-weight: 400;
+      align-self: flex-end;
+    }
+    
+    .pricing-subtitle {
+      font-size: 1rem;
+      color: var(--text-light);
+      margin-top: 0.5rem;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .pricing-features {
+      padding: 2rem;
+      background-color: white;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .pricing-features::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-image: 
+        radial-gradient(circle at 5% 10%, rgba(248, 187, 208, 0.03) 0%, transparent 30%),
+        radial-gradient(circle at 95% 90%, rgba(248, 187, 208, 0.03) 0%, transparent 30%);
+      z-index: -1;
+    }
+    
+    .pricing-features h4 {
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      color: var(--primary-color);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .pricing-features h4::after {
+      content: "";
+      position: absolute;
+      bottom: -0.5rem;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, var(--primary-light), var(--primary-color));
+      border-radius: 2px;
+    }
+    
+    .pricing-features ul {
+      margin-bottom: 1.5rem;
+    }
+    
+    .pricing-features ul li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      padding-left: 0;
+      transition: transform 0.3s ease;
+      
+      /* アニメーション効果 */
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.4s ease forwards;
+      animation-delay: calc(0.1s * var(--item-index, 1));
+    }
+    
+    .pricing-features ul li:hover {
+      transform: translateX(5px);
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .pricing-features ul li i {
+      color: var(--primary-color);
+      margin-right: 1rem;
+      font-size: 1.2rem;
+      background: var(--primary-light);
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .pricing-features ul li div {
+      flex: 1;
+    }
+    
+    .pricing-features ul li strong {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 1.1rem;
+      color: var(--text-color);
+    }
+    
+    .pricing-features ul li p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 0.3rem;
+      line-height: 1.4;
+    }
+    
+    .pricing-item-value {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--primary-dark);
+      padding: 0.2rem 0.8rem;
+      background-color: var(--primary-light);
+      border-radius: 1rem;
+      display: inline-block;
+      margin-top: 0.3rem;
+    }
+    
+    .pricing-total {
+      background-color: var(--background-light);
+      padding: 1.5rem;
+      border-radius: var(--card-border-radius);
+      margin-top: 2rem;
+      text-align: center;
+    }
+    
+    .pricing-total h4 {
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    
+    .pricing-total h4 span {
+      color: var(--text-color);
+      text-decoration: line-through;
+      margin-left: 0.5rem;
+      font-weight: 400;
+    }
+    
+    .pricing-save {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      box-shadow: 0 4px 10px rgba(248, 165, 179, 0.3);
+    }
+    
+    .pricing-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: -3rem;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.5rem 4rem;
+      transform: rotate(45deg);
+      z-index: 3;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards 0.5s;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    .reveal-on-scroll.visible .pricing-card {
+      animation: slideUp 0.6s ease forwards;
+    }
+    
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .pricing-cta {
+      padding: 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary-light) 0%, rgba(255,245,247,0.7) 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .pricing-cta::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="1" cy="1" r="1" fill="%23fff" fill-opacity="0.1"/></svg>');
+      background-size: 20px 20px;
+      opacity: 0.5;
+    }
+    
+    .faq {
+      background-color: var(--background-light);
+    }
+    
+    .cta {
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 5rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: -100px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .cta::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* サイト共通の装飾要素をオーバーライド */
+    .circle-decoration {
+      background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+    }
+    
+    /* レスポンシブスタイル */
+    @media (max-width: 992px) {
+      .program-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .testimonial-item {
+        width: calc(50% - 1rem);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .program-hero {
+        padding: 8rem 0 4rem;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .testimonial-item {
+        width: 100%;
+      }
+      
+      .timeline::before {
+        left: 20px;
+      }
+      
+      .timeline-item {
+        padding-left: 50px;
+      }
+      
+      .timeline-marker {
+        left: 20px;
+      }
+      
+      .pricing-badge {
+        right: -2.5rem;
+        font-size: 0.7rem;
+        padding: 0.4rem 3rem;
+      }
+      
+      .pricing-features ul li {
+        flex-direction: column;
+      }
+      
+      .pricing-features ul li i {
+        margin-bottom: 1rem;
+      }
+      
+      .pricing-item-value {
+        margin-top: 0.5rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .price {
+        font-size: 2.5rem;
+      }
+      
+      .currency {
+        font-size: 1.5rem;
+      }
+      
+      .pricing-header h3 {
+        font-size: 1.5rem;
+      }
+      
+      .pricing-features ul li strong {
+        font-size: 1rem;
+      }
+      
+      .pricing-total h4 {
+        font-size: 1.1rem;
+      }
+      
+      .pricing-save {
+        font-size: 0.8rem;
+        padding: 0.4rem 1.2rem;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="index.html"><img src="PremaNadi_logo.svg" alt="PremaNadi" class="logo-image"></a></div>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html#services">サービス</a></li>
+            <li><a href="about.html">金子あさみについて</a></li>
+            <li><a href="index.html#testimonials">お客様の声</a></li>
+            <li><a href="index.html#blog">ブログ</a></li>
+            <li><a href="index.html#contact" class="btn btn-primary">お問い合わせ</a></li>
+          </ul>
+        </nav>
+        <button class="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ヒーローセクション -->
+  <section class="hero program-hero parallax-section" style="background-image: url('写真素材/u8542656793_httpss.mj.run_nFlQmapDrY_moon_--ar_169_--profile__5a2cf554-6600-4066-994b-84478027f144_0.png'); background-size: cover; background-position: center;">
+    <div class="container">
+      <div class="hero-content">
+        <h1>未来創造<br><span class="highlight">3カ月プロジェクト</span></h1>
+        <p class="hero-description">"変わりたい"が口癖の自分から卒業し、<br class="pc-only">本来の才能と使命を生きる人生へ</p>
+      </div>
+    </div>
+    <div class="floral-decoration"></div>
+  </section>
+
+  <!-- こんな方におすすめセクション -->
+  <section class="target-audience parallax-section">
+    <div class="container">
+      <h2 class="section-header reveal-on-scroll">こんな方に<span class="highlight">おすすめ</span></h2>
+      
+      <div class="target-grid reveal-on-scroll">
+        <div class="target-item">
+          <div class="target-icon">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="target-content">
+            <h3>「私の人生、このままでいいのかな？」と悩んでいる方</h3>
+            <p>毎日同じような日々を過ごしていて、何か違うと感じている。でも何をどう変えていいか分からない。そんなモヤモヤを抱えている方</p>
+          </div>
+        </div>
+        
+        <div class="target-item">
+          <div class="target-icon">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="target-content">
+            <h3>「変わりたい」が口癖になっている方</h3>
+            <p>「今年こそは変わりたい」「来月から本気出す」と何度も思ってきたけど、結局何も変わっていない。そんな自分に嫌気がさしている方</p>
+          </div>
+        </div>
+        
+        <div class="target-item">
+          <div class="target-icon">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="target-content">
+            <h3>「私には才能がない」と思っている方</h3>
+            <p>周りの人と比べて自分には特別な才能がないと感じている。でも本当は何か特別な才能があるはずだと信じたい方</p>
+          </div>
+        </div>
+        
+        <div class="target-item">
+          <div class="target-icon">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="target-content">
+            <h3>「本当の自分」を見つけたい方</h3>
+            <p>人に合わせて生きてきたけど、本当の自分は何がしたいのか分からない。自分らしく生きたいけど、その方法が分からない方</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="circle-decoration top-right"></div>
+  </section>
+
+  <!-- プログラム概要セクション -->
+  <section class="program-overview parallax-section">
+    <div class="container">
+      <div class="program-content">
+        <div class="program-image reveal-on-scroll">
+          <img src="写真素材/57B2BE4F-6B7A-465D-AA9D-B12164E9FBDC.jpg" alt="未来創造3カ月プロジェクト">
+        </div>
+        <div class="program-text">
+          <h2 class="reveal-on-scroll">3カ月で<span class="highlight">人生を変える</span></h2>
+          <p class="reveal-on-scroll">「変わりたい」と思うだけで行動できなかった日々に終止符を打つ3ヶ月間のプログラムです。あなたの本来の才能と本当の目的を見つけ、理想の人生を実現する一歩を、今ここから始めましょう。</p>
+          
+          <ul class="feature-list reveal-on-scroll">
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>才能と使命を見つける</strong>
+                <p>マヤ暦・真密教・タロットによる多角的な自己分析で、本当の望みと理想の未来像を明確にします</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>心の壁を取り除く</strong>
+                <p>目標達成を妨げる内なるブロックを特定し、潜在意識の書き換えワークで自己肯定感を構築します</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>長く続く成長の仕組み</strong>
+                <p>長期的な成長のための習慣づくりと、未来へ向けた具体的なロードマップを完成させます</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>専属サポート</strong>
+                <p>月2回の個別セッション、LINE24時間サポート、6ヶ月間のフォローアップで確実に変化を定着させます</p>
+              </div>
+            </li>
+          </ul>
+          
+          <div class="cta-buttons reveal-on-scroll">
+            <a href="https://reserve.peraichi.com/r/5c0d06b5?_gl=1*hfykg*_gcl_au*MTQ1NzQwNjkzMy4xNzM1NzM5NDUw" class="btn btn-primary">今すぐ申し込む <i class="fas fa-arrow-right"></i></a>
+            <a href="index.html#contact" class="btn btn-outline">無料相談を予約 <i class="fas fa-message"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- プログラム特徴セクション -->
+  <section class="program-features parallax-section">
+    <div class="container">
+      <h2 class="section-header reveal-on-scroll">このプログラムの<span class="highlight">特徴</span></h2>
+      
+      <div class="features-grid">
+        <div class="feature-item reveal-on-scroll">
+          <div class="feature-icon">
+            <i class="fas fa-user-cog"></i>
+          </div>
+          <div class="feature-content">
+            <h5>個別カスタマイズ</h5>
+            <p>あなたの状況や目標に合わせて、プログラム内容を完全カスタマイズ。一人ひとりに最適な変化を実現します。</p>
+          </div>
+        </div>
+        
+        <div class="feature-item reveal-on-scroll">
+          <div class="feature-icon">
+            <i class="fas fa-hands-helping"></i>
+          </div>
+          <div class="feature-content">
+            <h5>継続的なサポート</h5>
+            <p>定期的な個別セッションとLINEでの日常サポートで、どんな課題も乗り越えられる環境を提供します。</p>
+          </div>
+        </div>
+        
+        <div class="feature-item reveal-on-scroll">
+          <div class="feature-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="feature-content">
+            <h5>仲間との共創</h5>
+            <p>同時期に参加する仲間とのグループワークで、互いに刺激し合い、一人では気づけない成長を実現します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="circle-decoration top-right"></div>
+    <div class="circle-decoration bottom-left"></div>
+  </section>
+
+  <!-- プログラム内容セクション -->
+  <section class="program-details parallax-section">
+    <div class="container">
+      <h2 class="section-header reveal-on-scroll">3カ月間の<span class="highlight">プログラム内容</span></h2>
+      
+      <div class="timeline reveal-on-scroll">
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>1カ月目：自己理解と目標設定</h3>
+            <ul>
+              <li>マヤ暦個人鑑定でのタレント診断</li>
+              <li>真密教に基づく運命パターン分析</li>
+              <li>理想の未来像の明確化ワーク</li>
+              <li>個別セッション2回</li>
+              <li>グループワークショップ1回</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>2カ月目：内なる障壁の克服</h3>
+            <ul>
+              <li>潜在意識の書き換えワーク</li>
+              <li>感情解放技術の習得</li>
+              <li>自己肯定感構築エクササイズ</li>
+              <li>行動パターン改善プラン作成</li>
+              <li>個別セッション2回</li>
+              <li>グループワークショップ1回</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>3カ月目：実践と習慣化</h3>
+            <ul>
+              <li>日常に取り入れる習慣づくり</li>
+              <li>6カ月間の行動計画作成</li>
+              <li>理想を実現する具体的なステップ設計</li>
+              <li>振り返りと成果確認</li>
+              <li>個別セッション2回</li>
+              <li>グループワークショップ1回</li>
+              <li>修了式</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>プログラム後：フォローアップ</h3>
+            <ul>
+              <li>6カ月間のフォローアップ期間</li>
+              <li>月1回のグループコーチングセッション</li>
+              <li>成果報告会</li>
+              <li>卒業生コミュニティへの参加権</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="floral-decoration"></div>
+  </section>
+
+  <!-- 参加者の声セクション -->
+  <section class="testimonials parallax-section">
+    <div class="container">
+      <h2 class="section-header reveal-on-scroll">参加者の<span class="highlight">声</span></h2>
+      
+      <div class="testimonial-slider reveal-on-scroll">
+        <div class="testimonial-item">
+          <div class="testimonial-content">
+            <div class="testimonial-icon"><i class="fas fa-quote-left"></i></div>
+            <p>「3カ月前の自分が想像もできないほど、人生が変わりました。長年悩んでいた自分の天職がようやく見つかり、今は起業準備に向けて毎日がワクワクしています。金子先生との出会いに心から感謝しています。」</p>
+            <div class="testimonial-author">
+              <i class="fas fa-user-circle fa-3x"></i>
+              <div class="author-info">
+                <h4>田中 優子さん</h4>
+                <p>38歳・栄養士</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-item">
+          <div class="testimonial-content">
+            <div class="testimonial-icon"><i class="fas fa-quote-left"></i></div>
+            <p>「毎日何となく過ごしていた日々から、明確な目標を持ち、一歩一歩前進できるようになりました。自分の才能を活かす方法が分かったことで、仕事のパフォーマンスも上がり、周囲からの評価も変わってきています。」</p>
+            <div class="testimonial-author">
+              <i class="fas fa-user-circle fa-3x"></i>
+              <div class="author-info">
+                <h4>佐藤 健太さん</h4>
+                <p>42歳・会社員</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-item">
+          <div class="testimonial-content">
+            <div class="testimonial-icon"><i class="fas fa-quote-left"></i></div>
+            <p>「自己否定の強かった私が、自分を認められるようになりました。マヤ暦診断で分かった才能を活かして、趣味だった料理教室を開くことができ、今では生徒さんも増えて充実した日々を送っています。」</p>
+            <div class="testimonial-author">
+              <i class="fas fa-user-circle fa-3x"></i>
+              <div class="author-info">
+                <h4>山本 美咲さん</h4>
+                <p>35歳・料理講師</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="circle-decoration middle-center"></div>
+  </section>
+
+  <!-- 料金セクション -->
+  <section class="pricing parallax-section">
+    <div class="container">
+      <h2 class="section-header reveal-on-scroll">参加費と<span class="highlight">特典</span></h2>
+      
+      <div class="pricing-content reveal-on-scroll">
+        <div class="pricing-card">
+          <div class="pricing-badge">限定8名</div>
+          <div class="pricing-header">
+            <h3>未来創造3カ月プロジェクト</h3>
+            <div class="price">
+              <span class="currency">¥</span>
+              330,000<span class="period">(税込)</span>
+            </div>
+            <p class="pricing-subtitle">早期申込価格：264,000円(税込)<br>分割払いも可能です（3回〜12回）</p>
+          </div>
+          
+          <div class="pricing-features">
+            <h4>プログラムに含まれるもの</h4>
+            <div class="features-grid">
+              <div class="feature-item">
+                <div class="feature-icon" style="background: white; color: var(--primary-color);">
+                  <i class="fas fa-gem"></i>
+                </div>
+                <div class="feature-content">
+                  <h5>マヤ暦個人鑑定</h5>
+                  <p>あなたの本来の才能と使命を明らかにする鑑定セッション</p>
+                </div>
+              </div>
+              
+              <div class="feature-item">
+                <div class="feature-icon" style="background: white; color: var(--primary-color);">
+                  <i class="fas fa-user-friends"></i>
+                </div>
+                <div class="feature-content">
+                  <h5>個別セッション全6回</h5>
+                  <p>あなた専用にカスタマイズされた個別コンサルティング</p>
+                </div>
+              </div>
+              
+              <div class="feature-item">
+                <div class="feature-icon" style="background: white; color: var(--primary-color);">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div class="feature-content">
+                  <h5>グループワークショップ全3回</h5>
+                  <p>仲間と共に学び、成長するための共創の場</p>
+                </div>
+              </div>
+              
+              <div class="feature-item">
+                <div class="feature-icon" style="background: white; color: var(--primary-color);">
+                  <i class="fas fa-comments"></i>
+                </div>
+                <div class="feature-content">
+                  <h5>LINE日常サポート3カ月間</h5>
+                  <p>日々の疑問や課題をすぐに解決できる安心のサポート体制</p>
+                </div>
+              </div>
+              
+              <div class="feature-item">
+                <div class="feature-icon" style="background: white; color: var(--primary-color);">
+                  <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="feature-content">
+                  <h5>各種ワークシート・教材一式</h5>
+                  <p>自己変容を促進するための厳選された教材とツール</p>
+                </div>
+              </div>
+              
+              <div class="feature-item">
+                <div class="feature-icon" style="background: white; color: var(--primary-color);">
+                  <i class="fas fa-hands-helping"></i>
+                </div>
+                <div class="feature-content">
+                  <h5>6カ月間のフォローアップ</h5>
+                  <p>プログラム終了後も成長を継続するための長期サポート</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="pricing-cta">
+            <a href="https://reserve.peraichi.com/r/5c0d06b5?_gl=1*hfykg*_gcl_au*MTQ1NzQwNjkzMy4xNzM1NzM5NDUw" class="btn btn-primary">今すぐ申し込む <i class="fas fa-arrow-right"></i></a>
+            <a href="index.html#contact" class="btn btn-outline">無料相談を予約 <i class="fas fa-message"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="circle-decoration bottom-left"></div>
+  </section>
+
+  <!-- FAQ セクション -->
+  <section class="faq parallax-section">
+    <div class="container">
+      <h2 class="section-header reveal-on-scroll">よくある<span class="highlight">質問</span></h2>
+      
+      <div class="faq-list reveal-on-scroll">
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>このプログラムはどんな人に向いていますか？</h3>
+            <div class="faq-toggle"><i class="fas fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>「自分の才能や使命を見つけたい」「今の生活を変えたいけど何から始めていいかわからない」「自己否定や自信のなさに悩んでいる」という方に特におすすめです。特に、30代〜40代の転機を迎えている方に効果的なプログラムです。</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>仕事が忙しくても参加できますか？</h3>
+            <div class="faq-toggle"><i class="fas fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>はい、可能です。個別セッションは平日夜や週末も対応可能です。また、グループワークショップは録画を提供しますので、参加できない場合も後から視聴していただけます。日々のワークも忙しい方でも無理なく取り組める内容になっています。</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>3カ月間で本当に変われますか？</h3>
+            <div class="faq-toggle"><i class="fas fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>はい、多くの方が3カ月間で大きな変化を実感されています。特に「自分の才能の理解」「目標の明確化」「行動パターンの変化」という点で成果が表れます。さらに、6カ月間のフォローアップ期間があるため、長期的な変化を定着させることができます。</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>分割払いは可能ですか？</h3>
+            <div class="faq-toggle"><i class="fas fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>はい、3回から12回までの分割払いに対応しています。詳細はお問い合わせください。</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>定員は何名ですか？</h3>
+            <div class="faq-toggle"><i class="fas fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>一期あたり8名限定です。一人ひとりに丁寧に向き合うため、少人数制で運営しています。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="floral-decoration"></div>
+  </section>
+
+  <!-- CTA セクション -->
+  <section class="cta">
+    <div class="container">
+      <h2>あなたの<span class="highlight" style="color: white;">本当の才能</span>と<br>使命に目覚める3カ月間</h2>
+      <p>「変わりたい」と思うだけで行動できなかった日々に終止符を打つ3ヶ月間のプログラムです。あなたの本来の才能と本当の目的を見つけ、理想の人生を実現する一歩を、今ここから始めましょう。</p>
+      <div class="cta-buttons">
+        <a href="https://reserve.peraichi.com/r/5c0d06b5?_gl=1*hfykg*_gcl_au*MTQ1NzQwNjkzMy4xNzM1NzM5NDUw" class="btn btn-light">今すぐ申し込む <i class="fas fa-arrow-right"></i></a>
+        <a href="index.html#contact" class="btn btn-outline-light">無料相談を予約 <i class="fas fa-message"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3><a href="index.html">PremaNadi</a></h3>
+          <p>金子あさみサービス</p>
+          <p class="footer-tagline">魂と人生を輝かせ、ワクワクさせるエネルギーを高める</p>
+        </div>
+        
+        <div class="footer-links">
+          <h4>サービス</h4>
+          <ul>
+            <li><a href="index.html#services">マヤ暦鑑定</a></li>
+            <li><a href="index.html#services">各種講座</a></li>
+            <li><a href="index.html#featured">未来創造プロジェクト</a></li>
+            <li><a href="sync-salon.html">シンクロサロン</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>お問い合わせ</h4>
+          <ul>
+            <li><a href="https://lin.ee/kTtgn9q">公式LINE</a></li>
+            <li><a href="index.html#contact">メールフォーム</a></li>
+            <li><a href="index.html#faq">よくある質問</a></li>
+            <li><a href="#privacy" class="privacy-policy-link">プライバシーポリシー</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-social">
+          <h4>フォロー</h4>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/asami.kaneko4488/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.threads.net/@asami.kaneko4488?xmt=AQGzV7RUmAeXAduSKWbM93ofT-J3xzu4gLaIOrm-oE3kiy8">
+              <svg class="threads-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 878 1000">
+                <path d="M446.7,1000h-0.3c-149.2-1-263.9-50.2-341-146.2C36.9,768.3,1.5,649.4,0.3,500.4v-0.7c1.2-149.1,36.6-267.9,105.2-353.4
+                  C182.5,50.2,297.3,1,446.4,0h0.3h0.3c114.4,0.8,210.1,30.2,284.4,87.4c69.9,53.8,119.1,130.4,146.2,227.8l-85,23.7
+                  c-46-165-162.4-249.3-346-250.6c-121.2,0.9-212.9,39-272.5,113.2C118.4,271,89.6,371.4,88.5,500c1.1,128.6,29.9,229,85.7,298.5
+                  c59.6,74.3,151.3,112.4,272.5,113.2c109.3-0.8,181.6-26.3,241.7-85.2c68.6-67.2,67.4-149.7,45.4-199.9
+                  c-12.9-29.6-36.4-54.2-68.1-72.9c-8,56.3-25.9,101.9-53.5,136.3c-36.9,45.9-89.2,71-155.4,74.6c-50.1,2.7-98.4-9.1-135.8-33.4
+                  c-44.3-28.7-70.2-72.5-73-123.5c-2.7-49.6,17-95.2,55.4-128.4c36.7-31.7,88.3-50.3,149.3-53.8c44.9-2.5,87-0.5,125.8,5.9
+                  c-5.2-30.9-15.6-55.5-31.2-73.2c-21.4-24.4-54.5-36.8-98.3-37.1c-0.4,0-0.8,0-1.2,0c-35.2,0-83,9.7-113.4,55L261.2,327
+                  c40.8-60.6,107-94,186.6-94c0.6,0,1.2,0,1.8,0c133.1,0.8,212.4,82.3,220.3,224.5c4.5,1.9,9,3.9,13.4,5.9
+                  c62.1,29.2,107.5,73.4,131.4,127.9c33.2,75.9,36.3,199.6-64.5,298.3C673.1,965,579.6,999.1,447,1000L446.7,1000L446.7,1000z
+                  M488.5,512.9c-10.1,0-20.3,0.3-30.8,0.9c-76.5,4.3-124.2,39.4-121.5,89.3c2.8,52.3,60.5,76.6,116,73.6
+                  c51-2.7,117.4-22.6,128.6-154.6C552.6,516,521.7,512.9,488.5,512.9z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> PremaNadi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- トップに戻るボタン -->
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="privacy.js"></script>
+</body>
+</html> 

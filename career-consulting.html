@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>マヤ暦お仕事コンサル - PremaNadi</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .threads-icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      vertical-align: middle;
+      fill: currentColor;
+    }
+    .social-icons .threads-icon {
+      width: 20px;
+      height: 20px;
+    }
+    
+    /* お仕事コンサル専用スタイル */
+    .career-hero {
+      background-color: var(--background-light);
+      position: relative;
+      padding: 12rem 0 8rem;
+      background-image: url('写真素材/4EF17BFB-0E24-419F-8247-99AB2DD4F273.jpg');
+      background-size: cover;
+      background-position: center;
+      background-blend-mode: overlay;
+      overflow: hidden;
+    }
+    
+    .career-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+      z-index: 1;
+    }
+    
+    .career-hero .container {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      animation: fadeInUp 1.2s ease;
+    }
+    
+    .hero-content h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+    
+    .hero-content .hero-description {
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    
+    /* クイックナビゲーション */
+    .quick-nav {
+      display: flex;
+      justify-content: center;
+      margin: 2.5rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .quick-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.2rem 1rem;
+      border-radius: 12px;
+      background-color: white;
+      color: var(--text-color);
+      text-decoration: none;
+      width: 110px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .quick-nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s ease;
+    }
+    
+    .quick-nav-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(248, 165, 179, 0.3);
+      color: var(--primary-color);
+    }
+    
+    .quick-nav-item:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    
+    .quick-nav-item i {
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
+      color: var(--primary-color);
+      transition: transform 0.3s ease;
+    }
+    
+    .quick-nav-item:hover i {
+      transform: scale(1.2);
+    }
+    
+    .quick-nav-item span {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    
+    .hero-buttons .btn {
+      padding: 1rem 2rem;
+      font-weight: 600;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .hero-buttons .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+      z-index: -1;
+    }
+    
+    .hero-buttons .btn:hover::before {
+      transform: translateX(0);
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .career-hero {
+        padding: 8rem 0 5rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero-content .hero-description {
+        font-size: 1.2rem;
+      }
+      
+      .quick-nav {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 1.5rem;
+        -webkit-overflow-scrolling: touch;
+        margin: 2rem 0;
+      }
+      
+      .quick-nav-item {
+        flex-shrink: 0;
+        width: 90px;
+        margin: 0 0.5rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .hero-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+    
+    /* 特徴セクション */
+    .features-section {
+      background-color: var(--background-color);
+      padding: 7rem 0;
+      position: relative;
+    }
+    
+    .features-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent);
+      z-index: 1;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-top: 4rem;
+    }
+    
+    .feature-card {
+      background-color: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* メリットセクション */
+    .benefits-section {
+      background-color: #fff;
+      padding: 7rem 0;
+    }
+    
+    .benefit-columns {
+      display: flex;
+      flex-direction: column;
+      gap: 6rem;
+      margin-top: 4rem;
+    }
+    
+    .benefit-column {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    
+    .benefit-column.reverse {
+      flex-direction: row-reverse;
+    }
+    
+    .benefit-image {
+      flex: 1;
+      max-width: 45%;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .benefit-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    
+    .benefit-column:hover .benefit-image img {
+      transform: scale(1.05);
+    }
+    
+    .benefit-content {
+      flex: 1;
+    }
+    
+    .benefit-content h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-color);
+    }
+    
+    .benefit-content p {
+      margin-bottom: 2rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+    
+    .benefit-points {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .benefit-points li {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .benefit-points li i {
+      color: var(--primary-color);
+      margin-right: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .testimonial-box {
+      background-color: #f9f9f9;
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-top: 4rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+    
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .testimonial-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 1.5rem;
+    }
+    
+    .testimonial-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .testimonial-meta h4 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .testimonial-rating {
+      color: #ffc107;
+    }
+    
+    .testimonial-text {
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--text-color);
+    }
+    
+    @media (max-width: 768px) {
+      .benefit-column, .benefit-column.reverse {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      
+      .benefit-image {
+        max-width: 100%;
+      }
+    }
+    
+    /* 流れセクション */
+    .flow-section {
+      background-color: var(--background-light);
+      padding: 7rem 0;
+    }
+    
+    .flow-timeline {
+      margin-top: 4rem;
+      position: relative;
+    }
+    
+    .flow-timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 37px;
+      width: 4px;
+      background-color: var(--primary-light);
+    }
+    
+    .flow-item {
+      display: flex;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    
+    .flow-number {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 700;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 2rem;
+      flex-shrink: 0;
+      z-index: 2;
+      box-shadow: 0 5px 15px rgba(248, 165, 179, 0.3);
+    }
+    
+    .flow-content {
+      flex: 1;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+    
+    .flow-content h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      color: var(--text-color);
+    }
+    
+    .flow-content p {
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    
+    .flow-check-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .flow-check-list li {
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+    }
+    
+    .flow-check-list li i {
+      color: var(--primary-color);
+      margin-right: 0.8rem;
+    }
+    
+    .flow-note {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      margin-top: 2rem;
+    }
+    
+    .note-icon {
+      width: 60px;
+      height: 60px;
+      background-color: var(--primary-light);
+      color: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-right: 2rem;
+      flex-shrink: 0;
+    }
+    
+    .note-content h4 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+    
+    .note-content p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    @media (max-width: 768px) {
+      .flow-timeline::before {
+        left: 25px;
+      }
+      
+      .flow-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        margin-right: 1.5rem;
+      }
+      
+      .flow-note {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .note-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+    }
+    
+    /* 対象者セクション */
+    .target-section {
+      background-color: #fff;
+      padding: 7rem 0;
+    }
+    
+    .audience-tabs {
+      margin: 2rem auto;
+      max-width: 900px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #fff;
+    }
+    
+    .audience-tab-header {
+      display: flex;
+      border-bottom: 1px solid #eaeaea;
+      background-color: #f8f9fa;
+    }
+    
+    .audience-tab-btn {
+      padding: 1rem 1.5rem;
+      background: none;
+      border: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      position: relative;
+      flex: 1;
+      text-align: center;
+      color: #555;
+      transition: all 0.3s ease;
+    }
+    
+    .audience-tab-btn:hover {
+      color: var(--primary-color);
+    }
+    
+    .audience-tab-btn.active {
+      color: var(--primary-color);
+      background-color: #fff;
+    }
+    
+    .audience-tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary-color);
+    }
+    
+    .audience-tab-content {
+      background-color: #fff;
+      padding: 0;
+    }
+    
+    .audience-panel {
+      display: none;
+      padding: 2rem;
+    }
+    
+    .audience-panel.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    .audience-panel-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+    
+    .audience-icon {
+      background-color: var(--primary-light);
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .audience-icon i {
+      font-size: 2rem;
+      color: var(--primary-color);
+    }
+    
+    .audience-text {
+      flex: 1;
+    }
+    
+    .audience-text h3 {
+      color: #333;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    
+    .audience-benefits {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+    }
+    
+    .audience-benefits li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.7rem;
+      font-size: 0.95rem;
+    }
+    
+    .audience-benefits li i {
+      color: var(--primary-color);
+      margin-right: 0.7rem;
+    }
+    
+    .audience-success {
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      position: relative;
+    }
+    
+    .success-badge {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    
+    .audience-success p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+    
+    .cta-box {
+      background: linear-gradient(135deg, var(--primary-light) 0%, #fff 100%);
+      border-radius: 20px;
+      padding: 3rem;
+      margin-top: 4rem;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+    
+    .cta-box h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--text-color);
+    }
+    
+    .cta-box p {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      color: var(--text-light);
+    }
+    
+    .cta-box .btn {
+      padding: 1rem 2.5rem;
+      font-weight: 600;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @media (max-width: 768px) {
+      .audience-panel-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      
+      .audience-benefits li {
+        justify-content: center;
+      }
+      
+      .audience-tab-btn {
+        padding: 0.8rem 0.5rem;
+        font-size: 0.8rem;
+      }
+      
+      .cta-box {
+        padding: 2rem 1rem;
+      }
+    }
+    
+    /* 価格セクション */
+    .price-section {
+      background-color: var(--background-color);
+      padding: 7rem 0;
+    }
+    
+    .price-card {
+      max-width: 700px;
+      margin: 4rem auto 0;
+      background-color: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .price-card-header {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 2.5rem;
+      text-align: center;
+    }
+    
+    .price-card-header h3 {
+      margin: 0 0 1rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    
+    .price-tag {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .price-unit {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+    
+    .price-duration {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+    
+    .price-card-body {
+      padding: 2.5rem;
+    }
+    
+    .price-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+    }
+    
+    .price-features li {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .price-features li i {
+      color: var(--primary-color);
+      margin-right: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .price-notes {
+      background-color: #f9f9f9;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+    }
+    
+    .price-notes p {
+      margin: 0 0 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+    }
+    
+    .price-notes p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .price-notes p i {
+      margin-right: 0.8rem;
+      color: var(--primary-color);
+    }
+    
+    .price-card-footer {
+      padding: 0 2.5rem 2.5rem;
+    }
+    
+    .payment-info {
+      max-width: 700px;
+      margin: 2rem auto 0;
+      background-color: #f9f9f9;
+      padding: 2rem;
+      border-radius: 10px;
+    }
+    
+    .payment-info h4 {
+      margin: 0 0 0.8rem;
+      font-size: 1.1rem;
+      color: var(--text-color);
+    }
+    
+    .payment-info p {
+      margin: 0 0 1.5rem;
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+    
+    .payment-info p:last-child {
+      margin-bottom: 0;
+    }
+    
+    /* 予約フォームセクション */
+    .reserve-section {
+      background-color: #fff;
+      padding: 7rem 0;
+    }
+    
+    .reservation-columns {
+      display: flex;
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+    
+    .reservation-form {
+      flex: 1;
+      background-color: #f9f9f9;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+    
+    .form-header {
+      padding: 2rem;
+      background-color: var(--primary-light);
+      text-align: center;
+    }
+    
+    .form-header h3 {
+      margin: 0 0 0.5rem;
+      color: var(--text-color);
+    }
+    
+    .form-header p {
+      margin: 0;
+      color: var(--text-light);
+    }
+    
+    .reservation-iframe {
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    .reservation-contact {
+      flex: 1;
+    }
+    
+    .contact-card {
+      background-color: #f9f9f9;
+      border-radius: 15px;
+      padding: 2rem;
+      height: 100%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+    
+    .contact-card h3 {
+      margin: 0 0 0.5rem;
+      color: var(--text-color);
+    }
+    
+    .contact-card p {
+      margin: 0 0 2rem;
+      color: var(--text-light);
+    }
+    
+    .contact-method {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    
+    .contact-icon {
+      width: 60px;
+      height: 60px;
+      background-color: var(--primary-light);
+      color: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-right: 1.5rem;
+      flex-shrink: 0;
+    }
+    
+    .contact-details {
+      flex: 1;
+    }
+    
+    .contact-details h4 {
+      margin: 0 0 0.5rem;
+      color: var(--text-color);
+    }
+    
+    .contact-details p {
+      margin: 0 0 1rem;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+    
+    .contact-note {
+      background-color: #f5f5f5;
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+    
+    .contact-note p {
+      margin: 0 0 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+    }
+    
+    .contact-note p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .contact-note p i {
+      margin-right: 0.8rem;
+      color: var(--primary-color);
+    }
+    
+    .faq-section {
+      margin-top: 4rem;
+    }
+    
+    .faq-section h3 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    
+    .faq-item {
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .faq-question {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .faq-question i {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      margin-right: 1rem;
+    }
+    
+    .faq-question h4 {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--text-color);
+    }
+    
+    .faq-answer p {
+      margin: 0;
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    @media (max-width: 768px) {
+      .reservation-columns {
+        flex-direction: column;
+      }
+      
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* 関連サービス */
+    .related-services {
+      background-color: var(--background-light);
+      padding: 7rem 0;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .service-card {
+      background: #fff;
+      border-radius: var(--card-border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border-color);
+      height: 100%;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(248, 165, 179, 0.2);
+    }
+    
+    .service-image {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .service-card:hover .service-image img {
+      transform: scale(1.05);
+    }
+    
+    .service-content {
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    
+    .service-content h3 {
+      margin-bottom: 0.8rem;
+      font-size: 1.3rem;
+      color: var(--text-color);
+    }
+    
+    .service-description {
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      flex: 1;
+    }
+    
+    .service-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .meta-item {
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+    
+    .meta-item i {
+      margin-right: 0.5rem;
+      color: var(--primary-color);
+      font-size: 0.95rem;
+    }
+    
+    @media (max-width: 992px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="index.html"><img src="PremaNadi_logo.svg" alt="PremaNadi" class="logo-image"></a></div>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html#services">サービス</a></li>
+            <li><a href="about.html">金子あさみについて</a></li>
+            <li><a href="index.html#testimonials">お客様の声</a></li>
+            <li><a href="index.html#blog">ブログ</a></li>
+            <li><a href="index.html#contact" class="btn btn-primary">お問い合わせ</a></li>
+          </ul>
+        </nav>
+        <button class="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main>
+    <!-- ヒーローセクション -->
+    <section class="career-hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="section-badge">キャリアコンサルティング</div>
+          <h1>マヤ暦お仕事コンサル</h1>
+          <p class="hero-description">あなたの才能を最大限に活かす仕事の見つけ方、<br>幸せに働くためのキャリアプランをご提案します</p>
+          
+          <div class="quick-nav">
+            <a href="#features" class="quick-nav-item">
+              <i class="fas fa-star"></i>
+              <span>特徴</span>
+            </a>
+            <a href="#benefits" class="quick-nav-item">
+              <i class="fas fa-gift"></i>
+              <span>メリット</span>
+            </a>
+            <a href="#flow" class="quick-nav-item">
+              <i class="fas fa-stream"></i>
+              <span>流れ</span>
+            </a>
+            <a href="#target" class="quick-nav-item">
+              <i class="fas fa-users"></i>
+              <span>対象者</span>
+            </a>
+            <a href="#price" class="quick-nav-item">
+              <i class="fas fa-yen-sign"></i>
+              <span>価格</span>
+            </a>
+          </div>
+          
+          <div class="hero-buttons">
+            <a href="https://lin.ee/XFSLtzB" class="btn btn-primary" target="_blank">
+              <i class="fab fa-line"></i> 公式LINEで問い合わせる
+            </a>
+            <a href="#reserve" class="btn btn-outline">
+              <i class="far fa-calendar-alt"></i> 予約フォーム
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 特徴セクション -->
+    <section id="features" class="features-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-badge">特徴</div>
+          <h2 class="section-title">お仕事コンサルの<span class="text-primary">5つの特徴</span></h2>
+          <p class="section-description">
+            マヤ暦という古代マヤ文明の叡智を活用し、あなたの才能を最大限に引き出すキャリアコンサルティングをご提供します
+          </p>
+        </div>
+        
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="feature-content">
+              <h3>才能と適職の発見</h3>
+              <p>マヤ暦解析であなたの生まれ持った才能や可能性を明らかにし、その能力を最大限に活かせる仕事を見つけます。</p>
+            </div>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="feature-content">
+              <h3>強み・弱みの明確化</h3>
+              <p>仕事における強みと弱みを明確にし、強みを伸ばし弱みをカバーする具体的な戦略をご提案します。</p>
+            </div>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <div class="feature-content">
+              <h3>理想の働き方設計</h3>
+              <p>あなたのエネルギーパターンや価値観に合った最適な働き方を設計し、ワークライフバランスの取れた人生を実現します。</p>
+            </div>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-road"></i>
+            </div>
+            <div class="feature-content">
+              <h3>キャリアプラン策定</h3>
+              <p>短期・中期・長期的なキャリアビジョンを描き、そこに到達するための具体的なステップをご提案します。</p>
+            </div>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-yen-sign"></i>
+            </div>
+            <div class="feature-content">
+              <h3>収入アップ戦略</h3>
+              <p>才能を活かした収入の増やし方、価値の高め方を具体的にアドバイスし、経済的な豊かさを実現します。</p>
+            </div>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-tasks"></i>
+            </div>
+            <div class="feature-content">
+              <h3>行動計画作成</h3>
+              <p>具体的な行動計画を共に作成し、理想のキャリアへの一歩を確実に踏み出すサポートをします。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- メリットセクション -->
+    <section id="benefits" class="benefits-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-badge">メリット</div>
+          <h2 class="section-title">お仕事コンサルを受けることで<span class="text-primary">得られるメリット</span></h2>
+          <p class="section-description">
+            マヤ暦お仕事コンサルを受けると、あなたの人生やキャリアにどのような変化が起きるのでしょうか
+          </p>
+        </div>
+        
+        <div class="benefit-columns">
+          <div class="benefit-column">
+            <div class="benefit-image">
+              <img src="写真素材/8F808788-590F-43AD-88A1-079AF2456DEF.jpg" alt="才能発見のイメージ">
+            </div>
+            <div class="benefit-content">
+              <h3>自分の才能を客観的に理解できる</h3>
+              <p>マヤ暦という古代の叡智を通して、自分自身でも気づいていなかった才能や可能性を発見できます。単なる適性検査ではなく、生まれた日から決まっている宇宙のエネルギーパターンから才能を読み解くため、深い気づきが得られます。</p>
+              <ul class="benefit-points">
+                <li><i class="fas fa-check-circle"></i> 自分の強みを科学的に理解</li>
+                <li><i class="fas fa-check-circle"></i> 隠れた才能の発見</li>
+                <li><i class="fas fa-check-circle"></i> 自己肯定感の向上</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="benefit-column reverse">
+            <div class="benefit-image">
+              <img src="写真素材/70AF9245-2427-4056-9426-E99C3B8B1E62.jpg" alt="キャリアプランのイメージ">
+            </div>
+            <div class="benefit-content">
+              <h3>最適なキャリア選択ができる</h3>
+              <p>「やりたいこと」と「できること」と「稼げること」の交点を見つけることができます。自分の才能に合った職業選択により、仕事のパフォーマンスが向上し、ストレスも軽減。転職や起業の判断材料としても最適です。</p>
+              <ul class="benefit-points">
+                <li><i class="fas fa-check-circle"></i> 迷いのない職業選択</li>
+                <li><i class="fas fa-check-circle"></i> 適職への転職成功率向上</li>
+                <li><i class="fas fa-check-circle"></i> 起業の方向性明確化</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="benefit-column">
+            <div class="benefit-image">
+              <img src="写真素材/253358D0-7195-498C-A4AD-F3B8D3E0F871.jpg" alt="収入アップのイメージ">
+            </div>
+            <div class="benefit-content">
+              <h3>収入と満足度が向上する</h3>
+              <p>才能を活かした仕事は自然と結果を出しやすく、収入アップにつながります。また、適性に合った仕事は「やらされ感」がなく充実感も高いため、ワークライフバランスも改善。人生全体の満足度が高まります。</p>
+              <ul class="benefit-points">
+                <li><i class="fas fa-check-circle"></i> 収入アップの具体策</li>
+                <li><i class="fas fa-check-circle"></i> 仕事の充実感向上</li>
+                <li><i class="fas fa-check-circle"></i> ワークライフバランスの改善</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-box">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">
+              <img src="写真素材/ABF94FF0-507C-4579-BCA2-109B30F3B2FB.jpg" alt="利用者の写真">
+            </div>
+            <div class="testimonial-meta">
+              <h4>30代 女性 会社員</h4>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            「長年やりがいを感じられない仕事を続けていましたが、マヤ暦お仕事コンサルを受けて自分の才能が明確になりました。勇気を出して転職し、今は才能を活かせる仕事で収入も増え、毎日が充実しています。あさみさんのアドバイスは的確で、人生が大きく変わりました！」
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 流れセクション -->
+    <section id="flow" class="flow-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-badge">流れ</div>
+          <h2 class="section-title">マヤ暦お仕事コンサルの<span class="text-primary">進め方</span></h2>
+          <p class="section-description">
+            120分のセッションで、あなたの才能を最大限に活かすキャリアプランを一緒に作成します
+          </p>
+        </div>
+        
+        <div class="flow-timeline">
+          <div class="flow-item">
+            <div class="flow-number">01</div>
+            <div class="flow-content">
+              <h3>事前準備</h3>
+              <p>予約確定後、現在の仕事状況や悩み、キャリアの希望などをお聞きする事前アンケートをお送りします。あなたの生年月日からマヤ暦の解析も事前に行います。</p>
+              <ul class="flow-check-list">
+                <li><i class="fas fa-check"></i> 事前アンケートの記入</li>
+                <li><i class="fas fa-check"></i> マヤ暦解析の準備</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="flow-item">
+            <div class="flow-number">02</div>
+            <div class="flow-content">
+              <h3>マヤ暦による才能分析</h3>
+              <p>セッション前半では、マヤ暦に基づいてあなたの生まれ持った才能、特性、強みを詳しく解説します。普段の仕事で感じている違和感や得意なことの理由が明確になります。</p>
+              <ul class="flow-check-list">
+                <li><i class="fas fa-check"></i> 太陽の紋章（KIN）の解説</li>
+                <li><i class="fas fa-check"></i> 才能と強みの詳細分析</li>
+                <li><i class="fas fa-check"></i> エネルギーパターンの解説</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="flow-item">
+            <div class="flow-number">03</div>
+            <div class="flow-content">
+              <h3>現状の仕事分析</h3>
+              <p>現在の仕事状況を才能との適合性から分析し、改善点や活かせていないポイントを明確にします。転職や起業を検討している方には、方向性のアドバイスを行います。</p>
+              <ul class="flow-check-list">
+                <li><i class="fas fa-check"></i> 現職と才能のミスマッチ分析</li>
+                <li><i class="fas fa-check"></i> 職場での強みの活かし方</li>
+                <li><i class="fas fa-check"></i> キャリアの方向性診断</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="flow-item">
+            <div class="flow-number">04</div>
+            <div class="flow-content">
+              <h3>理想のキャリアプラン設計</h3>
+              <p>才能を最大限に活かせる職業や働き方をご提案し、具体的なキャリアプランを一緒に作成します。あなたの価値観や生活スタイルも考慮した実現可能な計画です。</p>
+              <ul class="flow-check-list">
+                <li><i class="fas fa-check"></i> 適職リストの提案</li>
+                <li><i class="fas fa-check"></i> 理想の働き方の設計</li>
+                <li><i class="fas fa-check"></i> 短期・中期・長期計画の作成</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="flow-item">
+            <div class="flow-number">05</div>
+            <div class="flow-content">
+              <h3>収入アップ戦略</h3>
+              <p>才能を活かして収入を増やすための具体的な戦略をご提案します。市場価値の高め方、収入源の増やし方、価格設定など、経済的自立のためのアドバイスを行います。</p>
+              <ul class="flow-check-list">
+                <li><i class="fas fa-check"></i> 収入増加のための行動計画</li>
+                <li><i class="fas fa-check"></i> 市場価値を高める方法</li>
+                <li><i class="fas fa-check"></i> 複数の収入源の作り方</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="flow-item">
+            <div class="flow-number">06</div>
+            <div class="flow-content">
+              <h3>行動計画と次のステップ</h3>
+              <p>セッション後の具体的な行動計画を作成し、次に取るべき一歩を明確にします。必要に応じて、追加サポートや次のステップとなる講座やプログラムもご案内します。</p>
+              <ul class="flow-check-list">
+                <li><i class="fas fa-check"></i> 詳細な行動計画の作成</li>
+                <li><i class="fas fa-check"></i> 次のステップの提案</li>
+                <li><i class="fas fa-check"></i> フォローアップの案内</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flow-note">
+          <div class="note-icon"><i class="fas fa-lightbulb"></i></div>
+          <div class="note-content">
+            <h4>スキルアップや起業を目指す方へ</h4>
+            <p>お仕事コンサル後、さらに具体的なステップを踏みたい方には、「起業スクール」や「未来創造プロジェクト」などの次のステップもご用意しています。あなたの目標に合わせたプランをご提案します。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 対象者セクション -->
+    <section id="target" class="target-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-badge">対象者</div>
+          <h2 class="section-title">こんな方に<span class="text-primary">おすすめです</span></h2>
+          <p class="section-description">
+            マヤ暦お仕事コンサルは、キャリアに関する様々な悩みや課題を抱える方に最適なサービスです
+          </p>
+        </div>
+        
+        <div class="audience-tabs">
+          <div class="audience-tab-header">
+            <button class="audience-tab-btn active" data-tab="tab1">
+              <i class="fas fa-briefcase"></i> 会社員の方
+            </button>
+            <button class="audience-tab-btn" data-tab="tab2">
+              <i class="fas fa-user-tie"></i> フリーランス・個人事業主
+            </button>
+            <button class="audience-tab-btn" data-tab="tab3">
+              <i class="fas fa-lightbulb"></i> 起業検討中の方
+            </button>
+          </div>
+          
+          <div class="audience-tab-content">
+            <div class="audience-panel active" id="tab1">
+              <div class="audience-panel-content">
+                <div class="audience-icon">
+                  <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="audience-text">
+                  <h3>会社員の方</h3>
+                  <p>現在の仕事にやりがいを感じられない、自分の才能を活かせていないと感じている会社員の方に最適です。</p>
+                  
+                  <ul class="audience-benefits">
+                    <li><i class="fas fa-check-circle"></i> 今の職場で才能を活かす方法がわかる</li>
+                    <li><i class="fas fa-check-circle"></i> 転職すべきかどうかの判断材料が得られる</li>
+                    <li><i class="fas fa-check-circle"></i> 昇進・昇給に向けた戦略が明確になる</li>
+                    <li><i class="fas fa-check-circle"></i> 職場での人間関係改善のヒントが得られる</li>
+                    <li><i class="fas fa-check-circle"></i> 副業など複数の収入源の作り方がわかる</li>
+                  </ul>
+                  
+                  <div class="audience-success">
+                    <div class="success-badge">成功事例</div>
+                    <p>「IT企業で営業職をしていましたが、マヤ暦を通じて創造性が才能だとわかり、同じ会社の企画部門へ異動。収入も上がり、毎日楽しく働けるようになりました」（30代男性）</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="audience-panel" id="tab2">
+              <div class="audience-panel-content">
+                <div class="audience-icon">
+                  <i class="fas fa-user-tie"></i>
+                </div>
+                <div class="audience-text">
+                  <h3>フリーランス・個人事業主</h3>
+                  <p>すでに独立している方で、さらなる飛躍や収入アップを目指している方に最適です。</p>
+                  
+                  <ul class="audience-benefits">
+                    <li><i class="fas fa-check-circle"></i> 才能を活かしたサービスの開発方法がわかる</li>
+                    <li><i class="fas fa-check-circle"></i> 事業の方向性を明確にできる</li>
+                    <li><i class="fas fa-check-circle"></i> 収益アップのための具体的戦略が得られる</li>
+                    <li><i class="fas fa-check-circle"></i> 差別化ポイントが明確になる</li>
+                    <li><i class="fas fa-check-circle"></i> 持続可能な働き方の設計ができる</li>
+                  </ul>
+                  
+                  <div class="audience-success">
+                    <div class="success-badge">成功事例</div>
+                    <p>「ウェブデザイナーとして独立していましたが、お仕事コンサルを受けて才能の活かし方を知り、コンサルティングサービスも開始。クライアントの幅が広がり、月収が2倍になりました」（40代女性）</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="audience-panel" id="tab3">
+              <div class="audience-panel-content">
+                <div class="audience-icon">
+                  <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="audience-text">
+                  <h3>起業検討中の方</h3>
+                  <p>会社員からの独立や新規事業の立ち上げを考えている方に最適です。</p>
+                  
+                  <ul class="audience-benefits">
+                    <li><i class="fas fa-check-circle"></i> 才能を活かした起業アイデアが見つかる</li>
+                    <li><i class="fas fa-check-circle"></i> 起業すべきタイミングがわかる</li>
+                    <li><i class="fas fa-check-circle"></i> リスクを最小限に抑えた起業戦略が立てられる</li>
+                    <li><i class="fas fa-check-circle"></i> 強みを活かしたビジネスモデルの構築ができる</li>
+                    <li><i class="fas fa-check-circle"></i> 起業後の成功確率が高まる</li>
+                  </ul>
+                  
+                  <div class="audience-success">
+                    <div class="success-badge">成功事例</div>
+                    <p>「起業したいけど何をすればいいかわからなかった私が、お仕事コンサルで自分の才能を知り、オンラインスクールを創設。半年で会社員時代の年収を超える収入を得ることができました」（30代女性）</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="cta-box">
+          <h3>あなたも才能を活かした理想のキャリアを手に入れませんか？</h3>
+          <p>マヤ暦お仕事コンサルでは、一人ひとりの才能や特性に合わせたオーダーメイドのキャリア提案を行います。<br>まずは気軽にご相談ください。</p>
+          <a href="#reserve" class="btn btn-primary">
+            <i class="far fa-calendar-alt"></i> 予約する
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 価格セクション -->
+    <section id="price" class="price-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-badge">料金</div>
+          <h2 class="section-title">マヤ暦お仕事コンサルの<span class="text-primary">料金案内</span></h2>
+          <p class="section-description">
+            明確な価格設定でご提供しています。あなたの未来への投資としてご検討ください
+          </p>
+        </div>
+        
+        <div class="price-card">
+          <div class="price-card-header">
+            <h3>マヤ暦お仕事コンサル</h3>
+            <div class="price-tag">¥44,000<span class="price-unit">（税込）</span></div>
+            <div class="price-duration">120分</div>
+          </div>
+          
+          <div class="price-card-body">
+            <ul class="price-features">
+              <li><i class="fas fa-check-circle"></i> マヤ暦による才能分析</li>
+              <li><i class="fas fa-check-circle"></i> 強み・弱みの明確化</li>
+              <li><i class="fas fa-check-circle"></i> 理想の働き方設計</li>
+              <li><i class="fas fa-check-circle"></i> キャリアプラン策定</li>
+              <li><i class="fas fa-check-circle"></i> 収入アップ戦略</li>
+              <li><i class="fas fa-check-circle"></i> 具体的な行動計画作成</li>
+              <li><i class="fas fa-check-circle"></i> 質問への回答</li>
+              <li><i class="fas fa-check-circle"></i> 次のステップの提案</li>
+            </ul>
+            
+            <div class="price-notes">
+              <p><i class="fas fa-info-circle"></i> オンライン（Zoom）または対面で実施</p>
+              <p><i class="fas fa-info-circle"></i> 事前アンケートあり</p>
+              <p><i class="fas fa-info-circle"></i> 録音データをお渡し（希望者のみ）</p>
+            </div>
+          </div>
+          
+          <div class="price-card-footer">
+            <a href="#reserve" class="btn btn-primary btn-block">
+              <i class="far fa-calendar-alt"></i> 予約する
+            </a>
+          </div>
+        </div>
+        
+        <div class="payment-info">
+          <h4>お支払い方法</h4>
+          <p>銀行振込、クレジットカード、PayPay決済に対応しています。予約確定後に詳細をご案内いたします。</p>
+          
+          <h4>キャンセルポリシー</h4>
+          <p>7日前まで：全額返金、3日前まで：50%返金、それ以降：返金不可</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 予約フォームセクション -->
+    <section id="reserve" class="reserve-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-badge">予約</div>
+          <h2 class="section-title">マヤ暦お仕事コンサルの<span class="text-primary">ご予約</span></h2>
+          <p class="section-description">
+            下記の予約フォームから希望日時をお選びいただくか、公式LINEからお問い合わせください
+          </p>
+        </div>
+        
+        <div class="reservation-columns">
+          <div class="reservation-form">
+            <div class="form-header">
+              <h3>予約フォーム</h3>
+              <p>専用フォームから日時をお選びください</p>
+            </div>
+            <div class="reservation-iframe">
+              <!-- 予約フォーム埋め込み -->
+              <a href="https://lin.ee/XFSLtzB" class="btn btn-primary btn-block" target="_blank">
+                <i class="far fa-calendar-alt"></i> 予約フォームを開く
+              </a>
+            </div>
+          </div>
+          
+          <div class="reservation-contact">
+            <div class="contact-card">
+              <h3>その他の予約方法</h3>
+              <p>公式LINEからもご予約・お問い合わせいただけます</p>
+              
+              <div class="contact-method">
+                <div class="contact-icon">
+                  <i class="fab fa-line"></i>
+                </div>
+                <div class="contact-details">
+                  <h4>公式LINE</h4>
+                  <p>24時間いつでもお問い合わせ可能です。ご質問やご相談もお気軽にどうぞ。</p>
+                  <a href="https://lin.ee/XFSLtzB" class="btn btn-outline btn-block" target="_blank">
+                    <i class="fab fa-line"></i> 友だち追加する
+                  </a>
+                </div>
+              </div>
+              
+              <div class="contact-note">
+                <p><i class="fas fa-info-circle"></i> 通常2営業日以内にご返信いたします</p>
+                <p><i class="fas fa-info-circle"></i> 混雑状況により回答に時間がかかる場合がございます</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="faq-section">
+          <h3>よくある質問</h3>
+          
+          <div class="faq-grid">
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h4>マヤ暦を知らなくても大丈夫ですか？</h4>
+              </div>
+              <div class="faq-answer">
+                <p>はい、事前知識は必要ありません。わかりやすく解説いたしますので、初めての方でも安心してご参加いただけます。</p>
+              </div>
+            </div>
+            
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h4>オンラインでも受けられますか？</h4>
+              </div>
+              <div class="faq-answer">
+                <p>はい、Zoomを使用したオンラインセッションも行っています。遠方の方や忙しい方も気軽にご参加いただけます。</p>
+              </div>
+            </div>
+            
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h4>録音は可能ですか？</h4>
+              </div>
+              <div class="faq-answer">
+                <p>はい、セッションの録音データをお渡しすることも可能です。事前にお申し付けください。</p>
+              </div>
+            </div>
+            
+            <div class="faq-item">
+              <div class="faq-question">
+                <i class="fas fa-question-circle"></i>
+                <h4>1回のセッションで効果はありますか？</h4>
+              </div>
+              <div class="faq-answer">
+                <p>はい、1回のセッションで才能や適職の理解が深まり、具体的な行動計画も立てられます。さらに深く取り組みたい方には追加サポートもご用意しています。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 関連サービス -->
+    <section class="related-services">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-badge">関連サービス</div>
+          <h2 class="section-title">お仕事コンサル後の<span class="text-primary">次のステップ</span></h2>
+          <p class="section-description">
+            さらに深く才能を活かした人生を創るための関連サービスもご用意しています
+          </p>
+        </div>
+        
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-image">
+              <img src="写真素材/57B2BE4F-6B7A-465D-AA9D-B12164E9FBDC.jpg" alt="起業スクール">
+            </div>
+            <div class="service-content">
+              <h3>起業スクール</h3>
+              <p class="service-description">才能を活かした起業を目指す方へ。ビジネスモデルの構築から集客、運営まで徹底サポート。</p>
+              <div class="service-meta">
+                <div class="meta-item">
+                  <i class="fas fa-clock"></i> 全14〜24回
+                </div>
+                <div class="meta-item">
+                  <i class="fas fa-yen-sign"></i> 277,200円〜
+                </div>
+              </div>
+              <a href="entrepreneur-school.html" class="btn btn-outline btn-block">詳細を見る</a>
+            </div>
+          </div>
+          
+          <div class="service-card">
+            <div class="service-image">
+              <img src="写真素材/35EB6A0F-43CB-4FCE-8420-2FB87F16A30D.jpg" alt="未来創造プロジェクト">
+            </div>
+            <div class="service-content">
+              <h3>未来創造プロジェクト</h3>
+              <p class="service-description">3ヶ月間で人生の目的と使命を明確にし、具体的な行動計画を立てて実行する集中プログラム。</p>
+              <div class="service-meta">
+                <div class="meta-item">
+                  <i class="fas fa-clock"></i> 3ヶ月間
+                </div>
+                <div class="meta-item">
+                  <i class="fas fa-yen-sign"></i> 264,000円〜
+                </div>
+              </div>
+              <a href="future-project.html" class="btn btn-outline btn-block">詳細を見る</a>
+            </div>
+          </div>
+          
+          <div class="service-card">
+            <div class="service-image">
+              <img src="写真素材/0761EC26-17F1-45A3-9030-A7F1E24D95F0.jpg" alt="シンクロサロン">
+            </div>
+            <div class="service-content">
+              <h3>シンクロサロン</h3>
+              <p class="service-description">月額制のオンラインサロン。継続的なサポートやコミュニティで、長期的な成長をサポート。</p>
+              <div class="service-meta">
+                <div class="meta-item">
+                  <i class="fas fa-clock"></i> 月額制
+                </div>
+                <div class="meta-item">
+                  <i class="fas fa-yen-sign"></i> 2,000円/月
+                </div>
+              </div>
+              <a href="sync-salon.html" class="btn btn-outline btn-block">詳細を見る</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3><a href="index.html">PremaNadi</a></h3>
+          <p>金子あさみサービス</p>
+          <p class="footer-tagline">魂と人生を輝かせ、ワクワクさせるエネルギーを高める</p>
+        </div>
+        
+        <div class="footer-links">
+          <h4>サービス</h4>
+          <ul>
+            <li><a href="index.html#services">マヤ暦鑑定</a></li>
+            <li><a href="index.html#services">各種講座</a></li>
+            <li><a href="index.html#featured">未来創造プロジェクト</a></li>
+            <li><a href="sync-salon.html">シンクロサロン</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>お問い合わせ</h4>
+          <ul>
+            <li><a href="https://lin.ee/kTtgn9q">公式LINE</a></li>
+            <li><a href="index.html#contact">メールフォーム</a></li>
+            <li><a href="index.html#faq">よくある質問</a></li>
+            <li><a href="#privacy" class="privacy-policy-link">プライバシーポリシー</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-social">
+          <h4>フォロー</h4>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/asami.kaneko4488/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.threads.net/@asami.kaneko4488?xmt=AQGzV7RUmAeXAduSKWbM93ofT-J3xzu4gLaIOrm-oE3kiy8">
+              <svg class="threads-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 878 1000">
+                <path d="M446.7,1000h-0.3c-149.2-1-263.9-50.2-341-146.2C36.9,768.3,1.5,649.4,0.3,500.4v-0.7c1.2-149.1,36.6-267.9,105.2-353.4
+                  C182.5,50.2,297.3,1,446.4,0h0.3h0.3c114.4,0.8,210.1,30.2,284.4,87.4c69.9,53.8,119.1,130.4,146.2,227.8l-85,23.7
+                  c-46-165-162.4-249.3-346-250.6c-121.2,0.9-212.9,39-272.5,113.2C118.4,271,89.6,371.4,88.5,500c1.1,128.6,29.9,229,85.7,298.5
+                  c59.6,74.3,151.3,112.4,272.5,113.2c109.3-0.8,181.6-26.3,241.7-85.2c68.6-67.2,67.4-149.7,45.4-199.9
+                  c-12.9-29.6-36.4-54.2-68.1-72.9c-8,56.3-25.9,101.9-53.5,136.3c-36.9,45.9-89.2,71-155.4,74.6c-50.1,2.7-98.4-9.1-135.8-33.4
+                  c-44.3-28.7-70.2-72.5-73-123.5c-2.7-49.6,17-95.2,55.4-128.4c36.7-31.7,88.3-50.3,149.3-53.8c44.9-2.5,87-0.5,125.8,5.9
+                  c-5.2-30.9-15.6-55.5-31.2-73.2c-21.4-24.4-54.5-36.8-98.3-37.1c-0.4,0-0.8,0-1.2,0c-35.2,0-83,9.7-113.4,55L261.2,327
+                  c40.8-60.6,107-94,186.6-94c0.6,0,1.2,0,1.8,0c133.1,0.8,212.4,82.3,220.3,224.5c4.5,1.9,9,3.9,13.4,5.9
+                  c62.1,29.2,107.5,73.4,131.4,127.9c33.2,75.9,36.3,199.6-64.5,298.3C673.1,965,579.6,999.1,447,1000L446.7,1000L446.7,1000z
+                  M488.5,512.9c-10.1,0-20.3,0.3-30.8,0.9c-76.5,4.3-124.2,39.4-121.5,89.3c2.8,52.3,60.5,76.6,116,73.6
+                  c51-2.7,117.4-22.6,128.6-154.6C552.6,516,521.7,512.9,488.5,512.9z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> PremaNadi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- トップに戻るボタン -->
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="privacy.js"></script>
+  <script>
+    // タブ切り替え機能
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabButtons = document.querySelectorAll('.audience-tab-btn');
+      
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // タブボタンのアクティブ状態を切り替える
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          
+          // タブパネルを切り替える
+          const tabId = this.getAttribute('data-tab');
+          const panels = document.querySelectorAll('.audience-panel');
+          
+          panels.forEach(panel => {
+            panel.classList.remove('active');
+          });
+          
+          document.getElementById(tabId).classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

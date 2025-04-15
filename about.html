@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>金子あさみについて - PremaNadi</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700&display=swap">
+  <style>
+    .threads-icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      vertical-align: middle;
+      fill: currentColor;
+    }
+    .social-icons .threads-icon {
+      width: 20px;
+      height: 20px;
+    }
+    
+    /* 新しいスタイル追加 */
+    .about-hero {
+      background: linear-gradient(135deg, rgba(253, 193, 205, 0.8), rgba(248, 165, 179, 0.6)), url('写真素材/BF9FF406-E02C-47C0-8601-261283FC185D.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('写真素材/pattern.png');
+      opacity: 0.1;
+      z-index: 1;
+    }
+    
+    .about-hero .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 8rem 0 5rem;
+    }
+    
+    .about-image img {
+      border-radius: 50%;
+      box-shadow: 0 10px 30px rgba(248, 165, 179, 0.25);
+      transition: transform 0.5s ease;
+    }
+    
+    .about-image img:hover {
+      transform: scale(1.03);
+    }
+    
+    .about-section {
+      padding: 6rem 0;
+      background-color: #fff;
+    }
+    
+    .about-achievements {
+      margin-top: 3rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .achievement-item {
+      flex: 1;
+      min-width: 180px;
+      background: linear-gradient(135deg, #fff, #fcf6f7);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .achievement-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(248, 165, 179, 0.15);
+    }
+    
+    .achievement-icon {
+      color: var(--primary-color);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .story-section, .timeline-section, .skills-section, .message-section, .beliefs-section {
+      padding: 6rem 0;
+      position: relative;
+    }
+    
+    .story-section {
+      background-color: #fcf6f7;
+    }
+    
+    /* 新しい物語セクションのスタイル */
+    .story-container {
+      max-width: 800px;
+      margin: 3rem auto;
+    }
+    
+    .story-chapter {
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .story-chapter.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .story-chapter h3 {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      font-family: "Zen Old Mincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    .story-chapter h3::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(to right, var(--primary-color), transparent);
+    }
+    
+    .story-quote {
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--primary-color);
+      border-left: 3px solid var(--primary-color);
+      padding-left: 1.5rem;
+      margin: 1.5rem 0;
+      line-height: 1.8;
+      font-family: "Zen Old Mincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
+    }
+    
+    .story-signature {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      text-align: right;
+      margin-top: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .about-hero .hero-content {
+        padding: 6rem 0 3rem;
+      }
+      
+      .about-hero {
+        background-position: right center;
+      }
+      
+      .about-section, .story-section, .timeline-section, .skills-section, .message-section, .beliefs-section {
+        padding: 4rem 0;
+      }
+      
+      .story-chapter h3 {
+        font-size: 1.5rem;
+      }
+      
+      .story-quote {
+        font-size: 1.2rem;
+        padding-left: 1rem;
+      }
+      
+      .about-achievements {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .achievement-item {
+        min-width: auto;
+      }
+    }
+
+    .skills-section {
+      background-color: #fff;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .skill-item {
+      background: linear-gradient(135deg, #fff, #fcf6f7);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .skill-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(248, 165, 179, 0.2);
+    }
+
+    .skill-icon {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+      border-radius: 50%;
+      margin-bottom: 1.5rem;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .beliefs-section {
+      background-color: #fcf6f7;
+    }
+
+    .beliefs-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .belief-item {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      height: 100%;
+    }
+
+    .belief-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(248, 165, 179, 0.2);
+    }
+
+    .belief-icon {
+      width: 50px;
+      height: 50px;
+      min-width: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+      border-radius: 50%;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .belief-text {
+      flex: 1;
+    }
+
+    .message-section {
+      background-color: #fff;
+    }
+
+    .message-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .message-image img {
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(248, 165, 179, 0.25);
+      transition: transform 0.5s ease;
+    }
+
+    .message-image img:hover {
+      transform: scale(1.02);
+    }
+
+    .signature {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      margin: 2rem 0;
+    }
+
+    .message-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .skills-grid, .beliefs-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .message-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .message-image {
+        order: -1;
+      }
+      
+      .message-buttons {
+        flex-direction: column;
+      }
+    }
+    
+    /* セクションヘッダー装飾 */
+    .tab-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .tab-header::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+      margin: 1rem auto 0;
+    }
+    
+    .tab-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(253, 193, 205, 0.2), rgba(248, 165, 179, 0.1));
+      width: 80px;
+      height: 80px;
+      line-height: 80px;
+      border-radius: 50%;
+      box-shadow: 0 5px 15px rgba(248, 165, 179, 0.2);
+    }
+    
+    .tab-subheading {
+      font-size: 1.1rem;
+      color: #888;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    
+    /* 縦書き小説スタイル - シンプル化 */
+    .novel-container {
+      max-width: 800px;
+      margin: 3rem auto;
+      height: auto;
+      padding: 0;
+      background: transparent;
+      box-shadow: none;
+      font-family: "Zen Old Mincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
+      border: none;
+      color: #333;
+      line-height: 2;
+      letter-spacing: 0.05em;
+    }
+    
+    .novel-chapter {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      height: 70vh;
+      margin: 4rem auto 2rem;
+      padding: 2rem;
+      border-bottom: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      line-height: 2.5;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    
+    .novel-chapter.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .novel-title {
+      display: block;
+      font-size: 1.6rem;
+      color: #000;
+      font-weight: 600;
+      position: relative;
+      margin-bottom: 2em;
+      margin-right: 0;
+      letter-spacing: 0.2em;
+      line-height: 1.5;
+      border-bottom: 2px solid rgba(248, 165, 179, 0.5);
+      padding-bottom: 1rem;
+      background-color: transparent;
+      padding: 0;
+      z-index: auto;
+      text-align: right;
+      white-space: nowrap;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+    }
+    
+    .novel-quote {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      margin: 2rem 0;
+      line-height: 2;
+      font-style: italic;
+      padding-right: 0.8em;
+      position: static;
+      margin-right: 0;
+      padding-right: 0.8em;
+      z-index: auto;
+      background-color: transparent;
+      padding: 0;
+    }
+    
+    .novel-quote + p {
+      margin-top: 2em;
+    }
+    
+    .novel-quote {
+      margin-top: 2em;
+    }
+    
+    .novel-signature {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-left: 2rem;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+    }
+    
+    /* 段落スタイル - シンプル化 */
+    .novel-chapter p {
+      text-indent: 1em;
+      margin: 2em 0;
+      padding-right: 0.5em;
+      clear: none;
+      position: static;
+      max-width: 1em * 20;
+    }
+    
+    /* チャプター間のスペーサー - シンプル化 */
+    .chapter-spacer {
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .chapter-spacer::before {
+      content: '⁂';
+      color: #999;
+      opacity: 0.6;
+    }
+    
+    /* 縦書きレスポンシブ対応 */
+    @media (max-width: 768px) {
+      .novel-chapter {
+        height: 80vh; /* 高さを増やす */
+        padding: 1.5rem;
+        overflow-x: auto; /* 横スクロール可能に */
+        -webkit-overflow-scrolling: touch; /* スムーズスクロール */
+      }
+      
+      .novel-quote {
+        font-size: 1.1rem;
+      }
+      
+      /* スマホ表示時の縦書きレイアウト調整 */
+      .novel-chapter p {
+        margin: 1.2em 0;
+        line-height: 1.8;
+        font-size: 0.95rem; /* 文字サイズを小さく */
+      }
+      
+      /* スマホ表示時のナビゲーションヒント表示 */
+      .novel-container::after {
+        content: '← スワイプしてお読みください →';
+        display: block;
+        text-align: center;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+        color: #888;
+        margin-top: 1rem;
+        transition: opacity 0.3s ease;
+      }
+      
+      .novel-container.scrolled::after {
+        opacity: 0;
+      }
+      
+      .novel-title {
+        font-size: 1.4rem;
+      }
+    }
+    
+    /* 数字を縦書きにする */
+    .novel-chapter {
+      text-combine-upright: none;
+    }
+    
+    /* 数字要素に適用する特別なクラス */
+    .tate-chu-yoko {
+      text-combine-upright: all;
+    }
+    
+    /* 1桁と2桁の数字を縦書きにする */
+    .novel-chapter {
+      font-feature-settings: "valt";
+    }
+
+    /* 文字間隔を調整 */
+    .novel-chapter p, .novel-quote {
+      letter-spacing: 0.05em;
+      word-spacing: 0.1em;
+      line-break: strict;
+    }
+
+    .novel-chapter > * {
+      margin-right: 0;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+
+    /* 2カラムレイアウトのスタイル */
+    .experience-skills-section {
+      padding: 6rem 0;
+      background-color: #fff;
+    }
+    
+    .timeline {
+      max-width: 800px;
+      margin: 3rem auto;
+      position: relative;
+      padding: 2rem 0;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, var(--primary-color), transparent);
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+      width: 100%;
+    }
+    
+    .timeline-marker {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      z-index: 1;
+    }
+    
+    .timeline-content {
+      width: calc(50% - 40px);
+      padding: 1.5rem;
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content {
+      margin-left: auto;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-content {
+      margin-right: auto;
+    }
+    
+    .timeline-content:hover {
+      transform: translateY(-5px);
+    }
+    
+    .timeline-content h3 {
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+    
+    .timeline-content p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #666;
+    }
+    
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 20px;
+      }
+      
+      .timeline-marker {
+        left: 20px;
+      }
+      
+      .timeline-content {
+        width: calc(100% - 40px);
+        margin-left: 40px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="index.html"><img src="PremaNadi_logo.svg" alt="PremaNadi" class="logo-image"></a></div>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html#services">サービス</a></li>
+            <li><a href="about.html" class="active">金子あさみについて</a></li>
+            <li><a href="index.html#testimonials">お客様の声</a></li>
+            <li><a href="index.html#blog">ブログ</a></li>
+            <li><a href="index.html#contact" class="btn btn-primary">お問い合わせ</a></li>
+          </ul>
+        </nav>
+        <button class="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ヒーローセクション -->
+  <section class="hero about-hero parallax-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1>金子 あさみ<br><span class="highlight">プロフィール</span></h1>
+        <p class="hero-description">16年間の白バイ警官から、ヨガとマヤ暦に出会い人生が一変。<br class="pc-only">魂の使命に素直に沿った人生は最高。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 物語セクション（縦書き小説スタイル） -->
+  <section class="story-section parallax-section" id="story-section">
+    <div class="container">
+      <h2 class="reveal-on-scroll">私の<span class="highlight">物語</span></h2>
+      <div class="novel-container">
+        <div class="novel-chapter">
+          <h3 class="novel-title">安定を捨てる覚悟</h3>
+          <p class="novel-quote">「もうこのままではいけない」</p>
+          <p>16年間務めた警察官のキャリア。白バイに乗り、街の安全を守る。世間的には羨まれる安定した公務員という仕事。</p>
+          <p>けれど、心の奥底では常に問いかけていました。<strong>「これが私の望む本当の幸せな人生なの？」</strong></p>
+        </div>
+        
+        <div class="novel-chapter">
+          <h3 class="novel-title">絶望から見つけた光</h3>
+          <p>2人目の出産を終えた私の心と体は、限界を超えていました。</p>
+          <p>1人目の育児では手探りの毎日。自分を犠牲にして子どものために生きることが「良い母親」だと信じていました。家族との関係は徐々に崩れ、仕事と育児と家事の無限ループに囚われ、誰にも弱音を吐けない日々。</p>
+          <p class="novel-quote">「何もうまくいかない。私はこのまま一生、幸せになれないのかもしれない…」</p>
+        </div>
+        
+        <div class="novel-chapter">
+          <h3 class="novel-title">ヨガとの運命の出会い</h3>
+          <p>そんな絶望の中で出会ったのが「ヨガ」でした。産院でのたった一回の体験が、私の人生を変えるきっかけになるとは、当時は想像もしていませんでした。</p>
+          <p>初めてのヨガで、深い呼吸と共に自分自身を見つめる時間。それは16年ぶりに「自分」と向き合う、神聖な瞬間でした。</p>
+          <p class="novel-quote">「自分の心との対話が、こんなにも心地いのか」</p>
+        </div>
+        
+        <div class="novel-chapter">
+          <h3 class="novel-title">変化の始まり</h3>
+          <p>ヨガを続けるうちに、驚くべき変化が起こり始めました。身体の不調が改善されるだけでなく、心が穏やかになり、周囲への感謝の気持ちが自然と湧いてくるようになったのです。</p>
+          <p>ヨガマットの上で感動しながら「ありがとう」と呼吸するうちに、少しずつ自分を責めなくなり、自分を大切にすることが家族を幸せにする第一歩だと気づきました。</p>
+          <p class="novel-quote">「この感覚を、同じように苦しんでいるママたちにも伝えたい」</p>
+          <p>その強い想いが、私をヨガインストラクターへの道へと導いたのです。</p>
+        </div>
+        
+        <div class="novel-chapter">
+          <h3 class="novel-title">マヤ暦との奇跡の出会い</h3>
+          <p class="novel-quote">「今度マヤ暦お茶会があるんだけど、興味ある？」</p>
+          <p>友人からの何気ない誘いが、再び私の人生を大きく変える転機となりました。</p>
+          <p>正直に言えば、その時の私は半信半疑でした。でも「何か新しいことを始めたい」という気持ちだけで参加を決めたのです。</p>
+        </div>
+        
+        <div class="novel-chapter">
+          <h3 class="novel-title">衝撃の瞬間</h3>
+          <p>マヤ暦鑑定を受けた瞬間、全身に電流が走りました。</p>
+          <p class="novel-quote">「この人に全て見透かされているみたい…」</p>
+          <p>今まで誰にも言えなかった本音、自分でも気づいていなかった本質、夫や子どもとの関係性の真実。それらが鮮明に浮かび上がり、涙が止まりませんでした。</p>
+        </div>
+        
+        <div class="novel-chapter">
+          <h3 class="novel-title">魂の使命を知る</h3>
+          <p class="novel-quote">「あなたは人を導く光を持っている。その光を隠したまま生きるのはもったいない」</p>
+          <p>鑑定を受けて、そう言われたように感じた私は、ついに覚悟を決めたのです。</p>
+          <p>マヤ暦との出会いは、単なる占いとの出会いではなく、<strong>自分自身の本質</strong>との再会だったのです。</p>
+        </div>
+
+        <div class="novel-chapter">
+          <h3 class="novel-title">人生の転換点</h3>
+          <p>マヤ暦を学ぶうちに、長年悩んでいた夫婦関係にも驚くべき変化が。「うちの夫はわかってくれない」と思っていた私が、実は夫の本質を理解していなかったことに気づいたのです。</p>
+          <p>お互いの生まれ持った特性を尊重し始めると、16年間の結婚生活で初めて心から夫を愛せるようになりました。子どもたちとの関係も、彼らの個性を尊重することで格段に良くなっていったのです。</p>
+        </div>
+        
+        <div class="novel-chapter">
+          <h3 class="novel-title">新たな道へ</h3>
+          <p class="novel-quote">「この安定を捨てる勇気があるだろうか」</p>
+          <p>16年間勤めた警察官の職を辞めることは、周囲からは「勿体ない、考え直せ」と言われました。しかし、マヤ暦で自分の使命を知った私には、もう迷いはありませんでした。</p>
+          <p class="novel-quote">「私はもっと多くの女性の人生に光を灯すために生まれてきたんだ」</p>
+          <p>退職届を提出した日、恐怖よりも解放感の方が大きかったことを今でも鮮明に覚えています。</p>
+        </div>
+
+        <div class="novel-chapter">
+          <h3 class="novel-title">魂の修行</h3>
+          <p>マヤ暦を学び、鑑定技術を磨く日々。そして気づいたのです。不幸だと思っていた日々は、実は今の私を形作るための「魂の修行期間」だったのだと。</p>
+          <p>あの苦しみがなければ、今の私はない。あの痛みを知っているからこそ、同じ痛みを抱える人の心に寄り添える。</p>
+          <p>過去のすべての出来事に感謝できるようになった時、人生は奇跡のような展開を見せ始めたのです。</p>
+        </div>
+        
+        <div class="novel-chapter">
+          <h3 class="novel-title">あなたへのメッセージ</h3>
+          <p>かつての私と同じ場所にいるあなたへ。</p>
+          <p>毎日が辛くて、「このまま一生続くのだろうか」と絶望している方。子育てに追われ、自分を見失っている方。「本当は違う人生を生きたかった」と感じている方。</p>
+          <p>あなたに知ってほしいことがあります。</p>
+          <p>・すべての出会いと出来事は、あなたを正しい場所へ導くために起きている</p>
+          <p>・あなたの魂が望む人生への扉は、必ず開かれる</p>
+          <p>・今の苦しみは、未来のあなたを輝かせるための準備期間</p>
+        </div>
+
+        <div class="novel-chapter">
+          <h3 class="novel-title">希望の光</h3>
+          <p>私の人生の奇跡を振り返るたび、鳥肌が立つほどの感動が押し寄せます。たった5年前、私は毎日泣きながら生きていました。それが今では、毎日を感謝で満たされて生きています。</p>
+          <p>あなたの中にも、まだ見ぬ可能性が眠っています。その扉を開く鍵を、私と一緒に見つけませんか？</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 経歴と資格セクション -->
+  <section class="experience-skills-section parallax-section">
+    <div class="container">
+      <h2 class="reveal-on-scroll">これまでの<span class="highlight">歩み</span></h2>
+      <div class="tab-header">
+        <div class="tab-icon"><i class="fas fa-road"></i></div>
+        <p class="tab-subheading">2010年からの活動の変遷。マヤ暦との出会いから現在までの活動の広がりをご紹介します。</p>
+      </div>
+      <div class="timeline reveal-on-scroll">
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>2010年</h3>
+            <p>マヤ暦との出会い。自分自身の才能と使命に目覚め、本格的に学び始める。</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>2013年</h3>
+            <p>マヤ暦鑑定士としての活動をスタート。個人鑑定を中心に活動。</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>2014年</h3>
+            <p>マヤ暦マスター鑑定士の資格を取得。真密教認定師範としての活動も開始。</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>2015年</h3>
+            <p>シンクロサロンを設立。仲間と共に成長する場づくりに取り組む。ヨガインストラクターとしての活動も開始。</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>2016年</h3>
+            <p>NLPプラクティショナーの資格を取得。心理療法の技術を習得し、より深いサポートを提供。</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>2017年</h3>
+            <p>モンテッソーリ教育指導者の資格を取得。親子関係の構築をサポートする活動を開始。</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>2018年</h3>
+            <p>マヤ暦講師育成プログラムを開始。講師として多くの人材を育成。メモリーオイルマスターブレンダーとしての活動も開始。</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>2020年</h3>
+            <p>オンラインでのサービスを本格化。全国各地からクライアントが増加。</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>2022年</h3>
+            <p>未来創造3カ月プロジェクトを開始。多くの方の人生転換をサポート。</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>2023年</h3>
+            <p>起業スクールを開講。才能を活かしたビジネス構築をサポート。</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>現在</h3>
+            <p>PremaNadiを通じて、マヤ暦鑑定、各種講座、コンサルティングなど多様なサービスを提供中。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 信念セクション -->
+  <section class="beliefs-section parallax-section">
+    <div class="container">
+      <h2 class="reveal-on-scroll">私の<span class="highlight">信念</span></h2>
+      <div class="tab-header">
+        <div class="tab-icon"><i class="fas fa-heart"></i></div>
+        <p class="tab-subheading">私の活動や人生観の根底にある信念。大切にしている価値観をご紹介します。</p>
+      </div>
+      <div class="beliefs-list reveal-on-scroll">
+        <div class="belief-item">
+          <div class="belief-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="belief-text">
+            <h3>全ての出会いは必然</h3>
+            <p>出会いも出来事も、すべてがベストタイミングで起こります。あなたに必要なことが必要な時に起こるように宇宙は準備しています。</p>
+          </div>
+        </div>
+        
+        <div class="belief-item">
+          <div class="belief-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <div class="belief-text">
+            <h3>自分を愛することから始まる</h3>
+            <p>自分自身を大切にし、愛することが、家族や周りの人を幸せにする第一歩です。自分の幸せが周りの幸せにつながります。</p>
+          </div>
+        </div>
+        
+        <div class="belief-item">
+          <div class="belief-icon">
+            <i class="fas fa-seedling"></i>
+          </div>
+          <div class="belief-text">
+            <h3>苦難も成長の糧</h3>
+            <p>人生の苦しい時期は「修行ゾーン」です。その体験があるからこそ、今のあなたがあります。全ての経験に感謝できた時、人生は変わり始めます。</p>
+          </div>
+        </div>
+        
+        <div class="belief-item">
+          <div class="belief-icon">
+            <i class="fas fa-compass"></i>
+          </div>
+          <div class="belief-text">
+            <h3>全ての人に使命がある</h3>
+            <p>誰もが特別な才能と使命を持って生まれてきています。その才能を活かし、使命に沿って生きることで本当の幸せを感じられます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- メッセージセクション -->
+  <section class="message-section parallax-section">
+    <div class="container">
+      <div class="message-content">
+        <div class="message-text reveal-on-scroll">
+          <h2>あなたへの<span class="highlight">メッセージ</span></h2>
+          <p>あなたはもっと輝ける存在です。全ての人には生まれながらの才能と、使命があります。でも、多くの方がそれに気づかないまま、「このままでいいのかな」と悩みながら日々を過ごしています。</p>
+          
+          <p>私は自分自身もその道を歩んできました。悩み、迷い、時には立ち止まることもありました。だからこそ、あなたの気持ちを理解できます。</p>
+          
+          <p>マヤ暦や様々な叡智との出会いが、私の人生を大きく変えたように、あなたにも「本来の自分」と出会うチャンスがあります。その扉を開くお手伝いをすることが、私の使命だと信じています。</p>
+          
+          <p>どんな小さな一歩でも構いません。あなたの「変わりたい」という思いを大切に、一緒に歩んでいきましょう。</p>
+          
+          <div class="signature">
+            <p>金子あさみ</p>
+          </div>
+          
+          <div class="message-buttons">
+            <a href="index.html#services" class="btn btn-primary">サービス一覧を見る <i class="fas fa-arrow-right"></i></a>
+            <a href="index.html#contact" class="btn btn-outline">お問い合わせ <i class="fas fa-message"></i></a>
+          </div>
+        </div>
+        <div class="message-image reveal-on-scroll">
+          <img src="写真素材/BF9FF406-E02C-47C0-8601-261283FC185D.jpg" alt="金子あさみ メッセージ">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2>あなたの人生を輝かせる第一歩を踏み出しませんか？</h2>
+      <p>PremaNadiのサービスで、あなたの才能と可能性を最大限に引き出し、ワクワクする毎日を手に入れましょう。</p>
+      
+      <div class="cta-buttons">
+        <a href="index.html#contact" class="btn btn-light">無料相談を予約する <i class="fas fa-message"></i></a>
+        <a href="index.html#services" class="btn btn-outline-light">サービス一覧を見る <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3><a href="index.html">PremaNadi</a></h3>
+          <p>金子あさみサービス</p>
+          <p class="footer-tagline">魂と人生を輝かせ、ワクワクさせるエネルギーを高める</p>
+        </div>
+        
+        <div class="footer-links">
+          <h4>サービス</h4>
+          <ul>
+            <li><a href="index.html#services">マヤ暦鑑定</a></li>
+            <li><a href="index.html#services">各種講座</a></li>
+            <li><a href="index.html#featured">未来創造プロジェクト</a></li>
+            <li><a href="sync-salon.html">シンクロサロン</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>お問い合わせ</h4>
+          <ul>
+            <li><a href="https://lin.ee/kTtgn9q">公式LINE</a></li>
+            <li><a href="index.html#contact">メールフォーム</a></li>
+            <li><a href="index.html#faq">よくある質問</a></li>
+            <li><a href="#privacy" class="privacy-policy-link">プライバシーポリシー</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-social">
+          <h4>フォロー</h4>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/asami.kaneko4488/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.threads.net/@asami.kaneko4488?xmt=AQGzV7RUmAeXAduSKWbM93ofT-J3xzu4gLaIOrm-oE3kiy8">
+              <svg class="threads-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 878 1000">
+                <path d="M446.7,1000h-0.3c-149.2-1-263.9-50.2-341-146.2C36.9,768.3,1.5,649.4,0.3,500.4v-0.7c1.2-149.1,36.6-267.9,105.2-353.4
+                  C182.5,50.2,297.3,1,446.4,0h0.3h0.3c114.4,0.8,210.1,30.2,284.4,87.4c69.9,53.8,119.1,130.4,146.2,227.8l-85,23.7
+                  c-46-165-162.4-249.3-346-250.6c-121.2,0.9-212.9,39-272.5,113.2C118.4,271,89.6,371.4,88.5,500c1.1,128.6,29.9,229,85.7,298.5
+                  c59.6,74.3,151.3,112.4,272.5,113.2c109.3-0.8,181.6-26.3,241.7-85.2c68.6-67.2,67.4-149.7,45.4-199.9
+                  c-12.9-29.6-36.4-54.2-68.1-72.9c-8,56.3-25.9,101.9-53.5,136.3c-36.9,45.9-89.2,71-155.4,74.6c-50.1,2.7-98.4-9.1-135.8-33.4
+                  c-44.3-28.7-70.2-72.5-73-123.5c-2.7-49.6,17-95.2,55.4-128.4c36.7-31.7,88.3-50.3,149.3-53.8c44.9-2.5,87-0.5,125.8,5.9
+                  c-5.2-30.9-15.6-55.5-31.2-73.2c-21.4-24.4-54.5-36.8-98.3-37.1c-0.4,0-0.8,0-1.2,0c-35.2,0-83,9.7-113.4,55L261.2,327
+                  c40.8-60.6,107-94,186.6-94c0.6,0,1.2,0,1.8,0c133.1,0.8,212.4,82.3,220.3,224.5c4.5,1.9,9,3.9,13.4,5.9
+                  c62.1,29.2,107.5,73.4,131.4,127.9c33.2,75.9,36.3,199.6-64.5,298.3C673.1,965,579.6,999.1,447,1000L446.7,1000L446.7,1000z
+                  M488.5,512.9c-10.1,0-20.3,0.3-30.8,0.9c-76.5,4.3-124.2,39.4-121.5,89.3c2.8,52.3,60.5,76.6,116,73.6
+                  c51-2.7,117.4-22.6,128.6-154.6C552.6,516,521.7,512.9,488.5,512.9z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> PremaNadi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- トップに戻るボタン -->
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="privacy.js"></script>
+  
+  <!-- 縦書き小説スクリプト -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 物語セクションのアニメーション
+      const novelChapters = document.querySelectorAll('.novel-chapter');
+      
+      // IntersectionObserverの設定
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+      
+      const novelObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+      
+      // 各チャプターを監視
+      novelChapters.forEach((chapter, index) => {
+        novelObserver.observe(chapter);
+        
+        // 章間にスペーサーを追加（最後の章以外）
+        if (index < novelChapters.length - 1) {
+          const spacer = document.createElement('div');
+          spacer.className = 'chapter-spacer';
+          chapter.after(spacer);
+        }
+      });
+      
+      // 数字を縦書きに変換する処理
+      function processTateNumbers() {
+        const allTexts = document.querySelectorAll('.novel-chapter p');
+        
+        allTexts.forEach(textElement => {
+          // 数字が含まれるテキストを処理
+          let content = textElement.innerHTML;
+          
+          // 1桁または2桁の数字を探して縦中横に変換
+          content = content.replace(/(\d{1,2})(?![^\<]*\>)/g, '<span class="tate-chu-yoko">$1</span>');
+          
+          textElement.innerHTML = content;
+        });
+      }
+      
+      // 数字処理を実行
+      processTateNumbers();
+      
+      // スマホ表示時のスクロールヒント表示制御
+      function updateScrollHint() {
+        const novelContainer = document.querySelector('.novel-container');
+        if (window.innerWidth <= 768) {
+          // 各チャプターの横スクロール可能性を確認するイベントリスナーを追加
+          novelChapters.forEach(chapter => {
+            chapter.addEventListener('scroll', function() {
+              // スクロール位置が変わったらヒントを非表示
+              if (this.scrollLeft > 0) {
+                novelContainer.classList.add('scrolled');
+              }
+            });
+          });
+        }
+      }
+      
+      // 初期実行
+      updateScrollHint();
+      
+      // リサイズ時にも実行
+      window.addEventListener('resize', updateScrollHint);
+    });
+  </script>
+</body>
+</html> 

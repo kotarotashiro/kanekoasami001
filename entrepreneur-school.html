@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>才能を活かした起業スクール - PremaNadi</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="css/entrepreneur.css">
+  <style>
+    .threads-icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      vertical-align: middle;
+      fill: currentColor;
+    }
+    .social-icons .threads-icon {
+      width: 20px;
+      height: 20px;
+    }
+    
+    /* 対象者セクションのタブスタイル */
+    .audience-tabs {
+      margin: 2rem auto;
+      max-width: 900px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #fff;
+    }
+    
+    .audience-tab-header {
+      display: flex;
+      border-bottom: 1px solid #eaeaea;
+      background-color: #f8f9fa;
+    }
+    
+    .audience-tab-btn {
+      padding: 1rem 1.5rem;
+      background: none;
+      border: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      position: relative;
+      flex: 1;
+      text-align: center;
+      color: #555;
+      transition: all 0.3s ease;
+    }
+    
+    .audience-tab-btn:hover {
+      color: #f8a5b3;
+    }
+    
+    .audience-tab-btn.active {
+      color: #f8a5b3;
+      background-color: #fff;
+    }
+    
+    .audience-tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #f8a5b3;
+    }
+    
+    .audience-tab-content {
+      background-color: #fff;
+      padding: 0;
+    }
+    
+    .audience-panel {
+      display: none;
+      padding: 2rem;
+    }
+    
+    .audience-panel.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    .audience-panel-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+    
+    .audience-icon {
+      background-color: #fce7eb;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .audience-icon i {
+      font-size: 2rem;
+      color: #f8a5b3;
+    }
+    
+    .audience-text {
+      flex: 1;
+    }
+    
+    .audience-text h3 {
+      color: #333;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    
+    .audience-benefits {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+    }
+    
+    .audience-benefits li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.7rem;
+      font-size: 0.95rem;
+    }
+    
+    .audience-benefits li i {
+      color: #f8a5b3;
+      margin-right: 0.7rem;
+    }
+    
+    .audience-success {
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      position: relative;
+    }
+    
+    .success-badge {
+      display: inline-block;
+      background-color: #f8a5b3;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    
+    .audience-success p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+    
+    .cta-buttons {
+      margin-top: 2rem;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @media (max-width: 768px) {
+      .audience-panel-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      
+      .audience-benefits li {
+        justify-content: center;
+      }
+      
+      .audience-tab-btn {
+        padding: 0.8rem 0.5rem;
+        font-size: 0.8rem;
+      }
+    }
+    
+    /* 共通特典セクションのスタイル */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3rem auto;
+      max-width: 1200px;
+    }
+    
+    .benefit-card {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+    
+    .benefit-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #fce7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .benefit-icon i {
+      font-size: 1.5rem;
+      color: #f8a5b3;
+    }
+    
+    .benefit-content {
+      flex: 1;
+    }
+    
+    .benefit-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    
+    .benefit-card p {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    .benefit-tag {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background-color: #f8a5b3;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.25rem 0.8rem;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+    
+    .benefits-cta {
+      margin-top: 3rem;
+    }
+    
+    .benefits-note {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #666;
+    }
+    
+    /* 料金プランのスタイル改善 */
+    .pricing {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .pricing-tabs {
+      margin: 2rem auto;
+      max-width: 1000px;
+      overflow: hidden;
+    }
+    
+    .pricing-tab-header {
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid #eaeaea;
+      margin-bottom: 2rem;
+    }
+    
+    .pricing-tab-btn {
+      padding: 1rem 2rem;
+      background: none;
+      border: none;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      position: relative;
+      text-align: center;
+      color: #555;
+      transition: all 0.3s ease;
+    }
+    
+    .pricing-tab-btn:hover {
+      color: #f8a5b3;
+    }
+    
+    .pricing-tab-btn.active {
+      color: #f8a5b3;
+    }
+    
+    .pricing-tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #f8a5b3;
+    }
+    
+    .pricing-tab-content {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    .pricing-tab-content.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .pricing-comparison {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .pricing-plan {
+      background-color: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      border: 1px solid #f0f0f0;
+    }
+    
+    .pricing-plan:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    }
+    
+    .pricing-plan.featured {
+      border: 2px solid #f8a5b3;
+      transform: scale(1.03);
+      box-shadow: 0 10px 30px rgba(248, 165, 179, 0.25);
+      z-index: 2;
+    }
+    
+    .pricing-plan.featured:hover {
+      transform: scale(1.03) translateY(-5px);
+    }
+    
+    .pricing-ribbon {
+      position: absolute;
+      top: 20px;
+      left: -35px;
+      transform: rotate(-45deg);
+      background-color: #7dbde8;
+      color: white;
+      padding: 5px 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 1;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .pricing-ribbon.premium {
+      background-color: #f8a5b3;
+    }
+    
+    .pricing-top {
+      padding: 2.5rem 2rem 1.5rem;
+      text-align: center;
+      border-bottom: 1px solid #f0f0f0;
+      background: linear-gradient(to bottom, #fcfcfc, #fff);
+    }
+    
+    .plan-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: #e9f5ff;
+      color: #7dbde8;
+      font-size: 1.8rem;
+    }
+    
+    .plan-icon.premium {
+      background-color: #fce7eb;
+      color: #f8a5b3;
+    }
+    
+    .pricing-top h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1.2rem;
+      color: #333;
+    }
+    
+    .plan-price {
+      margin-bottom: 0.5rem;
+    }
+    
+    .price-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #333;
+    }
+    
+    .price-currency {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #333;
+      margin-left: 0.2rem;
+    }
+    
+    .price-period {
+      font-size: 1rem;
+      color: #888;
+      margin-left: 0.2rem;
+    }
+    
+    .price-calculation {
+      margin: 0.8rem 0;
+      color: #666;
+      font-size: 0.95rem;
+    }
+    
+    .price-save {
+      display: block;
+      margin-top: 0.3rem;
+      color: #f8a5b3;
+      font-weight: 600;
+    }
+    
+    .price-description {
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.5;
+      margin-top: 1rem;
+    }
+    
+    .pricing-features {
+      padding: 1.5rem 2rem 2rem;
+    }
+    
+    .pricing-features ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: #555;
+    }
+    
+    .pricing-features i {
+      color: #7dbde8;
+      margin-right: 0.7rem;
+      margin-top: 0.2rem;
+      flex-shrink: 0;
+    }
+    
+    .pricing-plan.featured .pricing-features i {
+      color: #f8a5b3;
+    }
+    
+    .featured-item {
+      background-color: #fce7eb;
+      border-radius: 5px;
+      padding: 0.7rem;
+      margin: 1rem 0;
+    }
+    
+    .featured-item i {
+      color: #f8a5b3 !important;
+    }
+    
+    .featured-item span {
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .plan-cta {
+      padding: 0 2rem 2.5rem;
+      text-align: center;
+    }
+    
+    .pricing-note {
+      background-color: #f9f7fa;
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      margin: 1rem auto;
+      max-width: 800px;
+    }
+    
+    .pricing-note i {
+      color: #f8a5b3;
+      margin-right: 1rem;
+      margin-top: 0.2rem;
+      font-size: 1.2rem;
+    }
+    
+    .pricing-note p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #666;
+    }
+    
+    @media (max-width: 992px) {
+      .pricing-comparison {
+        grid-template-columns: 1fr;
+        max-width: 550px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .pricing-plan.featured {
+        transform: scale(1);
+      }
+      
+      .pricing-plan.featured:hover {
+        transform: translateY(-5px);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .benefits-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+    
+    /* 特徴セクションのスタイルを追加 */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+      margin: 3rem auto;
+      max-width: 1100px;
+    }
+    
+    .feature-card {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+    
+    .feature-image {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .feature-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .feature-card:hover .feature-image img {
+      transform: scale(1.05);
+    }
+    
+    .feature-card h3 {
+      text-align: center;
+      margin: 1.5rem 0 1rem;
+      font-size: 1.25rem;
+      padding: 0 1.5rem;
+      color: #f8a5b3;
+    }
+    
+    .feature-card p {
+      padding: 0 1.5rem;
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    .feature-points {
+      list-style: none;
+      padding: 0 1.5rem 1.5rem;
+      margin: 1.5rem 0 0;
+    }
+    
+    .feature-points li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 0.7rem;
+      font-size: 0.95rem;
+    }
+    
+    .feature-points li i {
+      color: #f8a5b3;
+      margin-right: 0.5rem;
+      margin-top: 0.25rem;
+      flex-shrink: 0;
+    }
+    
+    .features-note {
+      margin-top: 3rem;
+    }
+    
+    .note-badge {
+      display: inline-block;
+      background-color: #f8a5b3;
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    
+    .note-badge i {
+      margin-right: 0.3rem;
+    }
+    
+    .features-note p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+    
+    /* 利用の流れセクションのスタイル */
+    .process-steps {
+      max-width: 800px;
+      margin: 3rem auto;
+      position: relative;
+    }
+    
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 30px;
+      width: 2px;
+      background-color: #e0e0e0;
+    }
+    
+    .process-step {
+      display: flex;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+    
+    .process-step:last-child {
+      margin-bottom: 0;
+    }
+    
+    .step-number {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #f8a5b3;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-right: 2rem;
+      flex-shrink: 0;
+      z-index: 1;
+      box-shadow: 0 4px 10px rgba(248, 165, 179, 0.3);
+    }
+    
+    .step-content {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      flex: 1;
+    }
+    
+    .step-content h3 {
+      color: #333;
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-size: 1.25rem;
+    }
+    
+    .step-content p {
+      color: #666;
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    .process-cta {
+      margin-top: 3rem;
+    }
+    
+    /* レスポンシブスタイル */
+    @media (max-width: 992px) {
+      .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .features-grid {
+        gap: 2rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .process-steps::before {
+        left: 25px;
+      }
+      
+      .step-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+        margin-right: 1.5rem;
+      }
+      
+      .step-content {
+        padding: 1.25rem 1.5rem;
+      }
+      
+      .feature-image {
+        height: 180px;
+      }
+      
+      .feature-card h3 {
+        font-size: 1.2rem;
+      }
+    }
+    
+    /* FAQ セクションのスタイル */
+    .faq-list {
+      max-width: 800px;
+      margin: 3rem auto;
+    }
+    
+    .faq-item {
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .faq-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem;
+      cursor: pointer;
+    }
+    
+    .faq-question h3 {
+      font-size: 1.1rem;
+      margin: 0;
+      padding-right: 2rem;
+    }
+    
+    .faq-toggle {
+      min-width: 24px;
+      transition: transform 0.3s ease;
+    }
+    
+    .faq-toggle i {
+      color: #f8a5b3;
+      font-size: 1.2rem;
+    }
+    
+    .faq-answer {
+      height: 0;
+      overflow: hidden;
+      transition: height 0.3s ease;
+      padding: 0 1.5rem;
+    }
+    
+    .faq-answer p {
+      padding-bottom: 1.5rem;
+      margin: 0;
+    }
+    
+    .faq-item.active .faq-toggle i {
+      transform: rotate(45deg);
+    }
+    
+    .faq-item.active .faq-answer {
+      height: auto;
+    }
+    
+    /* CTA セクション */
+    .cta {
+      background: linear-gradient(135deg, #f8a5b3, #f3899c);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cta p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cta-note {
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      display: inline-block;
+    }
+    
+    .cta-note p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+    
+    .cta-note i {
+      margin-right: 0.5rem;
+    }
+    
+    .section-badge-container {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .section-badge {
+      display: inline-block;
+      background-color: #f8a5b3;
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="index.html"><img src="PremaNadi_logo.svg" alt="PremaNadi" class="logo-image"></a></div>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html#services">サービス</a></li>
+            <li><a href="index.html#about">金子あさみについて</a></li>
+            <li><a href="index.html#testimonials">お客様の声</a></li>
+            <li><a href="index.html#blog">ブログ</a></li>
+            <li><a href="index.html#contact" class="btn btn-primary">お問い合わせ</a></li>
+          </ul>
+        </nav>
+        <button class="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ヒーローセクション -->
+  <section class="hero school-hero parallax-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1>才能を活かした<br><span class="highlight-text">起業スクール</span></h1>
+        <p class="hero-description">あなたの本質的な才能を軸に<br class="pc-only">理想のビジネスを構築するスクール</p>
+        <div class="hero-buttons">
+          <a href="https://reserve.peraichi.com/r/5c0d06b5?_gl=1*hfykg*_gcl_au*MTQ1NzQwNjkzMy4xNzM1NzM5NDUw" class="btn btn-primary">資料請求する <i class="fas fa-arrow-right"></i></a>
+          <a href="index.html#contact" class="btn btn-outline">無料相談を予約 <i class="fas fa-message"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="floral-decoration"></div>
+    <div class="accent-shape top-left"></div>
+  </section>
+
+  <!-- スクール概要セクション -->
+  <section class="school-overview parallax-section">
+    <div class="container">
+      <div class="school-content">
+        <div class="school-image reveal-on-scroll">
+          <img src="写真素材/B218ECAB-0D63-4D35-8F6E-8C2B24F8FE03.jpg" alt="起業スクール">
+        </div>
+        <div class="school-text">
+          <div class="section-badge reveal-on-scroll">マヤ暦×ビジネス</div>
+          <h2 class="reveal-on-scroll">才能を<span class="highlight">仕事にする</span></h2>
+          <p class="reveal-on-scroll">「好きなことで生きていきたい」「自分の才能を活かしたビジネスがしたい」という想いを形にするためのプログラムです。マヤ暦で見出したあなた本来の才能を軸に、無理なく続けられる理想のビジネスモデルを構築します。スクールの有効期限は1年間なので、じっくりと学ぶことができます。</p>
+          
+          <ul class="feature-list reveal-on-scroll">
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>才能を活かしたビジネスモデル設計</strong>
+                <p>マヤ暦診断であなたの生まれ持った才能を特定し、その才能を最大限活かせるビジネスモデルを設計します</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>集客から収益化までの仕組み作り</strong>
+                <p>理想のお客様を引き寄せる集客戦略から、安定した収入を得るための収益モデルまでを構築します</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>実践的なビジネススキル習得</strong>
+                <p>セールスライティング、SNSマーケティング、商品設計など、ビジネスに必要なスキルを習得します</p>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>マインドブロック解除と自己変容</strong>
+                <p>成功への恐れや自信のなさなど、成長を妨げる内なるブロックを解除し、経営者としてのマインドを育てます</p>
+              </div>
+            </li>
+          </ul>
+          
+          <div class="cta-buttons reveal-on-scroll">
+            <a href="https://reserve.peraichi.com/r/5c0d06b5?_gl=1*hfykg*_gcl_au*MTQ1NzQwNjkzMy4xNzM1NzM5NDUw" class="btn btn-primary">資料請求する <i class="fas fa-arrow-right"></i></a>
+            <a href="index.html#contact" class="btn btn-outline">無料相談を予約 <i class="fas fa-message"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wave-divider bottom">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 対象者セクション -->
+  <section class="target-audience parallax-section bg-light">
+    <div class="container">
+      <h2 class="text-center reveal-on-scroll">こんな方に<span class="highlight">おすすめ</span>です</h2>
+      <p class="section-description text-center reveal-on-scroll">あなたはどのタイプですか？クリックして詳細をご覧ください</p>
+      
+      <div class="audience-tabs reveal-on-scroll">
+        <div class="audience-tab-header">
+          <button class="audience-tab-btn active" data-target="startup">起業準備中</button>
+          <button class="audience-tab-btn" data-target="sidehustle">副業から始める</button>
+          <button class="audience-tab-btn" data-target="pivot">ビジネス転換</button>
+          <button class="audience-tab-btn" data-target="passion">好きを仕事に</button>
+        </div>
+        
+        <div class="audience-tab-content">
+          <!-- 起業準備中の方 -->
+          <div class="audience-panel active" id="startup-panel">
+            <div class="audience-panel-content">
+              <div class="audience-icon">
+                <i class="fas fa-lightbulb"></i>
+              </div>
+              <div class="audience-text">
+                <h3>起業準備中の方</h3>
+                <p>「Aさん（35歳・会社員）の場合...<br>
+                会社員として10年働いてきましたが、自分の才能を活かしたビジネスを始めたいと考えています。しかし、何から始めればいいか分からず、不安で一歩が踏み出せない状態です。自分の強みを活かしたビジネスモデルを確立したいと思っています。」</p>
+                <ul class="audience-benefits">
+                  <li><i class="fas fa-check-circle"></i> ビジネスの基礎から学べる</li>
+                  <li><i class="fas fa-check-circle"></i> 才能に合ったビジネスモデルを発見</li>
+                  <li><i class="fas fa-check-circle"></i> 具体的な行動計画の策定をサポート</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 副業から始めたい方 -->
+          <div class="audience-panel" id="sidehustle-panel">
+            <div class="audience-panel-content">
+              <div class="audience-icon">
+                <i class="fas fa-rocket"></i>
+              </div>
+              <div class="audience-text">
+                <h3>副業から始めたい方</h3>
+                <p>「Bさん（28歳・保育士）の場合...<br>
+                保育士として働きながら、自分の才能を活かした副業を始めたいと考えています。将来的には独立も視野に入れていますが、まずは本業を続けながら、自分のペースで始められる方法を探しています。」</p>
+                <ul class="audience-benefits">
+                  <li><i class="fas fa-check-circle"></i> 本業と両立できる時間管理術</li>
+                  <li><i class="fas fa-check-circle"></i> 少ない時間で成果を出す効率的な手法</li>
+                  <li><i class="fas fa-check-circle"></i> 段階的に収入を増やす戦略</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- ビジネス転換中の方 -->
+          <div class="audience-panel" id="pivot-panel">
+            <div class="audience-panel-content">
+              <div class="audience-icon">
+                <i class="fas fa-sync-alt"></i>
+              </div>
+              <div class="audience-text">
+                <h3>ビジネス転換中の方</h3>
+                <p>「Cさん（42歳・フリーランス）の場合...<br>
+                現在はフリーランスとして活動していますが、もっと自分らしいビジネスに転換したいと考えています。既存のスキルや経験を活かしながら、収益の柱を増やし、より充実したビジネスを構築したいと思っています。」</p>
+                <ul class="audience-benefits">
+                  <li><i class="fas fa-check-circle"></i> 既存のビジネスを活かした展開方法</li>
+                  <li><i class="fas fa-check-circle"></i> リスクを最小限に抑えた転換戦略</li>
+                  <li><i class="fas fa-check-circle"></i> 新たな収益の柱の構築</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 好きを仕事にしたい方 -->
+          <div class="audience-panel" id="passion-panel">
+            <div class="audience-panel-content">
+              <div class="audience-icon">
+                <i class="fas fa-heart"></i>
+              </div>
+              <div class="audience-text">
+                <h3>好きを仕事にしたい方</h3>
+                <p>「Dさん（31歳・会社員）の場合...<br>
+                趣味で続けてきたヨガやスピリチュアルな活動を、本格的なビジネスにしたいと考えています。自分の情熱を注げる仕事をしながら、収入も得られるようなビジネスモデルを構築したいと思っています。」</p>
+                <ul class="audience-benefits">
+                  <li><i class="fas fa-check-circle"></i> 趣味を収益化するビジネスモデル</li>
+                  <li><i class="fas fa-check-circle"></i> 情熱を維持しながら収益を上げる方法</li>
+                  <li><i class="fas fa-check-circle"></i> ファンコミュニティの作り方</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="circle-decoration top-right"></div>
+    <div class="circle-decoration bottom-left"></div>
+    <div class="dot-pattern right"></div>
+  </section>
+
+  <!-- 特徴セクション -->
+  <section class="school-features parallax-section bg-light">
+    <div class="container">
+      <div class="section-badge-container">
+        <div class="section-badge reveal-on-scroll">SPECIAL POINTS</div>
+      </div>
+      <h2 class="text-center reveal-on-scroll">このスクールの<span class="highlight">特徴</span></h2>
+      <p class="section-description text-center reveal-on-scroll">才能を活かした理想のビジネスを確実に構築するための特別な強み</p>
+      
+      <div class="features-grid">
+        <div class="feature-card reveal-on-scroll">
+          <div class="feature-image">
+            <img src="写真素材/0761EC26-17F1-45A3-9030-A7F1E24D95F0.jpg" alt="才能ベースのビジネス設計">
+          </div>
+          <h3>才能を活かしたビジネスモデル設計</h3>
+          <p>マヤ暦診断であなたの生まれ持った才能を特定し、その才能を最大限に活かせるビジネスモデルを設計します。本来の強みを活かすことで、無理なく成長し続けられます。</p>
+          <ul class="feature-points">
+            <li><i class="fas fa-check"></i> マヤ暦による才能・使命の明確化</li>
+            <li><i class="fas fa-check"></i> 自分の強みを最大限に活かすサービス設計</li>
+            <li><i class="fas fa-check"></i> エネルギーが湧いてくる働き方の実現</li>
+          </ul>
+        </div>
+        
+        <div class="feature-card reveal-on-scroll">
+          <div class="feature-image">
+            <img src="写真素材/FD3C3EEB-C969-462B-BE73-FFD6A9267873.jpg" alt="集客から収益化まで">
+          </div>
+          <h3>集客から収益化までの仕組み作り</h3>
+          <p>理想のお客様を引き寄せる集客戦略から、安定した収入を得るための収益モデルまでを構築します。お客様があなたの元に集まり、自然と収益が上がる仕組みを作ります。</p>
+          <ul class="feature-points">
+            <li><i class="fas fa-check"></i> 理想のお客様を明確にする顧客設定</li>
+            <li><i class="fas fa-check"></i> 個性を活かした差別化戦略の構築</li>
+            <li><i class="fas fa-check"></i> 複数の収益源を持つビジネスモデル設計</li>
+          </ul>
+        </div>
+        
+        <div class="feature-card reveal-on-scroll">
+          <div class="feature-image">
+            <img src="写真素材/B218ECAB-0D63-4D35-8F6E-8C2B24F8FE03.jpg" alt="実践的なビジネススキル">
+          </div>
+          <h3>実践的なビジネススキル習得</h3>
+          <p>セールスライティング、SNSマーケティング、商品設計など、ビジネスに必要な実践的スキルを習得します。理論だけでなく、すぐに使える具体的なスキルを身につけられます。</p>
+          <ul class="feature-points">
+            <li><i class="fas fa-check"></i> お客様の心に響くセールスライティング</li>
+            <li><i class="fas fa-check"></i> 集客につながるSNS活用法</li>
+            <li><i class="fas fa-check"></i> 高単価サービスの設計と提供方法</li>
+          </ul>
+        </div>
+        
+        <div class="feature-card reveal-on-scroll">
+          <div class="feature-image">
+            <img src="写真素材/19884343-0AA3-41D8-83E1-ADC095A64D86.jpg" alt="マインドブロック解除">
+          </div>
+          <h3>マインドブロック解除と自己変容</h3>
+          <p>成功への恐れや自信のなさなど、成長を妨げる内なるブロックを解除し、経営者としてのマインドを育てます。内側からの変化が、外側の現実を変える基盤となります。</p>
+          <ul class="feature-points">
+            <li><i class="fas fa-check"></i> 自分の価値を正しく伝える自信の醸成</li>
+            <li><i class="fas fa-check"></i> 適切な価格設定ができる価値観の構築</li>
+            <li><i class="fas fa-check"></i> 行動を妨げる無意識の思い込みの解放</li>
+          </ul>
+        </div>
+
+        <div class="feature-card reveal-on-scroll">
+          <div class="feature-image">
+            <img src="写真素材/0761EC26-17F1-45A3-9030-A7F1E24D95F0.jpg" alt="金子あさみによる直接コンサルティング">
+          </div>
+          <h3>金子あさみによる直接コンサルティング</h3>
+          <p>豊富な経験と実績を持つ金子あさみが直接アドバイスし、あなたのビジネス成長をサポートします。個別の状況に合わせた具体的なアドバイスで、最短で成果を出せるよう導きます。</p>
+          <ul class="feature-points">
+            <li><i class="fas fa-check"></i> 経験豊富な講師による個別指導</li>
+            <li><i class="fas fa-check"></i> 状況に応じた柔軟なアドバイス</li>
+            <li><i class="fas fa-check"></i> 最短で成果を出すための戦略立案</li>
+          </ul>
+        </div>
+
+        <div class="feature-card reveal-on-scroll">
+          <div class="feature-image">
+            <img src="写真素材/FD3C3EEB-C969-462B-BE73-FFD6A9267873.jpg" alt="マヤ暦鑑定と緊急サポート">
+          </div>
+          <h3>マヤ暦鑑定と緊急サポート</h3>
+          <p>才能診断のためのマヤ暦鑑定と、ビジネス上の重要な決断や課題に迅速に対応する緊急相談枠を提供します。必要に応じて才能診断を行い、最適なビジネス方向性を導き出します。</p>
+          <ul class="feature-points">
+            <li><i class="fas fa-check"></i> 必要に応じたマヤ暦鑑定の実施</li>
+            <li><i class="fas fa-check"></i> 月1回の緊急相談枠の確保</li>
+            <li><i class="fas fa-check"></i> メッセージでの即時フィードバック</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="circle-decoration middle-center"></div>
+  </section>
+  
+  <!-- 利用の流れセクション -->
+  <section class="process parallax-section bg-light">
+    <div class="container">
+      <div class="section-badge-container">
+        <div class="section-badge reveal-on-scroll">PROCESS</div>
+      </div>
+      <h2 class="text-center reveal-on-scroll">ご利用の<span class="highlight">流れ</span></h2>
+      <p class="section-description text-center reveal-on-scroll">お申し込みから成果創出までのステップ</p>
+      
+      <div class="process-steps reveal-on-scroll">
+        <div class="process-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>無料説明会または個別相談に参加</h3>
+            <p>スクールの詳細説明を聞き、あなたの状況や目標に合わせたアドバイスを受けられます。質問や不安点も解消できます。</p>
+          </div>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>適切なプランの選択と契約</h3>
+            <p>あなたの状況や目標に最適なプランを選び、契約手続きを行います。支払いは一括または分割が選べます。</p>
+          </div>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>初回カウンセリングでゴール設定</h3>
+            <p>マヤ暦診断と合わせて、あなたの才能を特定し、1年間で達成したい明確なゴールとマイルストーンを設定します。</p>
+          </div>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>定期的なコンサルティングの実施</h3>
+            <p>設定した計画に沿って、オンラインでの個別コンサルティングを実施。具体的な行動計画と実践をサポートします。</p>
+          </div>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <h3>進捗確認と戦略調整</h3>
+            <p>定期的な進捗確認で、必要に応じて戦略や計画を調整。最短で成果を出すための軌道修正を行います。</p>
+          </div>
+        </div>
+        
+        <div class="process-step">
+          <div class="step-number">6</div>
+          <div class="step-content">
+            <h3>最終回での成果確認と今後の計画策定</h3>
+            <p>1年間の成果を振り返り、今後も継続的に成長できるための長期計画を策定。卒業後も成長し続ける土台を作ります。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="accent-shape bottom-left"></div>
+  </section>
+
+  <!-- 料金表セクション -->
+  <section class="pricing parallax-section bg-light">
+    <div class="container">
+      <div class="section-badge-container">
+        <div class="section-badge reveal-on-scroll">PRICING</div>
+      </div>
+      <h2 class="text-center reveal-on-scroll"><span class="highlight">料金表</span></h2>
+      <p class="section-description text-center reveal-on-scroll">あなたの夢への投資は、未来への最大のリターンを生み出します</p>
+      
+      <div class="pricing-tabs reveal-on-scroll">
+        <div class="pricing-tab-header">
+          <button class="pricing-tab-btn active" data-target="general">一般向け起業スクール</button>
+          <button class="pricing-tab-btn" data-target="advisor">マヤ暦アドバイザー専門コース</button>
+        </div>
+        
+        <div class="pricing-plans">
+          <!-- 一般コース -->
+          <div class="pricing-tab-content active" id="general-content">
+            <div class="pricing-comparison">
+              <div class="pricing-plan">
+                <div class="pricing-ribbon">
+                  <span>ベーシック</span>
+                </div>
+                <div class="pricing-top">
+                  <div class="plan-icon"><i class="fas fa-rocket"></i></div>
+                  <h3>14回コンサルティング</h3>
+                  <div class="plan-price">
+                    <span class="price-value">277,200</span>
+                    <span class="price-currency">円</span>
+                    <span class="price-period">(税込)</span>
+                  </div>
+                  <div class="price-calculation">
+                    <span>1回あたり 19,800円</span>
+                  </div>
+                  <p class="price-description">マヤ暦鑑定を活用した才能発掘と戦略設計</p>
+                </div>
+                <div class="pricing-features">
+                  <ul>
+                    <li><i class="fas fa-check-circle"></i> 自分の才能を活かしたビジネスモデル設計</li>
+                    <li><i class="fas fa-check-circle"></i> ターゲット設定とマーケティング戦略</li>
+                    <li><i class="fas fa-check-circle"></i> 効果的な集客方法の構築</li>
+                    <li><i class="fas fa-check-circle"></i> 適切な価格設定と収益構造の確立</li>
+                    <li><i class="fas fa-check-circle"></i> ブランディング戦略の開発</li>
+                    <li><i class="fas fa-check-circle"></i> 有効期限：契約日より1年間</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="pricing-plan featured">
+                <div class="pricing-ribbon premium">
+                  <span>おすすめ</span>
+                </div>
+                <div class="pricing-top">
+                  <div class="plan-icon premium"><i class="fas fa-crown"></i></div>
+                  <h3>24回コンサルティング</h3>
+                  <div class="plan-price">
+                    <span class="price-value">343,200</span>
+                    <span class="price-currency">円</span>
+                    <span class="price-period">(税込)</span>
+                  </div>
+                  <div class="price-calculation">
+                    <span>1回あたり 14,300円</span>
+                    <span class="price-save">ベーシック比 27%お得</span>
+                  </div>
+                  <p class="price-description">豊富なコンサル回数でより深く継続的なサポート</p>
+                </div>
+                <div class="pricing-features">
+                  <ul>
+                    <li><i class="fas fa-check-circle"></i> 自分の才能を活かしたビジネスモデル設計</li>
+                    <li><i class="fas fa-check-circle"></i> ターゲット設定とマーケティング戦略</li>
+                    <li><i class="fas fa-check-circle"></i> 効果的な集客方法の構築</li>
+                    <li><i class="fas fa-check-circle"></i> 適切な価格設定と収益構造の確立</li>
+                    <li><i class="fas fa-check-circle"></i> ブランディング戦略の開発</li>
+                    <li><i class="fas fa-check-circle"></i> 回数を増やして継続的なサポートを確保</li>
+                    <li class="featured-item"><i class="fas fa-star"></i> <span>1回あたり14,300円でお得！</span></li>
+                    <li><i class="fas fa-check-circle"></i> 有効期限：契約日より1年間</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="pricing-note">
+            </div>
+          </div>
+          
+          <!-- アドバイザーコース -->
+          <div class="pricing-tab-content" id="advisor-content">
+            <div class="pricing-comparison">
+              <div class="pricing-plan">
+                <div class="pricing-ribbon">
+                  <span>ベーシック</span>
+                </div>
+                <div class="pricing-top">
+                  <div class="plan-icon"><i class="fas fa-rocket"></i></div>
+                  <h3>14回コンサルティング</h3>
+                  <div class="plan-price">
+                    <span class="price-value">200,200</span>
+                    <span class="price-currency">円</span>
+                    <span class="price-period">(税込)</span>
+                  </div>
+                  <div class="price-calculation">
+                    <span>1回あたり 14,300円</span>
+                  </div>
+                  <p class="price-description">マヤ暦鑑定士としてのビジネス構築に特化</p>
+                </div>
+                <div class="pricing-features">
+                  <ul>
+                    <li><i class="fas fa-check-circle"></i> 鑑定スキルの向上と差別化</li>
+                    <li><i class="fas fa-check-circle"></i> 高単価サービスの設計と価格設定</li>
+                    <li><i class="fas fa-check-circle"></i> ターゲットに響く言葉選びとメッセージング</li>
+                    <li><i class="fas fa-check-circle"></i> 効果的なクライアント獲得戦略</li>
+                    <li><i class="fas fa-check-circle"></i> リピート率向上の仕組み作り</li>
+                    <li><i class="fas fa-check-circle"></i> ビジネス上の課題解決サポート</li>
+                    <li><i class="fas fa-check-circle"></i> 有効期限：契約日より1年間</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="pricing-plan featured">
+                <div class="pricing-ribbon premium">
+                  <span>おすすめ</span>
+                </div>
+                <div class="pricing-top">
+                  <div class="plan-icon premium"><i class="fas fa-crown"></i></div>
+                  <h3>24回コンサルティング</h3>
+                  <div class="plan-price">
+                    <span class="price-value">264,000</span>
+                    <span class="price-currency">円</span>
+                    <span class="price-period">(税込)</span>
+                  </div>
+                  <div class="price-calculation">
+                    <span>1回あたり 11,000円</span>
+                    <span class="price-save">ベーシック比 23%お得</span>
+                  </div>
+                  <p class="price-description">本格的なマヤ暦ビジネス構築と拡大を徹底サポート</p>
+                </div>
+                <div class="pricing-features">
+                  <ul>
+                    <li><i class="fas fa-check-circle"></i> 鑑定スキルの向上と差別化</li>
+                    <li><i class="fas fa-check-circle"></i> 高単価サービスの設計と価格設定</li>
+                    <li><i class="fas fa-check-circle"></i> ターゲットに響く言葉選びとメッセージング</li>
+                    <li><i class="fas fa-check-circle"></i> 効果的なクライアント獲得戦略</li>
+                    <li><i class="fas fa-check-circle"></i> リピート率向上の仕組み作り</li>
+                    <li><i class="fas fa-check-circle"></i> ビジネス上の課題解決サポート</li>
+                    <li><i class="fas fa-check-circle"></i> 回数を増やして継続的なサポートを確保</li>
+                    <li class="featured-item"><i class="fas fa-star"></i> <span>1回あたり11,000円でお得！</span></li>
+                    <li><i class="fas fa-check-circle"></i> 有効期限：契約日より1年間</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="pricing-note">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="circle-decoration top-right"></div>
+    <div class="dot-pattern left"></div>
+  </section>
+
+  <!-- FAQ セクション -->
+  <section class="faq parallax-section">
+    <div class="container">
+      <div class="section-badge-container">
+        <div class="section-badge reveal-on-scroll">Q&A</div>
+      </div>
+      <h2 class="text-center reveal-on-scroll">よくある<span class="highlight">質問</span></h2>
+      <p class="section-description text-center reveal-on-scroll">起業スクールについてのよくある疑問にお答えします</p>
+      
+      <div class="faq-list reveal-on-scroll">
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>ビジネス初心者でも参加できますか？</h3>
+            <div class="faq-toggle"><i class="fas fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>はい、ビジネス未経験の方でも安心して参加いただけます。ゼロからビジネスを作り上げるプロセスを丁寧にサポートします。むしろ、先入観のない状態から自分らしいビジネスを構築できるメリットもあります。</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>仕事をしながらでも参加できますか？</h3>
+            <div class="faq-toggle"><i class="fas fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>はい、多くの受講生が会社員などの本業を持ちながら参加されています。個別コンサルティングは平日夜や週末も対応可能です。また、グループワークショップは録画を提供しますので、参加できない場合も後から視聴していただけます。</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>具体的なビジネスアイデアがなくても大丈夫ですか？</h3>
+            <div class="faq-toggle"><i class="fas fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>はい、問題ありません。むしろスクール開始時点でのアイデアにこだわらない方が、カリキュラムを通じて自分の才能を最大限活かせるビジネスを見つけることができます。マヤ暦診断をはじめとした自己分析から、あなたに最適なビジネスモデルを一緒に見つけていきます。</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>スクール期間中に実際に収益は出せますか？</h3>
+            <div class="faq-toggle"><i class="fas fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>多くの受講生が、スクール期間中に最初の収益を上げています。カリキュラムは実践的な内容になっているため、学びながら実際にビジネスを構築していきます。もちろん個人差はありますが、取り組み次第では早期に成果を出すことも可能です。</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>オンラインでの受講は可能ですか？</h3>
+            <div class="faq-toggle"><i class="fas fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>はい、すべてのコンサルティングとワークショップはオンラインで実施しています。全国どこからでも参加いただけます。</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>途中で挫折しないか心配です。サポート体制はどうなっていますか？</h3>
+            <div class="faq-toggle"><i class="fas fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>個別コンサルティングとグループワークショップに加え、受講生限定のオンラインコミュニティで常に質問や相談ができる環境を用意しています。また、同期の仲間とのコミュニケーションを通じて励まし合いながら進めることで、モチベーションを維持しやすい環境となっています。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA セクション -->
+  <section class="cta">
+    <div class="container">
+      <h2>あなたの<span class="highlight" style="color: white;">才能</span>を<br>ビジネスにするプログラム</h2>
+      <p>今、一歩踏み出す勇気が、未来の自分を創ります<br>無料個別相談で、あなたのビジネスプランについてアドバイスします</p>
+      <div class="cta-buttons">
+        <a href="https://lin.ee/kTtgn9q" class="btn btn-light">まずは相談してみる <i class="fas fa-comment"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3><a href="index.html">PremaNadi</a></h3>
+          <p>金子あさみサービス</p>
+          <p class="footer-tagline">魂と人生を輝かせ、ワクワクさせるエネルギーを高める</p>
+        </div>
+        
+        <div class="footer-links">
+          <h4>サービス</h4>
+          <ul>
+            <li><a href="index.html#services">マヤ暦鑑定</a></li>
+            <li><a href="index.html#services">各種講座</a></li>
+            <li><a href="index.html#featured">未来創造プロジェクト</a></li>
+            <li><a href="sync-salon.html">シンクロサロン</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>お問い合わせ</h4>
+          <ul>
+            <li><a href="https://lin.ee/kTtgn9q">公式LINE</a></li>
+            <li><a href="index.html#contact">メールフォーム</a></li>
+            <li><a href="index.html#faq">よくある質問</a></li>
+            <li><a href="#privacy" class="privacy-policy-link">プライバシーポリシー</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-social">
+          <h4>フォロー</h4>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/asami.kaneko4488/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.threads.net/@asami.kaneko4488?xmt=AQGzV7RUmAeXAduSKWbM93ofT-J3xzu4gLaIOrm-oE3kiy8">
+              <svg class="threads-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 878 1000">
+                <path d="M446.7,1000h-0.3c-149.2-1-263.9-50.2-341-146.2C36.9,768.3,1.5,649.4,0.3,500.4v-0.7c1.2-149.1,36.6-267.9,105.2-353.4
+                  C182.5,50.2,297.3,1,446.4,0h0.3h0.3c114.4,0.8,210.1,30.2,284.4,87.4c69.9,53.8,119.1,130.4,146.2,227.8l-85,23.7
+                  c-46-165-162.4-249.3-346-250.6c-121.2,0.9-212.9,39-272.5,113.2C118.4,271,89.6,371.4,88.5,500c1.1,128.6,29.9,229,85.7,298.5
+                  c59.6,74.3,151.3,112.4,272.5,113.2c109.3-0.8,181.6-26.3,241.7-85.2c68.6-67.2,67.4-149.7,45.4-199.9
+                  c-12.9-29.6-36.4-54.2-68.1-72.9c-8,56.3-25.9,101.9-53.5,136.3c-36.9,45.9-89.2,71-155.4,74.6c-50.1,2.7-98.4-9.1-135.8-33.4
+                  c-44.3-28.7-70.2-72.5-73-123.5c-2.7-49.6,17-95.2,55.4-128.4c36.7-31.7,88.3-50.3,149.3-53.8c44.9-2.5,87-0.5,125.8,5.9
+                  c-5.2-30.9-15.6-55.5-31.2-73.2c-21.4-24.4-54.5-36.8-98.3-37.1c-0.4,0-0.8,0-1.2,0c-35.2,0-83,9.7-113.4,55L261.2,327
+                  c40.8-60.6,107-94,186.6-94c0.6,0,1.2,0,1.8,0c133.1,0.8,212.4,82.3,220.3,224.5c4.5,1.9,9,3.9,13.4,5.9
+                  c62.1,29.2,107.5,73.4,131.4,127.9c33.2,75.9,36.3,199.6-64.5,298.3C673.1,965,579.6,999.1,447,1000L446.7,1000L446.7,1000z
+                  M488.5,512.9c-10.1,0-20.3,0.3-30.8,0.9c-76.5,4.3-124.2,39.4-121.5,89.3c2.8,52.3,60.5,76.6,116,73.6
+                  c51-2.7,117.4-22.6,128.6-154.6C552.6,516,521.7,512.9,488.5,512.9z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> PremaNadi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- トップに戻るボタン -->
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // タブ切り替え機能
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabButtons = document.querySelectorAll('.audience-tab-btn');
+      const tabPanels = document.querySelectorAll('.audience-panel');
+      
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // すべてのボタンから active クラスを削除
+          tabButtons.forEach(btn => {
+            btn.classList.remove('active');
+          });
+          
+          // クリックされたボタンに active クラスを追加
+          this.classList.add('active');
+          
+          // すべてのパネルを非表示にする
+          tabPanels.forEach(panel => {
+            panel.classList.remove('active');
+          });
+          
+          // クリックされたボタンに対応するパネルを表示する
+          const targetId = this.getAttribute('data-target') + '-panel';
+          document.getElementById(targetId).classList.add('active');
+        });
+      });
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 料金タブの切り替え機能
+      const pricingTabBtns = document.querySelectorAll('.pricing-tab-btn');
+      const pricingTabContents = document.querySelectorAll('.pricing-tab-content');
+      
+      pricingTabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          // ボタンのアクティブ状態を更新
+          pricingTabBtns.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          
+          // コンテンツの表示を切り替え
+          const target = this.getAttribute('data-target');
+          pricingTabContents.forEach(content => {
+            content.classList.remove('active');
+            if (content.id === target + '-content') {
+              content.classList.add('active');
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html> 
