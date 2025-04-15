@@ -1,0 +1,144 @@
+/* プライバシーポリシーモーダル */
+.privacy-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.privacy-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.privacy-modal-content {
+  position: relative;
+  background-color: white;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  border-radius: var(--card-border-radius);
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.privacy-modal.show .privacy-modal-content {
+  transform: translateY(0);
+}
+
+.privacy-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-color);
+  background-color: rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.privacy-close:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.privacy-content h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.privacy-content h2 {
+  font-size: 1.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.privacy-content p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.privacy-content ul {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.privacy-content li {
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 0.5rem;
+}
+
+.privacy-content .update-date {
+  color: var(--text-light);
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.privacy-policy-link {
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.privacy-policy-link:hover {
+  color: var(--primary-dark);
+}
+
+@media (max-width: 768px) {
+  .privacy-modal-content {
+    padding: 1.5rem;
+    width: 95%;
+    height: 80vh;
+  }
+
+  .privacy-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .privacy-content h2 {
+    font-size: 1.2rem;
+  }
+
+  .privacy-close {
+    top: 0.8rem;
+    right: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .privacy-modal-content {
+    padding: 1.2rem;
+    width: 95%;
+    height: 75vh;
+  }
+
+  .privacy-content h1 {
+    font-size: 1.3rem;
+  }
+
+  .privacy-content h2 {
+    font-size: 1.1rem;
+  }
+} 
