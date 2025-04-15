@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マヤ暦KIN診断ツール | PremaNadi</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    <meta name="description" content="あなたの生年月日からマヤ暦の神秘を解き明かす診断ツール | PremaNadi">
+    <style>
+        /* マヤ暦診断固有のスタイル */
+        .highlight {
+            color: var(--primary-color);
+        }
+        
+        #result-container {
+            display: none;
+            margin-top: 2rem;
+            background-color: var(--background-color);
+            border-radius: var(--card-border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .result-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .result-section:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .kin-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .kin-details p {
+            margin: 0;
+        }
+        
+        .kin-details i {
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+        }
+        
+        .checkbox-container {
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1rem;
+            background-color: var(--background-light);
+            border-radius: 0.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 0.5rem;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+        }
+        
+        .checkbox-container label {
+            font-size: 0.95rem;
+            color: var(--text-color);
+        }
+        
+        /* 診断結果の2列レイアウト */
+        .kin-result-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .kin-result-item {
+            background-color: var(--background-light);
+            border-radius: var(--card-border-radius);
+            padding: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .kin-result-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .kin-result-item .label {
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .kin-result-item .value {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .kin-result-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        #kin-number, #kin-name, #kin-tone, #kin-wave {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        /* 生年月日入力フォームの横並び用スタイル */
+        .date-input-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 1.5rem;
+        }
+        
+        .date-input-item {
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        @media (max-width: 768px) {
+            .date-input-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .date-input-item {
+                width: 100%;
+            }
+        }
+        
+        /* アップセルセクション用スタイル */
+        .upsell-section {
+            background-color: var(--background-light);
+            border-radius: var(--card-border-radius);
+            padding: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .upsell-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .upsell-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .upsell-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .upsell-benefit {
+            background-color: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            font-size: 0.9rem;
+            min-width: 200px;
+        }
+        
+        .upsell-benefit i {
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+        }
+        
+        .upsell-recommendation {
+            background-color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            margin: 0 auto 1.5rem;
+            max-width: 400px;
+            text-align: left;
+            line-height: 1.8;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .upsell-recommendation i {
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+        }
+        
+        .btn-premium {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 戻るボタン用スタイル */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--background-light);
+            color: var(--text-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin: 1rem 0;
+        }
+        
+        .back-button:hover {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            transform: translateY(-1px);
+        }
+        
+        .back-button i {
+            font-size: 0.8rem;
+        }
+        
+        .text-left {
+            text-align: left;
+        }
+        
+        .mt-4 {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="bg-light">
+            <div class="text-left">
+                <a href="../index.html" class="back-button"><i class="fas fa-chevron-left"></i> メインページに戻る</a>
+            </div>
+            
+            <div class="section-header text-center">
+                <h2>マヤ暦<span class="highlight">KIN診断</span>ツール</h2>
+                <p>あなたの生年月日からマヤ暦の神秘を解き明かします</p>
+            </div>
+            
+            <div class="card input-container">
+                <h2 class="section-title">生年月日を<span class="highlight">入力</span></h2>
+                
+                <div class="date-input-container">
+                    <div class="date-input-item">
+                        <label for="year-select">生まれた年:</label>
+                        <select id="year-select" required>
+                            <option value="">選択してください</option>
+                        </select>
+                    </div>
+                    
+                    <div class="date-input-item">
+                        <label for="month-select">生まれた月:</label>
+                        <select id="month-select" required>
+                            <option value="">選択してください</option>
+                        </select>
+                    </div>
+                    
+                    <div class="date-input-item">
+                        <label for="day-select">生まれた日:</label>
+                        <select id="day-select" required>
+                            <option value="">選択してください</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="checkbox-container">
+                    <input type="checkbox" id="leapYearAdjustment" checked>
+                    <label for="leapYearAdjustment">うるう年調整を適用する（うるう年の3月のみ+1日）</label>
+                </div>
+                
+                <div class="text-center" style="margin-top: 2rem;">
+                    <button id="diagnose-button" class="btn btn-primary" type="button">診断する</button>
+                </div>
+            </div>
+            
+            <div id="result-container">
+                <div class="result-header text-center">
+                    <h2>あなたの<span class="highlight">マヤ暦診断結果</span></h2>
+                </div>
+                
+                <div class="result-section">
+                    <div class="kin-result-grid">
+                        <div class="kin-result-item">
+                            <div class="label">KIN番号</div>
+                            <div class="value" id="kin-number"></div>
+                        </div>
+                        <div class="kin-result-item">
+                            <div class="label">銀河の音</div>
+                            <div class="value" id="kin-tone"></div>
+                        </div>
+                        <div class="kin-result-item">
+                            <div class="label">太陽の紋章</div>
+                            <div class="value" id="kin-name"></div>
+                        </div>
+                        <div class="kin-result-item">
+                            <div class="label">ウェイブスペル</div>
+                            <div class="value" id="kin-wave"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="upsell-section">
+                    <h3>あなたの可能性をさらに深く知りませんか？</h3>
+                    <p class="upsell-description">
+                        この無料診断はマヤ暦の入り口に過ぎません。<br>
+                        あなた本来の才能、使命、人生の流れを読み解く、深遠なマヤ暦の叡智の世界へ。
+                    </p>
+                    
+                    <div class="upsell-benefits">
+                        <div class="upsell-benefit">
+                            <i class="fas fa-gem"></i> 自分の才能と本質
+                        </div>
+                        <div class="upsell-benefit">
+                            <i class="fas fa-star"></i> 使命と人生の目的
+                        </div>
+                        <div class="upsell-benefit">
+                            <i class="fas fa-lightbulb"></i> エネルギーの流れとアドバイス
+                        </div>
+                    </div>
+                    
+                    <p class="upsell-recommendation">
+                        <i class="fas fa-check-circle"></i> 本質や才能を知りたい方<br>
+                        <i class="fas fa-check-circle"></i> 人生の方向性を見つけたい方におすすめ
+                    </p>
+                    
+                    <a href="../index.html#services" class="btn-premium">マヤ暦鑑定を受ける</a>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="../index.html" class="back-button"><i class="fas fa-chevron-left"></i> メインページに戻る</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- データファイル -->
+    <script src="data/kin-table-1910-1929.js"></script>
+    <script src="data/kin-table-1930-1949.js"></script>
+    <script src="data/kin-table-1950-1969.js"></script>
+    <script src="data/kin-table-1970-1989.js"></script>
+    <script src="data/kin-table-1990-2009.js"></script>
+    <script src="data/kin-table-2010-2029.js"></script>
+    <script src="data/kin-table-2030-2065.js"></script>
+    <script src="data/kin-descriptions.js"></script>
+    
+    <!-- ロジックファイル -->
+    <script src="js/maya-calculator.js"></script>
+    
+    <script>
+        // 年の選択肢を生成
+        const yearSelect = document.getElementById('year-select');
+        const monthSelect = document.getElementById('month-select');
+        const daySelect = document.getElementById('day-select');
+        
+        // 現在の日付を取得（常に実行時の日付を取得）
+        function getCurrentDate() {
+            const now = new Date();
+            return {
+                year: now.getFullYear(),
+                month: now.getMonth() + 1, // JavaScriptの月は0から始まるため+1
+                day: now.getDate()
+            };
+        }
+        
+        // 年の選択肢を生成（1910年から2065年まで）
+        for (let year = 1910; year <= 2065; year++) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            yearSelect.appendChild(option);
+        }
+        
+        // 月の選択肢を生成
+        for (let month = 1; month <= 12; month++) {
+            const option = document.createElement('option');
+            option.value = month;
+            option.textContent = month;
+            monthSelect.appendChild(option);
+        }
+        
+        // 初期値を当日の日付に設定
+        function setCurrentDateAsDefault() {
+            const currentDate = getCurrentDate();
+            yearSelect.value = currentDate.year;
+            monthSelect.value = currentDate.month;
+            // 日付の選択肢は updateDays() で設定
+            updateDays();
+        }
+        
+        // 日の選択肢を更新する関数
+        function updateDays() {
+            // 現在選択されている年と月
+            const year = parseInt(yearSelect.value);
+            const month = parseInt(monthSelect.value);
+            
+            // 選択されている日を保存
+            const selectedDay = daySelect.value ? parseInt(daySelect.value) : null;
+            
+            // 日の選択肢をクリア
+            daySelect.innerHTML = '<option value="">選択してください</option>';
+            
+            // 月の日数を計算
+            let daysInMonth = 31;
+            if (month === 4 || month === 6 || month === 9 || month === 11) {
+                daysInMonth = 30;
+            } else if (month === 2) {
+                // うるう年の判定
+                daysInMonth = isLeapYear(year) ? 29 : 28;
+            }
+            
+            // 日の選択肢を追加
+            for (let day = 1; day <= daysInMonth; day++) {
+                const option = document.createElement('option');
+                option.value = day;
+                option.textContent = day;
+                daySelect.appendChild(option);
+            }
+            
+            // 以前選択されていた日が有効なら、その値を保持
+            // 初回読み込み時は当日の日付を設定
+            if (selectedDay && selectedDay <= daysInMonth) {
+                daySelect.value = selectedDay;
+            } else if (!selectedDay) {
+                // 当日の日付を取得
+                const currentDate = getCurrentDate();
+                // 選択されている年月が当日と同じなら、当日の日を設定
+                if (year === currentDate.year && month === currentDate.month) {
+                    daySelect.value = currentDate.day;
+                } else {
+                    // 選択されている年月が当日と異なる場合は1日を設定
+                    daySelect.value = 1;
+                }
+            }
+        }
+        
+        // 年または月が変更されたら日の選択肢を更新
+        yearSelect.addEventListener('change', updateDays);
+        monthSelect.addEventListener('change', updateDays);
+        
+        // 初期表示時に当日の日付を設定
+        setCurrentDateAsDefault();
+        
+        // 診断ボタンのクリックイベントを処理
+        document.getElementById('diagnose-button').addEventListener('click', function() {
+            const year = parseInt(yearSelect.value);
+            const month = parseInt(monthSelect.value);
+            const day = parseInt(document.getElementById('day-select').value);
+            
+            // 入力値の検証
+            if (isNaN(year) || isNaN(month) || isNaN(day)) {
+                alert('年月日を選択してください');
+                return;
+            }
+            
+            // うるう年調整の適用
+            const applyLeapYearAdjustment = document.getElementById('leapYearAdjustment').checked;
+            
+            // KIN番号を計算
+            let kinNumber;
+            
+            // 年月日に対応するKIN番号を取得
+            try {
+                kinNumber = getKinNumber(year, month, day, applyLeapYearAdjustment);
+            } catch (e) {
+                alert(e.message);
+                return;
+            }
+            
+            // KIN番号が有効な範囲内かチェック
+            if (kinNumber < 1 || kinNumber > 260) {
+                alert('有効なKIN番号を計算できませんでした');
+                return;
+            }
+            
+            // KIN情報を取得
+            const kinInfo = getKinInfo(kinNumber);
+            
+            // 結果を表示
+            displayResult(kinInfo);
+        });
+        
+        // うるう年かどうかを判定する関数
+        function isLeapYear(year) {
+            return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+        }
+        
+        // KIN情報の表示形式を整える
+        function getKinInfo(kin) {
+            // KIN番号に対応する情報を取得
+            const kinData = KIN_DESCRIPTIONS[kin];
+            
+            if (!kinData) {
+                return {
+                    number: kin,
+                    name: '不明',
+                    tone: '不明',
+                    wavespell: '不明'
+                };
+            }
+            
+            return kinData;
+        }
+        
+        // 結果を表示する関数
+        function displayResult(kinInfo) {
+            // 結果コンテナを表示
+            const resultContainer = document.getElementById('result-container');
+            resultContainer.style.display = 'block';
+            
+            // スクロールして結果を表示
+            resultContainer.scrollIntoView({ behavior: 'smooth' });
+            
+            // KIN情報を表示
+            document.getElementById('kin-number').textContent = kinInfo.number;
+            document.getElementById('kin-name').textContent = kinInfo.name;
+            document.getElementById('kin-tone').textContent = kinInfo.tone;
+            document.getElementById('kin-wave').textContent = kinInfo.wavespell;
+        }
+    </script>
+</body>
+</html> 
